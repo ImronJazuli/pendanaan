@@ -87,7 +87,7 @@
                             <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                 <span class="text-xs text-emerald-200/80 block mb-1">Total Dana Tersalur</span>
                                 <p class="text-xl sm:text-2xl font-black text-emerald-300 font-heading">
-                                    Rp {{ number_format($totalDanaTerkumpul ?? 482500000, 0, ',', '.') }}
+                                    Rp {{ number_format($totalDanaTersalur ?? 0, 0, ',', '.') }}
                                 </p>
                                 <span class="text-[10px] text-emerald-400 mt-1 inline-flex items-center gap-1">
                                     <i data-lucide="trending-up" class="w-3 h-3"></i> 100% Diaudit PPID
@@ -97,7 +97,7 @@
                             <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                 <span class="text-xs text-emerald-200/80 block mb-1">Kausa Terverifikasi</span>
                                 <p class="text-xl sm:text-2xl font-black text-white font-heading">
-                                    {{ $totalKausa ?? 18 }} <span class="text-xs font-normal text-emerald-200">Program</span>
+                                    {{ $totalKausa ?? 0 }} <span class="text-xs font-normal text-emerald-200">Program</span>
                                 </p>
                                 <span class="text-[10px] text-emerald-300 mt-1 inline-flex items-center gap-1">
                                     <i data-lucide="check-check" class="w-3 h-3"></i> Lolos Uji Legalitas
@@ -107,7 +107,7 @@
                             <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                 <span class="text-xs text-emerald-200/80 block mb-1">Donatur Terlibat</span>
                                 <p class="text-xl sm:text-2xl font-black text-white font-heading">
-                                    {{ number_format($totalDonatur ?? 1420, 0, ',', '.') }}
+                                    {{ number_format($totalDonatur ?? 0, 0, ',', '.') }}
                                 </p>
                                 <span class="text-[10px] text-emerald-300 mt-1 inline-flex items-center gap-1">
                                     <i data-lucide="users" class="w-3 h-3"></i> Masyarakat Peduli
@@ -183,9 +183,9 @@
 
                     <!-- Progress Bar -->
                     @php
-                        $terkumpul = $urgentKausa->donasi ? $urgentKausa->donasi->where('status', 'berhasil')->sum('nominal') : 0;
+                        $terkumpul = $urgentKausa->total_terkumpul;
                         $target = $urgentKausa->target_dana > 0 ? $urgentKausa->target_dana : 1;
-                        $persen = min(100, round(($terkumpul / $target) * 100));
+                        $persen = $urgentKausa->persentase_progress;
                     @endphp
                     <div class="space-y-2 bg-[#F6F8F7] p-4 rounded-xl border border-[#D9E2DE]">
                         <div class="flex justify-between items-baseline text-xs sm:text-sm">
@@ -205,7 +205,7 @@
 
                         <div class="flex justify-between items-center text-[11px] text-[#73817C] pt-1">
                             <span class="font-bold text-emerald-800">{{ $persen }}% Tercapai</span>
-                            <span>{{ $urgentKausa->donasi ? $urgentKausa->donasi->where('status', 'berhasil')->count() : 0 }} Donatur Terlibat</span>
+                            <span>{{ $urgentKausa->jumlah_donatur }} Donatur Terlibat</span>
                         </div>
                     </div>
 
@@ -289,9 +289,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($kausaTerbaru as $kausa)
                 @php
-                    $terkumpul = $kausa->donasi ? $kausa->donasi->where('status', 'berhasil')->sum('nominal') : 0;
+                    $terkumpul = $kausa->total_terkumpul;
                     $target = $kausa->target_dana > 0 ? $kausa->target_dana : 1;
-                    $persen = min(100, round(($terkumpul / $target) * 100));
+                    $persen = $kausa->persentase_progress;
                     $kategoriSlug = Str::slug($kausa->kategori->nama ?? 'umum');
                 @endphp
                 <article 

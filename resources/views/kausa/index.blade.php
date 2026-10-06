@@ -105,9 +105,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                 @foreach ($kausa as $item)
                     @php
-                        $terkumpul = $item->donasi ? $item->donasi->where('status', 'berhasil')->sum('nominal') : 0;
+                        $terkumpul = $item->total_terkumpul;
                         $target = $item->target_dana > 0 ? $item->target_dana : 1;
-                        $persen = min(100, round(($terkumpul / $target) * 100));
+                        $persen = $item->persentase_progress;
                     @endphp
                     <article class="bg-white rounded-2xl border border-[#D9E2DE] overflow-hidden hover:shadow-xl transition-all flex flex-col group">
                         <!-- Media Header -->

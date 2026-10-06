@@ -118,9 +118,9 @@
                         <tbody class="divide-y divide-slate-100">
                             @foreach ($kausa as $item)
                                 @php
-                                    $terkumpul = $item->donasi ? $item->donasi->where('status', 'berhasil')->sum('nominal') : 0;
+                                    $terkumpul = $item->total_terkumpul;
                                     $target = $item->target_dana > 0 ? $item->target_dana : 1;
-                                    $persen = min(100, round(($terkumpul / $target) * 100));
+                                    $persen = $item->persentase_progress;
                                 @endphp
                                 <tr class="hover:bg-slate-50/70 transition-colors">
                                     <td class="py-4 px-6 max-w-xs">

@@ -11,7 +11,19 @@ class Donasi extends Model
 {
     use HasFactory;
 
+    public const STATUS_PENDING = 'pending';
+
+    public const STATUS_SUCCESS = 'success';
+
+    public const STATUS_FAILED = 'failed';
+
+    public const STATUS_EXPIRED = 'expired';
+
     protected $table = 'donasi';
+
+    protected $attributes = [
+        'status' => self::STATUS_PENDING,
+    ];
 
     protected $fillable = [
         'kausa_id', 'user_id', 'pesanan_pembayaran', 'nama_donatur', 'anonim',
@@ -41,5 +53,20 @@ class Donasi extends Model
     public function transaksiPembayaran(): HasOne
     {
         return $this->hasOne(TransaksiPembayaran::class);
+    }
+
+    public function transaksi(): HasOne
+    {
+        return $this->transaksiPembayaran();
+    }
+
+    public function scopeSuccess($query)
+    {
+        return $query->where('status', self::STATUS_SUCCESS);
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', self::STATUS_PENDING);
     }
 }

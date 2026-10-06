@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SimpanKausaRequest;
-use App\Models\Kausa;
 use App\Models\KategoriKausa;
+use App\Models\Kausa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,8 +21,8 @@ class KausaController extends Controller
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
                 $q->where('judul', 'like', "%{$search}%")
-                  ->orWhere('ringkasan', 'like', "%{$search}%")
-                  ->orWhere('lokasi', 'like', "%{$search}%");
+                    ->orWhere('ringkasan', 'like', "%{$search}%")
+                    ->orWhere('lokasi', 'like', "%{$search}%");
             });
         }
 
@@ -32,7 +32,7 @@ class KausaController extends Controller
 
         if ($request->input('sort') === 'populer') {
             $query->withCount('donasi')
-                  ->orderBy('donasi_count', 'desc');
+                ->orderBy('donasi_count', 'desc');
         } elseif ($request->input('sort') === 'target_tinggi') {
             $query->orderBy('target_dana', 'desc');
         } else {
@@ -52,14 +52,8 @@ class KausaController extends Controller
             ->with(['kategori', 'instansi', 'donasi', 'dokumen', 'riwayatStatus'])
             ->firstOrFail();
 
-        $totalDonasi = $kausa->donasi()
-            ->where('status', 'berhasil')
-            ->sum('nominal');
-
-        $jumlahDonatur = $kausa->donasi()
-            ->where('status', 'berhasil')
-            ->distinct('user_id')
-            ->count();
+        $totalDonasi = $kausa->total_terkumpul;
+        $jumlahDonatur = $kausa->jumlah_donatur;
 
         return view('kausa.show', [
             'kausa' => $kausa,
@@ -71,6 +65,7 @@ class KausaController extends Controller
     public function create(): View
     {
         $kategori = KategoriKausa::where('aktif', true)->get();
+
         return view('kausa.create', compact('kategori'));
     }
 
@@ -99,7 +94,7 @@ class KausaController extends Controller
         $kausa->riwayatStatus()->create([
             'user_id' => $request->user()->id,
             'status_baru' => $kausa->status,
-            'catatan' => $data['status'] === 'menunggu_verifikasi' 
+            'catatan' => $data['status'] === 'menunggu_verifikasi'
                 ? 'Pengajuan dikirim oleh instansi untuk verifikasi Admin.'
                 : 'Pengajuan disimpan sebagai draf oleh instansi.',
         ]);

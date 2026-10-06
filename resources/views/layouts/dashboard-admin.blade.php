@@ -26,6 +26,7 @@
 <body
     class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen selection:bg-emerald-100 selection:text-emerald-900"
     x-data="{ sidebarOpen: false }"
+    @resize.window="if (window.innerWidth >= 1024) sidebarOpen = false"
 >
 
     {{-- Mobile Sidebar Overlay --}}
@@ -60,38 +61,8 @@
                 </button>
             </div>
             <nav class="mt-4 space-y-1">
-                {{-- Mobile nav duplicates desktop sidebar items --}}
-                <a href="{{ route('dashboard.admin') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->routeIs('dashboard.admin') && !request()->routeIs('dashboard.admin.detail') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0"></i>
-                    <span>Antrean Kurasi Kausa</span>
-                    <span class="ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full {{ request()->routeIs('dashboard.admin') ? 'bg-amber-400 text-amber-950' : 'bg-[#EEF3F1] text-[#52615C]' }}">{{ $statusCounts['menunggu_verifikasi'] ?? 0 }}</span>
-                </a>
-                <a href="{{ route('admin.kausa.aktif') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->routeIs('admin.kausa*') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="layout-list" class="w-4 h-4 shrink-0"></i>
-                    <span>Daftar Kausa Aktif</span>
-                </a>
-                <a href="{{ Route::has('admin.penyaluran') ? route('admin.penyaluran') : url('/dashboard/admin/penyaluran') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->is('dashboard/admin/penyaluran*') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="send" class="w-4 h-4 shrink-0"></i>
-                    <span>Penyaluran Dana</span>
-                </a>
-                <a href="{{ route('admin.donasi') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->routeIs('admin.donasi*') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="credit-card" class="w-4 h-4 shrink-0"></i>
-                    <span>Donasi &amp; Pembayaran</span>
-                </a>
-                <a href="{{ route('admin.laporan') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->routeIs('admin.laporan*') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="file-bar-chart-2" class="w-4 h-4 shrink-0"></i>
-                    <span>Laporan Transparansi</span>
-                </a>
-                <a href="{{ route('admin.legalitas') }}"
-                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm {{ request()->routeIs('admin.legalitas*') || request()->routeIs('admin.instansi*') ? 'bg-[#087F5B] text-white font-semibold' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} transition-colors">
-                    <i data-lucide="building-2" class="w-4 h-4 shrink-0"></i>
-                    <span>Legalitas OPD &amp; Ormas</span>
-                </a>
+                <p class="px-3 pt-2 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-[#73817C]">Menu Kurasi &amp; Kontrol</p>
+                @include('layouts.partials.admin-sidebar-menu')
             </nav>
         </div>
         <div class="pt-4 border-t border-[#D9E2DE] text-xs text-[#52615C]">
@@ -102,7 +73,7 @@
 
     {{-- ===== DARK TOPBAR (canvas 008) ===== --}}
     <header class="bg-[#123B32] text-white sticky top-0 z-30 border-b border-[#1A5144] shadow-sm">
-        <div class="max-w-[1380px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3.5">
                 <button @click="sidebarOpen = true" type="button" aria-label="Toggle Sidebar" class="lg:hidden p-2 rounded-lg text-emerald-200 hover:text-white hover:bg-[#1A5144] transition-colors">
                     <i data-lucide="menu" class="w-5 h-5"></i>
@@ -172,7 +143,7 @@
     </header>
 
     {{-- ===== MAIN LAYOUT: Sidebar + Content ===== --}}
-    <div class="max-w-[1380px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex gap-6 min-h-[calc(100vh-4rem)]">
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-6 flex gap-6 min-h-[calc(100vh-4rem)]">
 
         {{-- Desktop White Sidebar (canvas 008, fixed 288px / lg:w-72, sticky) --}}
         <aside class="w-64 lg:w-72 shrink-0 hidden lg:flex flex-col gap-5 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
@@ -199,76 +170,7 @@
             {{-- Nav Menu --}}
             <nav class="bg-white rounded-xl p-3 border border-[#D9E2DE] shadow-xs space-y-1">
                 <p class="px-3 pt-2 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-[#73817C]">Menu Kurasi &amp; Kontrol</p>
-
-                {{-- Antrean Kurasi --}}
-                <a href="{{ route('dashboard.admin') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->routeIs('dashboard.admin') && !request()->routeIs('dashboard.admin.detail') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="clipboard-check" class="w-4 h-4 shrink-0 {{ request()->routeIs('dashboard.admin') && !request()->routeIs('dashboard.admin.detail') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Antrean Kurasi Kausa</span>
-                    </div>
-                    <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full {{ request()->routeIs('dashboard.admin') && !request()->routeIs('dashboard.admin.detail') ? 'bg-amber-400 text-amber-950' : 'bg-[#EEF3F1] text-[#52615C]' }}">{{ $statusCounts['menunggu_verifikasi'] ?? 0 }} Baru</span>
-                </a>
-
-                {{-- Daftar Kausa Aktif --}}
-                <a href="{{ route('admin.kausa.aktif') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->routeIs('admin.kausa*') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="layout-list" class="w-4 h-4 shrink-0 {{ request()->routeIs('admin.kausa*') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Daftar Kausa Aktif</span>
-                    </div>
-                    @isset($statusCounts)
-                        <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#EEF3F1] text-[#52615C]">{{ $statusCounts['disetujui'] ?? 0 }} Aktif</span>
-                    @endisset
-                </a>
-
-                {{-- Penyaluran Dana (Item 2) --}}
-                <a href="{{ Route::has('admin.penyaluran') ? route('admin.penyaluran') : url('/dashboard/admin/penyaluran') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->is('dashboard/admin/penyaluran*') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="send" class="w-4 h-4 shrink-0 {{ request()->is('dashboard/admin/penyaluran*') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Penyaluran Dana</span>
-                    </div>
-                    <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-semibold rounded-full bg-slate-100 text-slate-600">Realisasi</span>
-                </a>
-
-                {{-- Donasi & Pembayaran --}}
-                <a href="{{ route('admin.donasi') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->routeIs('admin.donasi*') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="credit-card" class="w-4 h-4 shrink-0 {{ request()->routeIs('admin.donasi*') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Donasi &amp; Pembayaran</span>
-                    </div>
-                    <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-100 text-emerald-700">Live</span>
-                </a>
-
-                {{-- Laporan Transparansi --}}
-                <a href="{{ route('admin.laporan') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->routeIs('admin.laporan*') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="file-bar-chart-2" class="w-4 h-4 shrink-0 {{ request()->routeIs('admin.laporan*') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Laporan Transparansi Dana</span>
-                    </div>
-                    <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-semibold rounded-full bg-blue-100 text-blue-700">PPID</span>
-                </a>
-
-                <div class="px-3 pt-4 pb-1">
-                    <p class="text-[11px] font-bold uppercase tracking-wider text-[#73817C]">Verifikasi Lembaga</p>
-                </div>
-
-                {{-- Legalitas OPD --}}
-                <a href="{{ route('admin.legalitas') }}"
-                    class="w-full flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-lg text-left {{ request()->routeIs('admin.legalitas*') || request()->routeIs('admin.instansi*') ? 'bg-[#087F5B] text-white font-medium shadow-xs' : 'text-[#52615C] hover:bg-[#EEF3F1] hover:text-[#17211E] font-medium' }} text-xs transition-all">
-                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                        <i data-lucide="building-2" class="w-4 h-4 shrink-0 {{ request()->routeIs('admin.legalitas*') || request()->routeIs('admin.instansi*') ? 'text-white' : 'text-[#087F5B]' }}"></i>
-                        <span class="truncate">Legalitas OPD &amp; Ormas</span>
-                    </div>
-                    @isset($pendingInstansiCount)
-                        @if($pendingInstansiCount > 0)
-                            <span class="shrink-0 ml-auto px-2 py-0.5 text-[10px] font-bold rounded-full bg-amber-400 text-amber-950">{{ $pendingInstansiCount }} Pending</span>
-                        @endif
-                    @endisset
-                </a>
+                @include('layouts.partials.admin-sidebar-menu')
             </nav>
 
             {{-- Integrity Box (Mockup 008) --}}

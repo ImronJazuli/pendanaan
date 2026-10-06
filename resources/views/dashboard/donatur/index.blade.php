@@ -124,9 +124,9 @@
                         <label class="block text-xs font-semibold text-text-secondary uppercase tracking-wider mb-1.5">Status Donasi</label>
                         <select name="status" class="w-full px-3.5 py-2 text-xs rounded-xl border border-border bg-white text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                             <option value="">Semua Status</option>
-                            <option value="berhasil" @selected(request('status') === 'berhasil')>✓ Berhasil (Sukses)</option>
+                            <option value="success" @selected(request('status') === 'success')>✓ Berhasil (Sukses)</option>
                             <option value="pending" @selected(request('status') === 'pending')>⏳ Menunggu Pembayaran</option>
-                            <option value="gagal" @selected(request('status') === 'gagal')>✗ Dibatalkan / Gagal</option>
+                            <option value="failed" @selected(request('status') === 'failed')>✗ Dibatalkan / Gagal</option>
                         </select>
                     </div>
 
@@ -227,7 +227,7 @@
                                     </div>
 
                                     <div class="flex items-center gap-2">
-                                        @if ($item->status === 'berhasil')
+                                        @if ($item->status === 'success' || $item->status === 'berhasil')
                                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-300">
                                                 <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600"></i>
                                                 Berhasil
@@ -237,10 +237,10 @@
                                                 <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i>
                                                 Menunggu Bayar
                                             </span>
-                                        @elseif ($item->status === 'gagal')
+                                        @elseif (in_array($item->status, ['failed', 'gagal', 'expired']))
                                             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-800 border border-rose-300">
                                                 <i data-lucide="x-circle" class="w-3.5 h-3.5 text-rose-600"></i>
-                                                Gagal
+                                                {{ $item->status === 'expired' ? 'Kedaluwarsa' : 'Gagal' }}
                                             </span>
                                         @endif
 

@@ -2,9 +2,9 @@
 
 @section('content')
 @php
-    $terkumpul = $totalDonasi ?? ($kausa->donasi ? $kausa->donasi->where('status', 'berhasil')->sum('nominal') : 0);
+    $terkumpul = $kausa->total_terkumpul;
     $target = $kausa->target_dana > 0 ? $kausa->target_dana : 1;
-    $persen = min(100, round(($terkumpul / $target) * 100));
+    $persen = $kausa->persentase_progress;
     $sisaHari = $kausa->tanggal_berakhir ? max(0, now()->diffInDays($kausa->tanggal_berakhir, false)) : 30;
     $kausaIdCode = 'KSA-TA-'.($kausa->created_at ? $kausa->created_at->format('Y') : date('Y')).'-'.str_pad($kausa->id, 3, '0', STR_PAD_LEFT);
 @endphp
@@ -312,17 +312,17 @@
                         <span class="text-xs text-slate-500">{{ $jumlahDonatur ?? 0 }} Donatur Berpartisipasi</span>
                     </div>
 
-                    @if ($kausa->donasi && $kausa->donasi->where('status', 'berhasil')->count() > 0)
+                    @if ($kausa->donasi && $kausa->donasi->where('status', \App\Models\Donasi::STATUS_SUCCESS)->count() > 0)
                         <div class="divide-y divide-slate-100">
-                            @foreach ($kausa->donasi->where('status', 'berhasil') as $d)
+                            @foreach ($kausa->donasi->where('status', \App\Models\Donasi::STATUS_SUCCESS) as $d)
                                 <div class="py-3 flex items-start gap-3">
                                     <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">
-                                        {{ $d->anonim ? 'HA' : strtoupper(substr($d->user->name ?? 'D', 0, 2)) }}
+                                        {{ $d->anonim ? 'HA' : strtoupper(substr($d->nama_donatur ?? ($d->user->name ?? 'D'), 0, 2)) }}
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center justify-between">
                                             <p class="text-xs font-bold text-slate-800">
-                                                {{ $d->anonim ? 'Hamba Allah (Anonim)' : ($d->user->name ?? 'Donatur') }}
+                                                {{ $d->anonim ? 'Hamba Allah (Anonim)' : ($d->nama_donatur ?? ($d->user->name ?? 'Donatur')) }}
                                             </p>
                                             <span class="font-bold text-xs text-[#087F5B]">
                                                 Rp {{ number_format($d->nominal, 0, ',', '.') }}

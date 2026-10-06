@@ -114,11 +114,11 @@
 
         <!-- KPI Performance Metrics -->
         @php
-            $target = $kausa->target_dana ?? 1;
-            $terkumpul = $kausa->dana_terkumpul ?? 0;
-            $pct = min(100, round(($terkumpul / $target) * 100));
+            $target = $kausa->target_dana > 0 ? $kausa->target_dana : 1;
+            $terkumpul = $kausa->total_terkumpul;
+            $pct = $kausa->persentase_progress;
             $sisaHari = max(0, now()->diffInDays($kausa->tanggal_berakhir, false));
-            $totalDonatur = $kausa->donasi->where('status', 'berhasil')->count();
+            $totalDonatur = $kausa->jumlah_donatur;
         @endphp
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Card 1: Dana Masuk -->

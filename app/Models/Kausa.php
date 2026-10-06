@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Kausa extends Model
 {
@@ -65,5 +65,56 @@ class Kausa extends Model
     public function logTransparansi(): HasMany
     {
         return $this->hasMany(LogTransparansi::class);
+    }
+
+    /**
+     * Satu-satunya method resmi untuk menambah dana terkumpul saat donasi sukses.
+     * Dipanggil di dalam DB::transaction dengan lockForUpdate.
+     */
+    public function tambahDanaTerkumpul(float $nominal): void
+    {
+        $this->dana_terkumpul = (float) $this->dana_terkumpul + $nominal;
+        $this->save();
+    }
+
+    /**
+     * Rekonsiliasi nilai dana_terkumpul dari tabel donasi.
+     */
+    public function recalculateDanaTerkumpul(): float
+    {
+        $total = (float) $this->donasi()->where('status', Donasi::STATUS_SUCCESS)->sum('nominal');
+        $this->dana_terkumpul = $total;
+        $this->save();
+
+        return $total;
+    }
+
+    /**
+     * Accessor total donasi terkumpul (membaca dari kolom tersimpan dana_terkumpul).
+     */
+    public function getTotalTerkumpulAttribute(): float
+    {
+        return (float) $this->dana_terkumpul;
+    }
+
+    /**
+     * Accessor persentase progress donasi (maksimal 100% untuk progress bar).
+     */
+    public function getPersentaseProgressAttribute(): int
+    {
+        $target = (float) $this->target_dana;
+        if ($target <= 0) {
+            return 0;
+        }
+
+        return (int) min(100, round(($this->total_terkumpul / $target) * 100));
+    }
+
+    /**
+     * Accessor jumlah donatur (dihitung per transaksi donasi berstatus success).
+     */
+    public function getJumlahDonaturAttribute(): int
+    {
+        return $this->donasi()->where('status', Donasi::STATUS_SUCCESS)->count();
     }
 }

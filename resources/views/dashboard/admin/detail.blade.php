@@ -1,10 +1,8 @@
 @extends('layouts.dashboard-admin')
 
 @section('content')
-<div class="min-h-screen bg-[#F6F8F7] py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        
-        <!-- Breadcrumb & Back button -->
+<div class="space-y-6">
+    <!-- Breadcrumb & Back button -->
         <div class="flex items-center justify-between">
             <a href="{{ route('dashboard.admin') }}" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white border border-[#D9E2DE] hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-xs transition-all">
                 <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -246,5 +244,4 @@
 
         </div>
     </div>
-</div>
 @endsection

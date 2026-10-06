@@ -9,8 +9,6 @@ use Illuminate\View\View;
 
 class DonatarDashboardController extends Controller
 {
-    
-
     public function index(Request $request): View
     {
         $user = auth()->user();
@@ -36,17 +34,18 @@ class DonatarDashboardController extends Controller
 
         $statCounts = [
             'total' => Donasi::where('user_id', $user->id)->count(),
-            'berhasil' => Donasi::where('user_id', $user->id)->where('status', 'berhasil')->count(),
-            'pending' => Donasi::where('user_id', $user->id)->where('status', 'pending')->count(),
-            'gagal' => Donasi::where('user_id', $user->id)->where('status', 'gagal')->count(),
+            'success' => Donasi::where('user_id', $user->id)->where('status', Donasi::STATUS_SUCCESS)->count(),
+            'pending' => Donasi::where('user_id', $user->id)->where('status', Donasi::STATUS_PENDING)->count(),
+            'failed' => Donasi::where('user_id', $user->id)->whereIn('status', [Donasi::STATUS_FAILED, Donasi::STATUS_EXPIRED])->count(),
+            'berhasil' => Donasi::where('user_id', $user->id)->where('status', Donasi::STATUS_SUCCESS)->count(),
         ];
 
         $totalDonasi = Donasi::where('user_id', $user->id)
-            ->where('status', 'berhasil')
+            ->where('status', Donasi::STATUS_SUCCESS)
             ->sum('nominal');
 
         $totalKausaDibantu = Donasi::where('user_id', $user->id)
-            ->where('status', 'berhasil')
+            ->where('status', Donasi::STATUS_SUCCESS)
             ->distinct('kausa_id')
             ->count();
 

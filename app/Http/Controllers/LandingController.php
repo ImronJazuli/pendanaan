@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kausa;
 use App\Models\Donasi;
-use App\Models\User;
+use App\Models\Kausa;
+use App\Models\LaporanDana;
 use Illuminate\View\View;
 
 class LandingController extends Controller
@@ -12,17 +12,16 @@ class LandingController extends Controller
     public function index(): View
     {
         $totalKausa = Kausa::where('status', 'disetujui')->count();
-        
-        $totalDanaTerkumpul = Donasi::where('status', 'berhasil')
+
+        $totalDanaTerkumpul = Donasi::where('status', Donasi::STATUS_SUCCESS)
             ->sum('nominal');
-        
-        $totalDonatur = User::where('peran', 'donatur')
-            ->whereHas('donasi', function ($query) {
-                $query->where('status', 'berhasil');
-            })
-            ->distinct('id')
+
+        $totalDanaTersalur = LaporanDana::where('status', 'dipublikasikan')
+            ->sum('total_digunakan');
+
+        $totalDonatur = Donasi::where('status', Donasi::STATUS_SUCCESS)
             ->count();
-        
+
         $kausaTerbaru = Kausa::where('status', 'disetujui')
             ->with(['kategori', 'donasi'])
             ->orderBy('created_at', 'desc')
@@ -32,6 +31,7 @@ class LandingController extends Controller
         return view('landing', [
             'totalKausa' => $totalKausa,
             'totalDanaTerkumpul' => $totalDanaTerkumpul,
+            'totalDanaTersalur' => $totalDanaTersalur,
             'totalDonatur' => $totalDonatur,
             'kausaTerbaru' => $kausaTerbaru,
         ]);
