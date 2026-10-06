@@ -103,7 +103,7 @@
                             <a href="{{ route('profile.edit') }}" class="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-[#087F5B]">
                                 <i data-lucide="user-cog" class="w-4 h-4 text-emerald-600"></i> Profil Akun
                             </a>
-                            <form method="POST" action="{{ route('logout') }}" class="border-t border-slate-100 mt-1">
+                            <form method="POST" action="{{ route('donatur.logout') }}" class="border-t border-slate-100 mt-1">
                                 @csrf
                                 <button type="submit" class="w-full flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50">
                                     <i data-lucide="log-out" class="w-4 h-4 text-red-500"></i> Keluar
@@ -187,7 +187,7 @@
                 <a href="{{ $dashboardRoute }}" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-emerald-50 border border-emerald-600 text-emerald-700 font-semibold text-sm">
                     <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Masuk Dasbor
                 </a>
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('donatur.logout') }}">
                     @csrf
                     <button type="submit" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-red-50 text-red-600 font-semibold text-sm">
                         <i data-lucide="log-out" class="w-4 h-4"></i> Keluar
@@ -197,7 +197,7 @@
                 <a href="{{ route('login') }}" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#087F5B] text-white font-semibold text-sm">
                     <i data-lucide="log-in" class="w-4 h-4"></i> Masuk Akun / SSO
                 </a>
-                <a href="{{ route('register') }}" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm">
+                <a href="{{ route('donatur.register') }}" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm">
                     Daftar Akun Baru
                 </a>
             @endauth

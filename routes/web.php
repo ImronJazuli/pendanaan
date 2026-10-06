@@ -33,15 +33,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         $user = auth()->user();
 
-        if ($user->peran === 'institution_user') {
-            return redirect()->route('dashboard.instansi');
-        } elseif ($user->peran === 'donatur') {
-            return redirect()->route('dashboard.donatur');
-        } elseif ($user->peran === 'admin') {
-            return redirect()->route('dashboard.admin');
+        // Support untuk kolom role (baru) dan peran (lama)
+        $userRole = $user->role ?? $user->peran ?? 'donatur';
+
+        if ($userRole === 'institution_user' || $userRole === 'instansi') {
+            return redirect()->route('instansi.dashboard');
+        } elseif ($userRole === 'donatur') {
+            return redirect()->route('donatur.dashboard');
+        } elseif ($userRole === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
 
-        // Fallback jika peran tidak dikenali
+        // Fallback jika role tidak dikenali
         return view('dashboard');
     })->name('dashboard');
 
@@ -49,8 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Route untuk Instansi (support middleware baru dan lama)
     Route::middleware('peran:institution_user')->group(function () {
-        Route::get('/dashboard/instansi', [InstansiDashboardController::class, 'index'])->name('dashboard.instansi');
+        Route::get('/dashboard/instansi', [InstansiDashboardController::class, 'index'])->name('instansi.dashboard');
         Route::get('/dashboard/instansi/profil', [InstansiDashboardController::class, 'profil'])->name('instansi.profil');
         Route::post('/dashboard/instansi/profil', [InstansiDashboardController::class, 'updateProfil'])->name('instansi.profil.update');
         Route::get('/dashboard/instansi/laporan', function () {
@@ -62,10 +66,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/instansi/{kausa}', [InstansiDashboardController::class, 'detail'])->name('dashboard.instansi.detail');
     });
 
+    // Route untuk Donatur (support middleware baru dan lama)
     Route::middleware('peran:donatur')->group(function () {
-        Route::get('/dashboard/donatur', [DonatarDashboardController::class, 'index'])->name('dashboard.donatur');
+        Route::get('/dashboard/donatur', [DonatarDashboardController::class, 'index'])->name('donatur.dashboard');
     });
 
+    // Route untuk Admin guard web dengan peran admin
     Route::middleware('peran:admin')->group(function () {
         Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
         Route::get('/dashboard/admin/kausa-aktif', function () {
@@ -85,6 +91,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/dashboard/admin/kausa/{kausa}/reject', [AdminDashboardController::class, 'reject'])->name('dashboard.admin.reject');
         Route::post('/dashboard/admin/kausa/{kausa}/revise', [AdminDashboardController::class, 'revise'])->name('dashboard.admin.revise');
     });
+});
+
+// Route untuk Admin guard 'admin' (tabel admins terpisah)
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';

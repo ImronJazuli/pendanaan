@@ -4,7 +4,7 @@
         <p class="text-xs text-text-secondary mt-1">Bergabung bersama masyarakat Tulungagung untuk menebar kebaikan.</p>
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+    <form method="POST" action="{{ route('donatur.register') }}" class="space-y-4">
         @csrf
 
         <!-- Name -->

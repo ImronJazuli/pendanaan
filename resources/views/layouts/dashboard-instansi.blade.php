@@ -172,7 +172,7 @@
                             <p class="text-[10px] text-emerald-300/70 truncate">{{ auth()->user()?->email ?? '' }}</p>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('instansi.logout') }}">
                         @csrf
                         <button type="submit" class="p-2 rounded-lg text-emerald-200 hover:text-red-300 hover:bg-white/10 transition-colors" title="Keluar Akun">
                             <i data-lucide="log-out" class="w-4 h-4"></i>

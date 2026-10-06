@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Panggil AdminSeeder terlebih dahulu
+        $this->call(AdminSeeder::class);
+
         // Kategori Kausa
         KategoriKausa::firstOrCreate(
             ['nama' => 'Bencana alam'],
@@ -79,7 +82,7 @@ class DatabaseSeeder extends Seeder
 
         // Kausa Test untuk Katalog
         $instansi = $instansiUser->instansi;
-        
+
         $kausa1 = Kausa::firstOrCreate(
             ['slug' => 'bantuan-korban-banjir-besuki'],
             [

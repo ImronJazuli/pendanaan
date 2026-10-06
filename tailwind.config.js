@@ -23,7 +23,7 @@ export default {
                     700: '#066A4C',
                     800: '#05563E',
                 },
-                secondary: {
+                secondary: {   
                     DEFAULT: '#123B32',
                     hover: '#1A5144',
                 },

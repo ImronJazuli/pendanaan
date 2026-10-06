@@ -131,7 +131,7 @@
                         <p class="text-[11px] text-emerald-200/90 leading-tight">Admin Verifikator Pemkab {{ auth()->user()->nip ? '(NIP. '.auth()->user()->nip.')' : 'Tulungagung' }}</p>
                     </div>
                     {{-- Logout --}}
-                    <form method="POST" action="{{ route('logout') }}" class="ml-1">
+                    <form method="POST" action="{{ route('admin.logout') }}" class="ml-1">
                         @csrf
                         <button type="submit" class="p-2 rounded-lg text-emerald-200 hover:text-red-300 hover:bg-[#1A5144] transition-colors" title="Keluar">
                             <i data-lucide="log-out" class="w-4 h-4"></i>
