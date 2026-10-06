@@ -12,15 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Menambahkan kolom-kolom baru yang belum ada
-            $table->string('role', 30)->default('donatur')->index()->after('password');
-            $table->string('nik', 16)->nullable()->unique()->after('role');
-            $table->string('phone_number', 20)->nullable()->after('nik');
-            $table->string('sso_id')->nullable()->unique()->after('phone_number');
-            $table->string('google_id')->nullable()->unique()->after('sso_id');
-            $table->string('avatar')->nullable()->after('google_id');
-            $table->string('npwp', 20)->nullable()->unique()->after('nik');
-            $table->text('address')->nullable()->after('phone_number');
+            if (! Schema::hasColumn('users', 'role')) {
+                $table->string('role', 30)->default('donatur')->index();
+            }
+            if (! Schema::hasColumn('users', 'nik')) {
+                $table->string('nik', 16)->nullable()->unique();
+            }
+            if (! Schema::hasColumn('users', 'phone_number')) {
+                $table->string('phone_number', 20)->nullable();
+            }
+            if (! Schema::hasColumn('users', 'sso_id')) {
+                $table->string('sso_id')->nullable()->unique();
+            }
+            if (! Schema::hasColumn('users', 'google_id')) {
+                $table->string('google_id')->nullable()->unique();
+            }
+            if (! Schema::hasColumn('users', 'avatar')) {
+                $table->string('avatar')->nullable();
+            }
+            if (! Schema::hasColumn('users', 'npwp')) {
+                $table->string('npwp', 20)->nullable()->unique();
+            }
+            if (! Schema::hasColumn('users', 'address')) {
+                $table->text('address')->nullable();
+            }
         });
     }
 

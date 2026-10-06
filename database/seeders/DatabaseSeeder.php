@@ -45,13 +45,15 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Instansi User
+        // Instansi User Default & Contoh
         $instansiUser = User::firstOrCreate(
             ['email' => 'instansi@example.test'],
             [
                 'name' => 'Dinas Sosial Pemkab',
                 'password' => Hash::make('password'),
+                'role' => 'instansi',
                 'peran' => 'institution_user',
+                'email_verified_at' => now(),
                 'status' => 'aktif',
             ]
         );
@@ -69,13 +71,84 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Donatur User
+        // Akun-akun Instansi Tambahan
+        $institutions = [
+            [
+                'email' => 'dinsos@tulungagung.go.id',
+                'name' => 'Dinas Sosial Kabupaten Tulungagung',
+                'jenis' => 'OPD',
+                'reg' => 'OPD-TA-001/DINSOS',
+                'phone' => '081234567891',
+                'alamat' => 'Jl. Pahlawan No. 20, Tulungagung',
+            ],
+            [
+                'email' => 'bpbd@tulungagung.go.id',
+                'name' => 'Badan Penanggulangan Bencana Daerah (BPBD) Tulungagung',
+                'jenis' => 'OPD',
+                'reg' => 'OPD-TA-042/BPBD',
+                'phone' => '081234567892',
+                'alamat' => 'Jl. Supriadi No. 10, Tulungagung',
+            ],
+            [
+                'email' => 'panti.bunda@gmail.com',
+                'name' => 'Panti Asuhan Bunda Kasih',
+                'jenis' => 'lembaga_sosial',
+                'reg' => 'LKS-TA-015/PABK',
+                'phone' => '081234567893',
+                'alamat' => 'Jl. Merak No. 5, Tulungagung',
+            ],
+        ];
+
+        foreach ($institutions as $inst) {
+            $user = User::firstOrCreate(
+                ['email' => $inst['email']],
+                [
+                    'name' => $inst['name'],
+                    'role' => 'instansi',
+                    'peran' => 'institution_user',
+                    'password' => Hash::make('password'),
+                    'email_verified_at' => now(),
+                    'status' => 'aktif',
+                    'phone_number' => $inst['phone'],
+                    'address' => $inst['alamat'],
+                ]
+            );
+
+            Instansi::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'jenis' => $inst['jenis'],
+                    'nama' => $inst['name'],
+                    'nomor_registrasi' => $inst['reg'],
+                    'status_verifikasi' => 'terverifikasi',
+                    'alamat' => $inst['alamat'],
+                    'nomor_telepon' => $inst['phone'],
+                    'terverifikasi_pada' => now(),
+                ]
+            );
+        }
+
+        // Donatur User Default & Tambahan
         User::firstOrCreate(
             ['email' => 'donatur@example.test'],
             [
                 'name' => 'Budi Santoso',
                 'password' => Hash::make('password'),
+                'role' => 'donatur',
                 'peran' => 'donatur',
+                'email_verified_at' => now(),
+                'status' => 'aktif',
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'donatur@gmail.com'],
+            [
+                'name' => 'Donatur Masyarakat Tulungagung',
+                'password' => Hash::make('password'),
+                'role' => 'donatur',
+                'peran' => 'donatur',
+                'email_verified_at' => now(),
                 'status' => 'aktif',
             ]
         );

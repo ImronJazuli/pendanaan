@@ -16,7 +16,17 @@ class EnsureInstansi
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::check() || Auth::user()->role !== 'instansi') {
+        if (! Auth::check()) {
+            session(['url.intended' => $request->url()]);
+
+            return redirect()->route('login', ['tab' => 'instansi']);
+        }
+
+        $user = Auth::user();
+        $isInstansi = in_array($user->role ?? '', ['instansi', 'institution_user'], true)
+            || in_array($user->peran ?? '', ['instansi', 'institution_user'], true);
+
+        if (! $isInstansi) {
             session(['url.intended' => $request->url()]);
 
             return redirect()->route('login', ['tab' => 'instansi']);

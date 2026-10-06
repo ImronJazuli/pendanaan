@@ -54,9 +54,10 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk Instansi (support middleware baru dan lama)
     Route::middleware('peran:institution_user')->group(function () {
-        Route::get('/dashboard/instansi', [InstansiDashboardController::class, 'index'])->name('instansi.dashboard');
+        Route::get('/dashboard/instansi', [InstansiDashboardController::class, 'index'])->name('dashboard.instansi');
+        Route::get('/instansi/dashboard', [InstansiDashboardController::class, 'index'])->name('instansi.dashboard');
         Route::get('/dashboard/instansi/profil', [InstansiDashboardController::class, 'profil'])->name('instansi.profil');
-        Route::post('/dashboard/instansi/profil', [InstansiDashboardController::class, 'updateProfil'])->name('instansi.profil.update');
+        Route::match(['put', 'post'], '/dashboard/instansi/profil', [InstansiDashboardController::class, 'updateProfil'])->name('instansi.profil.update');
         Route::get('/dashboard/instansi/laporan', function () {
             return view('dashboard.instansi.laporan');
         })->name('instansi.laporan');

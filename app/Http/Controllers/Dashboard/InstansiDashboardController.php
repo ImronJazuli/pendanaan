@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProfilInstansiRequest;
+use App\Models\Instansi;
 use App\Models\Kausa;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,12 +59,70 @@ class InstansiDashboardController extends Controller
 
     public function profil(): View
     {
-        return view('dashboard.instansi.profil');
+        $user = auth()->user();
+
+        // Auto-provision record instansi jika belum ada
+        $instansi = $user->instansi;
+        if (! $instansi) {
+            $instansi = Instansi::firstOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'nama' => $user->name,
+                    'jenis' => 'Yayasan',
+                    'status_verifikasi' => 'belum_diverifikasi',
+                    'alamat' => $user->address,
+                    'nomor_telepon' => $user->phone_number,
+                ]
+            );
+        }
+
+        $instansi->load('dokumen');
+
+        return view('dashboard.instansi.profil', compact('instansi', 'user'));
     }
 
-    public function updateProfil(Request $request): RedirectResponse
+    public function updateProfil(UpdateProfilInstansiRequest $request): RedirectResponse
     {
-        // TODO: Implement update logic
-        return redirect()->route('instansi.profil')->with('success', 'Profil berhasil diperbarui.');
+        $user = auth()->user();
+        $instansi = $user->instansi;
+
+        if (! $instansi) {
+            $instansi = Instansi::create([
+                'user_id' => $user->id,
+                'nama' => $request->input('nama') ?? $request->input('nama_lembaga') ?? $user->name,
+                'jenis' => $request->input('jenis') ?? $request->input('jenis_badan_hukum') ?? 'Yayasan',
+                'status_verifikasi' => 'belum_diverifikasi',
+            ]);
+        }
+
+        $instansi->update([
+            'nama' => $request->input('nama') ?? $request->input('nama_lembaga') ?? $instansi->nama,
+            'jenis' => $request->input('jenis') ?? $request->input('jenis_badan_hukum') ?? $instansi->jenis,
+            'nomor_registrasi' => $request->input('nomor_registrasi') ?? $request->input('no_sk_kemenkumham') ?? $instansi->nomor_registrasi,
+            'alamat' => $request->input('alamat') ?? $request->input('alamat_kantor') ?? $instansi->alamat,
+            'nomor_telepon' => $request->input('nomor_telepon') ?? $request->input('wa_pj') ?? $instansi->nomor_telepon,
+        ]);
+
+        $userUpdates = [];
+        if ($request->filled('nama_pj')) {
+            $userUpdates['name'] = $request->input('nama_pj');
+        }
+        if ($request->filled('nik_pj')) {
+            $userUpdates['nik'] = $request->input('nik_pj');
+        }
+        if ($request->filled('wa_pj') || $request->filled('nomor_telepon')) {
+            $userUpdates['phone_number'] = $request->input('wa_pj') ?? $request->input('nomor_telepon');
+        }
+        if ($request->filled('npwp_lembaga')) {
+            $userUpdates['npwp'] = $request->input('npwp_lembaga');
+        }
+        if ($request->filled('alamat') || $request->filled('alamat_kantor')) {
+            $userUpdates['address'] = $request->input('alamat') ?? $request->input('alamat_kantor');
+        }
+        if (! empty($userUpdates)) {
+            $user->update($userUpdates);
+        }
+
+        return redirect()->route('instansi.profil')->with('success', 'Profil instansi berhasil diperbarui.');
     }
 }
