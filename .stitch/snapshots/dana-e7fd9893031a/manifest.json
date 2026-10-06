@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "e7fd9893-031a-4d37-ba0c-75972fe7986a",
+  "createdAt": "2026-09-29T05:22:30.380Z",
+  "project": {
+    "id": "f5d617c8-67b1-40c3-b0a1-2824a9c16b51",
+    "name": "DANA",
+    "source": {
+      "type": "blank",
+      "id": null
+    }
+  },
+  "canvases": [
+    {
+      "id": "frame-desktop",
+      "order": 0,
+      "title": "Web",
+      "file": "canvases/001-frame-desktop.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 800
+      },
+      "position": {
+        "x": 60,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 713,
+        "sha256": "27b2e88c2664298686282343bfcdedd28a2b4ede84edc90e3d2ed0b330286c3a"
+      }
+    },
+    {
+      "id": "frame-mobile",
+      "order": 1,
+      "title": "Mobile",
+      "file": "canvases/002-frame-mobile.html",
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 375,
+        "height": 844
+      },
+      "position": {
+        "x": 1440,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 713,
+        "sha256": "27b2e88c2664298686282343bfcdedd28a2b4ede84edc90e3d2ed0b330286c3a"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-landing-page",
+      "order": 2,
+      "title": "Beranda & Katalog Kausa Terpadu",
+      "file": "canvases/003-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-landing-page.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 4132
+      },
+      "position": {
+        "x": 1895,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 132420,
+        "sha256": "307f76239a70e38bfd7e0883c074cb5743faed54017dd77071af7eb0743b70e0"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-detail",
+      "order": 3,
+      "title": "Detail Kausa & Pusat Transparansi Penyaluran",
+      "file": "canvases/004-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-detail.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 2858
+      },
+      "position": {
+        "x": 3255,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 100375,
+        "sha256": "f4b5ce8f5d87f122c9d7d81eb7459677ca87d34a89a6cd35dda2e66024a394f0"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-profile-setup",
+      "order": 4,
+      "title": "Profil & Verifikasi Legalitas Lembaga",
+      "file": "canvases/005-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-profile-.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 2498
+      },
+      "position": {
+        "x": 4615,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 81370,
+        "sha256": "71b7d1c6564381cd5d400bc73e04d58294a3120c6945763c96f178fea7415915"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-create",
+      "order": 5,
+      "title": "Formulir Pengajuan Kausa Baru",
+      "file": "canvases/006-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-create.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 1370
+      },
+      "position": {
+        "x": 5975,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 84655,
+        "sha256": "9e9a48bb6263a21814d0a2ef4d608a223a71cf5d6c6ed23e62023f0ccdad1fba"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-dashboard",
+      "order": 6,
+      "title": "Dashboard Instansi & Pelaporan Dana",
+      "file": "canvases/007-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-dashboar.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 1870
+      },
+      "position": {
+        "x": 7335,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 102296,
+        "sha256": "379822d3cb11d25f994a1fc77108f992dad9dfeda371c54dbaf401e708feb471"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-dashboard",
+      "order": 7,
+      "title": "Dashboard Verifikator & Antrean Kausa",
+      "file": "canvases/008-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-dashboard.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 2129
+      },
+      "position": {
+        "x": 8695,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 87737,
+        "sha256": "2b118d7af9aa470f230462a3d3b8745c77fdf1f776c50c58fc321f74e5b858fb"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-disbursement",
+      "order": 8,
+      "title": "Modul Manajemen Penyaluran Dana & Audit",
+      "file": "canvases/009-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-disbursemen.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 1834
+      },
+      "position": {
+        "x": 10055,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 91590,
+        "sha256": "d67576cea4a85960ba40d1148ae42a80871c9a85adc2e7f3535bf1bf7c798252"
+      }
+    },
+    {
+      "id": "frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-manual-payments",
+      "order": 9,
+      "title": "Verifikasi Pembayaran Manual",
+      "file": "canvases/010-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-manual-paym.html",
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1280,
+        "height": 1223
+      },
+      "position": {
+        "x": 11415,
+        "y": 60
+      },
+      "html": {
+        "source": "artboard",
+        "byteLength": 68195,
+        "sha256": "e9bd27e1a32bf6a06cc071252ad146af926b6167f25ff2879127fa22c5472a6a"
+      }
+    }
+  ],
+  "selectedReferenceIds": [],
+  "components": [],
+  "warnings": [],
+  "files": [
+    {
+      "path": "canvases/001-frame-desktop.html",
+      "byteLength": 713,
+      "sha256": "27b2e88c2664298686282343bfcdedd28a2b4ede84edc90e3d2ed0b330286c3a"
+    },
+    {
+      "path": "canvases/002-frame-mobile.html",
+      "byteLength": 713,
+      "sha256": "27b2e88c2664298686282343bfcdedd28a2b4ede84edc90e3d2ed0b330286c3a"
+    },
+    {
+      "path": "canvases/003-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-landing-page.html",
+      "byteLength": 132420,
+      "sha256": "307f76239a70e38bfd7e0883c074cb5743faed54017dd77071af7eb0743b70e0"
+    },
+    {
+      "path": "canvases/004-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-detail.html",
+      "byteLength": 100375,
+      "sha256": "f4b5ce8f5d87f122c9d7d81eb7459677ca87d34a89a6cd35dda2e66024a394f0"
+    },
+    {
+      "path": "canvases/005-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-profile-.html",
+      "byteLength": 81370,
+      "sha256": "71b7d1c6564381cd5d400bc73e04d58294a3120c6945763c96f178fea7415915"
+    },
+    {
+      "path": "canvases/006-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-kausa-create.html",
+      "byteLength": 84655,
+      "sha256": "9e9a48bb6263a21814d0a2ef4d608a223a71cf5d6c6ed23e62023f0ccdad1fba"
+    },
+    {
+      "path": "canvases/007-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-instansi-dashboar.html",
+      "byteLength": 102296,
+      "sha256": "379822d3cb11d25f994a1fc77108f992dad9dfeda371c54dbaf401e708feb471"
+    },
+    {
+      "path": "canvases/008-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-dashboard.html",
+      "byteLength": 87737,
+      "sha256": "2b118d7af9aa470f230462a3d3b8745c77fdf1f776c50c58fc321f74e5b858fb"
+    },
+    {
+      "path": "canvases/009-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-disbursemen.html",
+      "byteLength": 91590,
+      "sha256": "d67576cea4a85960ba40d1148ae42a80871c9a85adc2e7f3535bf1bf7c798252"
+    },
+    {
+      "path": "canvases/010-frame-prd-6e4619ea-97d2-4431-ae14-b43e30a7b84d-admin-manual-paym.html",
+      "byteLength": 68195,
+      "sha256": "e9bd27e1a32bf6a06cc071252ad146af926b6167f25ff2879127fa22c5472a6a"
+    },
+    {
+      "path": "AGENT_CONTEXT.md",
+      "byteLength": 558,
+      "sha256": "d6e41dc0dc81c902b24d755e282c359375cdbf3671bd02a16174de5487d3f3cf"
+    },
+    {
+      "path": "skills/stitch-canvas-migrator/SKILL.md",
+      "byteLength": 1179,
+      "sha256": "d4ad46867e9be3d60f674fd31136fdfab56d013cf1a1ffb82a251d77d29ba2ec"
+    },
+    {
+      "path": "skills/stitch-canvas-migrator/references/security.md",
+      "byteLength": 392,
+      "sha256": "60a8e33dc1ee325986a6f4d0418df5c49ae5281cff5a956b98f4e93a9f07caaa"
+    },
+    {
+      "path": "skills/stitch-canvas-migrator/references/react-conversion.md",
+      "byteLength": 313,
+      "sha256": "5aaae41acadc5dd1240905e997f31c37c6499527a2c37e4886fde7bd8da5b944"
+    },
+    {
+      "path": "skills/stitch-canvas-migrator/references/backend-integration.md",
+      "byteLength": 340,
+      "sha256": "00b9abd510f2ae7ab07da7f5ed19b884a260ef1450ce43ad2573de2bc127ce92"
+    },
+    {
+      "path": "skills/stitch-canvas-migrator/references/visual-fidelity.md",
+      "byteLength": 327,
+      "sha256": "fc287b244639a0792fe55708d7233c0ea0c1302a35bfd144875ebff67e5a683b"
+    }
+  ],
+  "rootChecksum": "a86896d2c653a4281671831c060cc9e9c0075df7ed476c0e6bcdf5a154fe7fa6"
+}

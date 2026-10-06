@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Pendanaan Sosial Pemkab Tulungagung - Beranda &amp; Katalog Kausa Terpadu</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#087F5B',
+              hover: '#066A4C',
+              active: '#05563E',
+              subtle: '#E6F4EF'
+            },
+            secondary: {
+              DEFAULT: '#123B32',
+              hover: '#1A5144'
+            },
+            surface: {
+              DEFAULT: '#FFFFFF',
+              muted: '#EEF3F1'
+            },
+            tulungagung: {
+              bg: '#F6F8F7',
+              text: '#17211E',
+              muted: '#73817C',
+              border: '#D9E2DE'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    body {
+      background-color: #F6F8F7;
+      color: #17211E;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body data-ds-id="ds-d2a664d6" class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen flex flex-col selection:bg-emerald-100 selection:text-emerald-900">
+
+  <!-- ==================== TOP OFFICIAL BAR ==================== -->
+  <div data-ds-id="ds-21a1810b" class="bg-[#123B32] text-white text-xs py-2 px-4 border-b border-emerald-950/40">
+    <div data-ds-id="ds-469a50be" class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div data-ds-id="ds-ed9b8830" class="flex items-center gap-2">
+        <span data-ds-id="ds-005af0f4" class="inline-flex items-center gap-1.5 bg-[#087F5B] text-white px-2 py-0.5 rounded-full font-semibold text-[11px] tracking-wide">
+          <i data-ds-id="ds-8b13ca7a" data-lucide="shield-check" stroke-width="2.5" class="w-3.5 h-3.5"></i> PORTAL RESMI
+        </span>
+        <span data-ds-id="ds-9ba31517" class="text-emerald-100/90 hidden sm:inline">Pemerintah Kabupaten Tulungagung &bull; Terintegrasi PPID &amp; Dinsos</span>
+      </div>
+      <div data-ds-id="ds-4fe0864e" class="flex items-center gap-4 text-emerald-200/80 text-[11px]">
+        <span data-ds-id="ds-38db862b" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          <i data-ds-id="ds-67b58582" data-lucide="clock" stroke-width="2.5" class="w-3 h-3 text-emerald-400"></i> Pembaruan Audit: 24 Menit Lalu
+        </span>
+        <span data-ds-id="ds-eced3304" class="hidden md:inline text-emerald-800">|</span>
+        <a data-ds-id="ds-5f0bdf68" href="#transparansi-info" class="hover:text-white underline underline-offset-2 transition-colors">SOP Verifikasi Bantuan</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN NAVBAR ==================== -->
+  <header data-ds-id="ds-62642619" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#D9E2DE] shadow-xs">
+    <div data-ds-id="ds-2f24832f" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-ds-id="ds-72545cec" class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo Brand -->
+        <a data-ds-id="ds-9fc5a9b0" href="#" class="flex items-center gap-3 shrink-0 group">
+          <div data-ds-id="ds-54b87559" class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#087F5B] to-[#123B32] p-2 flex items-center justify-center shadow-sm text-white group-hover:scale-105 transition-transform">
+            <i data-ds-id="ds-87722f30" data-lucide="landmark" stroke-width="2.5" class="w-6 h-6 text-white"></i>
+          </div>
+          <div data-ds-id="ds-22cbd0de" class="flex flex-col">
+            <div data-ds-id="ds-0ea24850" class="flex items-center gap-1.5">
+              <span data-ds-id="ds-fc524088" class="font-heading font-extrabold text-lg tracking-tight text-[#123B32]">SI-PEDULI</span>
+              <span data-ds-id="ds-8f2c2d9c" class="bg-emerald-100 text-[#087F5B] text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wider">PEMKAB</span>
+            </div>
+            <span data-ds-id="ds-978dcda9" class="text-xs text-[#73817C] font-medium leading-none">Kabupaten Tulungagung</span>
+          </div>
+        </a>
+
+        <!-- Desktop Search & Quick Navigation -->
+        <div data-ds-id="ds-beef4894" class="hidden lg:flex items-center flex-1 max-w-md mx-4">
+          <div data-ds-id="ds-cc35f954" class="relative w-full">
+            <span data-ds-id="ds-5bbdd876" class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i data-ds-id="ds-bdc54a8b" data-lucide="search" stroke-width="2.5" class="w-4 h-4 text-emerald-700"></i>
+            </span>
+            <input data-ds-id="ds-9e9905f4" id="navbar-search-input" 
+              type="text" 
+              placeholder="Cari kausa, lokasi kecamatan, bencana..." 
+              class="w-full pl-10 pr-4 py-2 bg-[#F6F8F7] border border-[#D9E2DE] focus:border-[#087F5B] focus:bg-white rounded-lg text-xs md:text-sm text-[#17211E] placeholder:text-[#73817C] outline-none transition-all"
+            >
+          </div>
+        </div>
+
+        <!-- Desktop Action Buttons -->
+        <div data-ds-id="ds-64e0e501" class="hidden md:flex items-center gap-3">
+          <!-- Dropdown Filter Kategori -->
+          <div data-ds-id="ds-650a9f68" class="relative">
+            <button data-ds-id="ds-a8bf6311" id="category-dropdown-btn" type="button" class="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-[#52615C] hover:text-[#087F5B] rounded-lg hover:bg-emerald-50/60 transition-all">
+              <i data-ds-id="ds-eabc4e21" data-lucide="layout-grid" stroke-width="2.5" class="w-4 h-4 text-emerald-600"></i>
+              <span data-ds-id="ds-a90c7ccb">Kategori</span>
+              <i data-ds-id="ds-6297f8dd" data-lucide="chevron-down" stroke-width="2.5" class="w-3.5 h-3.5 text-slate-400"></i>
+            </button>
+            <!-- Dropdown Menu -->
+            <div data-ds-id="ds-1d90976d" id="category-dropdown-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border border-[#D9E2DE] rounded-xl shadow-lg py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <div data-ds-id="ds-28aff015" class="px-3 py-1.5 text-[11px] font-bold tracking-wider text-slate-400 uppercase">Pilih Sektor Bantuan</div>
+              <a data-ds-id="ds-e1a8b7b4" href="#kategori-bencana" class="flex items-center gap-3 px-3 py-2 text-sm text-[#17211E] hover:bg-emerald-50 hover:text-[#087F5B] transition-colors">
+                <span data-ds-id="ds-a0bbff35" class="w-7 h-7 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0">
+                  <i data-ds-id="ds-8683929c" data-lucide="flame" stroke-width="2.5" class="w-4 h-4"></i>
+                </span>
+                <div data-ds-id="ds-84a1c468">
+                  <p data-ds-id="ds-68a6613f" class="font-semibold text-xs leading-snug">Bencana Alam</p>
+                  <p data-ds-id="ds-705e0e1e" class="text-[11px] text-slate-500">Banjir, Longsor &amp; Puting Beliung</p>
+                </div>
+              </a>
+              <a data-ds-id="ds-b1b2ca06" href="#kategori-panti" class="flex items-center gap-3 px-3 py-2 text-sm text-[#17211E] hover:bg-emerald-50 hover:text-[#087F5B] transition-colors">
+                <span data-ds-id="ds-a1c117ff" class="w-7 h-7 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+                  <i data-ds-id="ds-107f6208" data-lucide="heart-handshake" stroke-width="2.5" class="w-4 h-4"></i>
+                </span>
+                <div data-ds-id="ds-c773c20c">
+                  <p data-ds-id="ds-d31e8fe0" class="font-semibold text-xs leading-snug">Panti Asuhan</p>
+                  <p data-ds-id="ds-28e44653" class="text-[11px] text-slate-500">Kebutuhan Anak Yatim &amp; Dhuafa</p>
+                </div>
+              </a>
+              <a data-ds-id="ds-a7f660b2" href="#kategori-ibadah" class="flex items-center gap-3 px-3 py-2 text-sm text-[#17211E] hover:bg-emerald-50 hover:text-[#087F5B] transition-colors">
+                <span data-ds-id="ds-00b43fa8" class="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+                  <i data-ds-id="ds-0b4fa0af" data-lucide="building" stroke-width="2.5" class="w-4 h-4"></i>
+                </span>
+                <div data-ds-id="ds-3b9d4731">
+                  <p data-ds-id="ds-792b8561" class="font-semibold text-xs leading-snug">Tempat Ibadah</p>
+                  <p data-ds-id="ds-15146780" class="text-[11px] text-slate-500">Renovasi Masjid, Musholla &amp; Pura</p>
+                </div>
+              </a>
+              <a data-ds-id="ds-f241dd09" href="#kategori-lansia" class="flex items-center gap-3 px-3 py-2 text-sm text-[#17211E] hover:bg-emerald-50 hover:text-[#087F5B] transition-colors">
+                <span data-ds-id="ds-c6e3d18a" class="w-7 h-7 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                  <i data-ds-id="ds-99dbe7db" data-lucide="user-check" stroke-width="2.5" class="w-4 h-4"></i>
+                </span>
+                <div data-ds-id="ds-4d992d96">
+                  <p data-ds-id="ds-6553d514" class="font-semibold text-xs leading-snug">Lansia &amp; Dhuafa</p>
+                  <p data-ds-id="ds-adf07851" class="text-[11px] text-slate-500">Bantuan Hidup &amp; Pengobatan Terlantar</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Notification Bell with Active Count Badge -->
+          <div data-ds-id="ds-18ff0b5b" class="relative">
+            <button data-ds-id="ds-fea51e03" id="notification-btn" type="button" aria-label="Buka Notifikasi" class="relative p-2.5 rounded-lg text-[#52615C] hover:text-[#087F5B] hover:bg-emerald-50/60 transition-colors">
+              <i data-ds-id="ds-8587e0dd" data-lucide="bell" stroke-width="2.5" class="w-5 h-5 text-emerald-800"></i>
+              <!-- Active Badge Count [NOT-4] -->
+              <span data-ds-id="ds-c5af14e2" class="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-xs animate-pulse">
+                3
+              </span>
+            </button>
+          </div>
+
+          <!-- CTA Ajukan Dana / Bantuan [PUB-1, AUT-1] -->
+          <button data-ds-id="ds-f8099aea" id="btn-ajukan-bantuan-nav" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#087F5B] text-[#087F5B] hover:bg-emerald-50 font-semibold text-xs tracking-wide active:scale-95 transition-all shadow-xs">
+            <i data-ds-id="ds-45594efc" data-lucide="plus-circle" stroke-width="2.5" class="w-4 h-4 text-[#087F5B]"></i>
+            <span data-ds-id="ds-41be9156">Ajukan Program</span>
+          </button>
+
+          <!-- CTA Login / Masuk [AUT-2] -->
+          <button data-ds-id="ds-4415ea75" id="open-auth-modal-btn" type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide active:scale-95 transition-all shadow-xs">
+            <i data-ds-id="ds-8669bd8b" data-lucide="log-in" stroke-width="2.5" class="w-4 h-4 text-white"></i>
+            <span data-ds-id="ds-cc51a530">Masuk / SSO</span>
+          </button>
+        </div>
+
+        <!-- Mobile Menu Hamburger & Bell -->
+        <div data-ds-id="ds-ff64dd47" class="flex items-center gap-2 md:hidden">
+          <button data-ds-id="ds-447414dc" id="mobile-notification-btn" type="button" aria-label="Buka Notifikasi" class="p-2 relative rounded-lg text-slate-700 hover:bg-slate-100">
+            <i data-ds-id="ds-fe01ecb7" data-lucide="bell" stroke-width="2.5" class="w-5 h-5 text-emerald-800"></i>
+            <span data-ds-id="ds-1d6fc321" class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
+              3
+            </span>
+          </button>
+          <button data-ds-id="ds-f396ee6d" id="mobile-menu-btn" type="button" aria-label="Buka Menu" class="p-2 rounded-lg text-slate-700 hover:bg-slate-100">
+            <i data-ds-id="ds-653905d9" data-lucide="menu" stroke-width="2.5" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Sidebar Menu -->
+    <div data-ds-id="ds-a1b9c903" id="mobile-overlay" class="fixed inset-0 z-40 bg-black/50 hidden"></div>
+    <aside data-ds-id="ds-e06a7119" id="mobile-sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white transform -translate-x-full transition-transform duration-300 ease-in-out p-6 flex flex-col justify-between shadow-2xl">
+      <div data-ds-id="ds-44bfe327">
+        <div data-ds-id="ds-9f861520" class="flex items-center justify-between pb-4 border-b border-slate-200">
+          <div data-ds-id="ds-944fb964" class="flex items-center gap-2">
+            <div data-ds-id="ds-d5fd5d46" class="w-9 h-9 rounded-lg bg-[#087F5B] flex items-center justify-center text-white">
+              <i data-ds-id="ds-c23fa865" data-lucide="landmark" stroke-width="2.5" class="w-5 h-5"></i>
+            </div>
+            <div data-ds-id="ds-db28cbad">
+              <p data-ds-id="ds-8844d2d3" class="font-heading font-bold text-sm text-[#123B32]">SI-PEDULI</p>
+              <p data-ds-id="ds-6551d037" class="text-[10px] text-slate-500">Pemkab Tulungagung</p>
+            </div>
+          </div>
+          <button data-ds-id="ds-80883160" id="close-mobile-menu-btn" type="button" aria-label="Tutup Menu" class="p-1 rounded text-slate-400 hover:text-slate-600">
+            <i data-ds-id="ds-a6467a09" data-lucide="x" stroke-width="2.5" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <div data-ds-id="ds-99c20d95" class="mt-4">
+          <label data-ds-id="ds-6e702e63" class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">Pencarian</label>
+          <div data-ds-id="ds-2cd5e07b" class="relative">
+            <input data-ds-id="ds-5d77e591" id="mobile-search-input" type="text" placeholder="Cari kausa..." class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm">
+            <i data-ds-id="ds-327a2dd8" data-lucide="search" stroke-width="2.5" class="w-4 h-4 text-emerald-700 absolute left-3 top-2.5"></i>
+          </div>
+        </div>
+
+        <div data-ds-id="ds-3e7a900c" class="mt-6 space-y-1">
+          <p data-ds-id="ds-9a4ddedb" class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Kategori Cepat</p>
+          <a data-ds-id="ds-28677a4a" href="#kategori-bencana" class="mobile-nav-link flex items-center gap-3 p-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+            <i data-ds-id="ds-deafb68f" data-lucide="flame" stroke-width="2.5" class="w-4 h-4 text-red-500"></i> Bencana Alam
+          </a>
+          <a data-ds-id="ds-48f84d3e" href="#kategori-panti" class="mobile-nav-link flex items-center gap-3 p-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+            <i data-ds-id="ds-74e1d1a3" data-lucide="heart-handshake" stroke-width="2.5" class="w-4 h-4 text-amber-500"></i> Panti Asuhan
+          </a>
+          <a data-ds-id="ds-4b763ac4" href="#kategori-ibadah" class="mobile-nav-link flex items-center gap-3 p-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+            <i data-ds-id="ds-f3ea8384" data-lucide="building" stroke-width="2.5" class="w-4 h-4 text-blue-500"></i> Tempat Ibadah
+          </a>
+          <a data-ds-id="ds-9e38f846" href="#kategori-lansia" class="mobile-nav-link flex items-center gap-3 p-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">
+            <i data-ds-id="ds-ebd50084" data-lucide="user-check" stroke-width="2.5" class="w-4 h-4 text-purple-500"></i> Lansia &amp; Dhuafa
+          </a>
+        </div>
+      </div>
+
+      <div data-ds-id="ds-e36c6101" class="pt-6 border-t border-slate-200 space-y-2">
+        <button data-ds-id="ds-08a81818" id="btn-ajukan-bantuan-mobile" type="button" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-emerald-50 border border-emerald-600 text-emerald-700 font-semibold text-sm">
+          <i data-ds-id="ds-584e5d85" data-lucide="plus-circle" stroke-width="2.5" class="w-4 h-4 text-emerald-700"></i> Ajukan Program
+        </button>
+        <button data-ds-id="ds-3a8d008f" id="open-auth-modal-mobile-btn" type="button" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#087F5B] text-white font-semibold text-sm">
+          <i data-ds-id="ds-a9219777" data-lucide="log-in" stroke-width="2.5" class="w-4 h-4 text-white"></i> Masuk Akun / SSO
+        </button>
+      </div>
+    </aside>
+  </header>
+
+  <!-- ==================== HERO SECTION & RINGKASAN DAMPAK SOSIAL [PUB-4, PUB-3] ==================== -->
+  <section data-ds-id="ds-3b0ad743" class="relative bg-gradient-to-b from-[#123B32] via-[#0D2D26] to-[#0A241E] text-white overflow-hidden py-14 md:py-20">
+    <!-- Ambient Backdrop Effects (pointer-events-none) -->
+    <div data-ds-id="ds-683082ae" class="absolute inset-0 opacity-10 bg-[radial-gradient(#34d399_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div data-ds-id="ds-0d75694c" class="absolute -right-32 -top-32 w-96 h-96 rounded-full bg-emerald-500/20 blur-3xl pointer-events-none"></div>
+    <div data-ds-id="ds-e65dde8e" class="absolute -left-32 -bottom-32 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl pointer-events-none"></div>
+
+    <div data-ds-id="ds-279d609d" class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-ds-id="ds-32dd1354" class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <!-- Left: Welcoming & Real-time Search Box -->
+        <div data-ds-id="ds-ca294e86" class="lg:col-span-7 space-y-6">
+          <div data-ds-id="ds-ec3f2eb9" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 text-xs font-semibold backdrop-blur-sm">
+            <span data-ds-id="ds-cdde4c71" class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            Amanah, Transparan, dan Diaudit Resmi oleh Tim Verifikator Pemkab
+          </div>
+
+          <h1 data-ds-id="ds-d8127c6a" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Gotong Royong Nyata untuk Kesejahteraan Warga <span data-ds-id="ds-2a61f5de" class="text-emerald-400">Tulungagung</span>
+          </h1>
+
+          <p data-ds-id="ds-01dc6431" class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-xl">
+            Satu pintu donasi kemanusiaan yang terverifikasi legalitasnya. Setiap rupiah disalurkan secara akuntabel dengan laporan nota belanja fisik terbuka untuk publik.
+          </p>
+
+          <!-- Interactive Search Filter Bar [PUB-3] -->
+          <div data-ds-id="ds-b1d64336" class="bg-white p-2.5 rounded-2xl shadow-xl max-w-xl border border-white/20">
+            <div data-ds-id="ds-5f30b03d" class="flex flex-col sm:flex-row gap-2">
+              <div data-ds-id="ds-9062d88a" class="relative flex-1">
+                <i data-ds-id="ds-c85224f0" data-lucide="search" stroke-width="2.5" class="w-4 h-4 text-emerald-600 absolute left-3 top-3.5"></i>
+                <input data-ds-id="ds-fc665d28" id="hero-search-input" 
+                  type="text" 
+                  placeholder="Cari nama kausa atau lembaga pengaju..." 
+                  class="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm text-[#17211E] rounded-xl bg-slate-50 focus:bg-white border border-transparent focus:border-emerald-600 outline-none transition-all placeholder:text-slate-400"
+                >
+              </div>
+              <div data-ds-id="ds-d502b047" class="relative sm:w-44">
+                <i data-ds-id="ds-65c16a4c" data-lucide="map-pin" stroke-width="2.5" class="w-4 h-4 text-emerald-600 absolute left-3 top-3.5"></i>
+                <select data-ds-id="ds-4fa9cc2f" id="hero-location-filter" class="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm text-[#17211E] rounded-xl bg-slate-50 border border-transparent focus:border-emerald-600 outline-none appearance-none cursor-pointer">
+                  <option data-ds-id="ds-dc3a0ae1" value="all">Semua Wilayah</option>
+                  <option data-ds-id="ds-3efb1a63" value="tulungagung-kota">Kec. Tulungagung</option>
+                  <option data-ds-id="ds-233bf86a" value="boyolangu">Kec. Boyolangu</option>
+                  <option data-ds-id="ds-8a9c4735" value="kedungwaru">Kec. Kedungwaru</option>
+                  <option data-ds-id="ds-9c7e14d2" value="ngunut">Kec. Ngunut</option>
+                  <option data-ds-id="ds-3a23df5a" value="campurdarat">Kec. Campurdarat</option>
+                  <option data-ds-id="ds-1261ad8d" value="besuki">Kec. Besuki</option>
+                  <option data-ds-id="ds-232d3843" value="kalidawir">Kec. Kalidawir</option>
+                  <option data-ds-id="ds-a9459169" value="sendang">Kec. Sendang</option>
+                </select>
+                <i data-ds-id="ds-38a473e2" data-lucide="chevron-down" stroke-width="2.5" class="w-3.5 h-3.5 text-slate-400 absolute right-3 top-3.5 pointer-events-none"></i>
+              </div>
+              <button data-ds-id="ds-6eec0881" id="hero-filter-submit" type="button" class="px-5 py-2.5 rounded-xl bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs sm:text-sm tracking-wide shadow-md active:scale-95 transition-all flex items-center justify-center gap-1.5 shrink-0">
+                <span data-ds-id="ds-39154fff">Filter</span>
+                <i data-ds-id="ds-9bfac1b4" data-lucide="arrow-right" stroke-width="2.5" class="w-4 h-4 text-white"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick tags -->
+          <div data-ds-id="ds-48ab3a68" class="flex flex-wrap items-center gap-2 pt-1 text-xs text-emerald-200/80">
+            <span data-ds-id="ds-4d857bd6" class="font-medium text-emerald-300">Paling Mendesak:</span>
+            <button data-ds-id="ds-11f91e5e" type="button" class="quick-tag-chip px-2.5 py-1 rounded-md bg-emerald-950/60 hover:bg-emerald-800 border border-emerald-700/50 text-emerald-200 transition-colors" data-tag="Banjir Campurdarat">#Banjir Campurdarat</button>
+            <button data-ds-id="ds-dba2c00c" type="button" class="quick-tag-chip px-2.5 py-1 rounded-md bg-emerald-950/60 hover:bg-emerald-800 border border-emerald-700/50 text-emerald-200 transition-colors" data-tag="Panti Asuhan">#Panti Asuhan Al-Kautsar</button>
+            <button data-ds-id="ds-f5d2dd47" type="button" class="quick-tag-chip px-2.5 py-1 rounded-md bg-emerald-950/60 hover:bg-emerald-800 border border-emerald-700/50 text-emerald-200 transition-colors" data-tag="Lansia Dhuafa">#Lansia Terlantar</button>
+          </div>
+        </div>
+
+        <!-- Right: Official Metric Impact Cards [PUB-4] -->
+        <div data-ds-id="ds-2b4c2808" class="lg:col-span-5 grid grid-cols-2 gap-4">
+          
+          <div data-ds-id="ds-3edeaf68" class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-white/15 transition-all">
+            <div data-ds-id="ds-4e2dcdd5" class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center mb-3">
+              <i data-ds-id="ds-ba1311a7" data-lucide="wallet" stroke-width="2.5" class="w-5 h-5 text-emerald-400"></i>
+            </div>
+            <p data-ds-id="ds-3e8d607d" class="text-xs font-medium text-emerald-200/80">Total Dana Disalurkan</p>
+            <p data-ds-id="ds-bf3b5053" class="text-xl sm:text-2xl font-bold text-white mt-1">Rp 1.482.500.000</p>
+            <div data-ds-id="ds-35acb6f8" class="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-300">
+              <i data-ds-id="ds-90ad7a96" data-lucide="check-circle-2" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span data-ds-id="ds-30a7243d">100% Tercatat PPID</span>
+            </div>
+          </div>
+
+          <div data-ds-id="ds-9bbcb216" class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-white/15 transition-all">
+            <div data-ds-id="ds-e0de457d" class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center mb-3">
+              <i data-ds-id="ds-d9ee2902" data-lucide="shield-check" stroke-width="2.5" class="w-5 h-5 text-blue-400"></i>
+            </div>
+            <p data-ds-id="ds-38e30811" class="text-xs font-medium text-emerald-200/80">Kausa Terverifikasi</p>
+            <p data-ds-id="ds-03566ef7" class="text-xl sm:text-2xl font-bold text-white mt-1">48 Program</p>
+            <div data-ds-id="ds-ee7dbe80" class="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-300">
+              <i data-ds-id="ds-f0f71321" data-lucide="building-2" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-400"></i>
+              <span data-ds-id="ds-3bcf6bfa">19 Instansi &amp; Lembaga</span>
+            </div>
+          </div>
+
+          <div data-ds-id="ds-367ff7b3" class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-white/15 transition-all">
+            <div data-ds-id="ds-a39f5ddd" class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center mb-3">
+              <i data-ds-id="ds-07e5cef0" data-lucide="users" stroke-width="2.5" class="w-5 h-5 text-amber-400"></i>
+            </div>
+            <p data-ds-id="ds-649ec9ed" class="text-xs font-medium text-emerald-200/80">Donatur Dermawan</p>
+            <p data-ds-id="ds-b183045f" class="text-xl sm:text-2xl font-bold text-white mt-1">14.920 Jiwa</p>
+            <div data-ds-id="ds-264efb26" class="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-300">
+              <i data-ds-id="ds-bb886b83" data-lucide="heart" stroke-width="2.5" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span data-ds-id="ds-cd8dae78">Termasuk Hamba Allah</span>
+            </div>
+          </div>
+
+          <div data-ds-id="ds-ad4d9280" class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 hover:bg-white/15 transition-all">
+            <div data-ds-id="ds-ff39e343" class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center mb-3">
+              <i data-ds-id="ds-e4f77699" data-lucide="file-check-2" stroke-width="2.5" class="w-5 h-5 text-purple-400"></i>
+            </div>
+            <p data-ds-id="ds-f8e62bcb" class="text-xs font-medium text-emerald-200/80">Laporan Nota Terbuka</p>
+            <p data-ds-id="ds-339ef4a5" class="text-xl sm:text-2xl font-bold text-white mt-1">112 Berkas</p>
+            <div data-ds-id="ds-b4e9ce90" class="flex items-center gap-1.5 mt-2 text-[11px] text-emerald-300">
+              <i data-ds-id="ds-2c65ab65" data-lucide="eye" stroke-width="2.5" class="w-3.5 h-3.5 text-purple-400"></i>
+              <span data-ds-id="ds-2cb38b59">Audit Publik Terbit</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== QUICK FILTER TABS (JUMP-TO-CATEGORY) [PUB-7] ==================== -->
+  <nav data-ds-id="ds-23254ee8" aria-label="Kategori Kausa" class="sticky top-20 z-30 bg-white border-b border-[#D9E2DE] shadow-xs">
+    <div data-ds-id="ds-74f1f08c" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div data-ds-id="ds-0c559b77" class="flex items-center justify-between py-3 overflow-x-auto no-scrollbar gap-2">
+        <div data-ds-id="ds-ba29a5ab" class="flex items-center gap-2 shrink-0">
+          <span data-ds-id="ds-884b34f7" class="text-xs font-bold text-[#52615C] uppercase tracking-wider hidden sm:inline mr-2">Lompat Cepat:</span>
+          
+          <a data-ds-id="ds-1a96ad50" href="#kategori-semua" class="quick-tab-btn active px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#087F5B] text-white transition-all shadow-xs flex items-center gap-1.5" data-filter="all">
+            <i data-ds-id="ds-a56e3a8f" data-lucide="layers" stroke-width="2.5" class="w-3.5 h-3.5 text-white"></i>
+            <span data-ds-id="ds-7f5f90a2">Semua Sektor</span>
+          </a>
+
+          <a data-ds-id="ds-5918ce86" href="#kategori-bencana" class="quick-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EEF3F1] hover:bg-emerald-100/70 text-[#17211E] transition-all flex items-center gap-1.5" data-filter="bencana">
+            <i data-ds-id="ds-94a3ce6a" data-lucide="flame" stroke-width="2.5" class="w-3.5 h-3.5 text-red-500"></i>
+            <span data-ds-id="ds-bc3dbe10">Bencana Alam (2)</span>
+          </a>
+
+          <a data-ds-id="ds-c357c5a7" href="#kategori-panti" class="quick-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EEF3F1] hover:bg-emerald-100/70 text-[#17211E] transition-all flex items-center gap-1.5" data-filter="panti">
+            <i data-ds-id="ds-f7daa4c8" data-lucide="heart-handshake" stroke-width="2.5" class="w-3.5 h-3.5 text-amber-600"></i>
+            <span data-ds-id="ds-ea3e7a59">Panti Asuhan (2)</span>
+          </a>
+
+          <a data-ds-id="ds-2df96d5c" href="#kategori-ibadah" class="quick-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EEF3F1] hover:bg-emerald-100/70 text-[#17211E] transition-all flex items-center gap-1.5" data-filter="ibadah">
+            <i data-ds-id="ds-46a819d9" data-lucide="building" stroke-width="2.5" class="w-3.5 h-3.5 text-blue-600"></i>
+            <span data-ds-id="ds-15f96770">Tempat Ibadah (2)</span>
+          </a>
+
+          <a data-ds-id="ds-c0e36300" href="#kategori-lansia" class="quick-tab-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#EEF3F1] hover:bg-emerald-100/70 text-[#17211E] transition-all flex items-center gap-1.5" data-filter="lansia">
+            <i data-ds-id="ds-7b784af6" data-lucide="user-check" stroke-width="2.5" class="w-3.5 h-3.5 text-purple-600"></i>
+            <span data-ds-id="ds-6c396bc8">Lansia &amp; Dhuafa (2)</span>
+          </a>
+        </div>
+
+        <div data-ds-id="ds-1e30f41a" class="text-[11px] text-[#73817C] hidden md:flex items-center gap-1.5 shrink-0 pl-4 border-l border-slate-200">
+          <i data-ds-id="ds-23853b6e" data-lucide="badge-check" stroke-width="2.5" class="w-4 h-4 text-[#087F5B]"></i>
+          <span data-ds-id="ds-33f14c03">Seluruh kausa berizin sah BPBD &amp; Dinsos</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== MAIN CONTENT: FULL-PAGE GROUPING BY CATEGORY [PUB-5, PUB-6] ==================== -->
+  <main data-ds-id="ds-69281b9b" id="kategori-semua" class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- SEARCH EMPTY STATE (HIDDEN BY DEFAULT) -->
+    <div data-ds-id="ds-2b4393f6" id="search-empty-state" class="hidden bg-white border border-[#D9E2DE] rounded-2xl p-12 text-center max-w-lg mx-auto shadow-xs">
+      <div data-ds-id="ds-dc34026f" class="w-16 h-16 rounded-full bg-emerald-50 text-[#087F5B] flex items-center justify-center mx-auto mb-4">
+        <i data-ds-id="ds-192fb38b" data-lucide="search-x" stroke-width="2.5" class="w-8 h-8 text-emerald-700"></i>
+      </div>
+      <h3 data-ds-id="ds-e50a1590" class="font-heading font-bold text-lg text-[#17211E]">Kausa Tidak Ditemukan</h3>
+      <p data-ds-id="ds-7cf9f5d4" class="text-xs sm:text-sm text-[#73817C] mt-1">Kata kunci atau filter wilayah yang Anda masukkan belum memiliki kausa aktif saat ini.</p>
+      <button data-ds-id="ds-365e7fbf" id="reset-search-btn" type="button" class="mt-4 px-4 py-2 bg-[#087F5B] text-white text-xs font-semibold rounded-lg hover:bg-[#066A4C] transition-all">
+        Reset Pencarian
+      </button>
+    </div>
+
+    <!-- ==================== GROUP 1: BENCANA ALAM ==================== -->
+    <section data-ds-id="ds-997136a8" id="kategori-bencana" class="kausa-group-section space-y-6 pt-2" data-category="bencana">
+      <div data-ds-id="ds-2ad90f29" class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-[#D9E2DE] pb-4">
+        <div data-ds-id="ds-606a6a95" class="space-y-1">
+          <div data-ds-id="ds-fc0801fa" class="flex items-center gap-2">
+            <span data-ds-id="ds-6efe8e51" class="p-1.5 rounded-lg bg-red-100 text-red-700">
+              <i data-ds-id="ds-4f8b33d8" data-lucide="flame" stroke-width="2.5" class="w-5 h-5"></i>
+            </span>
+            <h2 data-ds-id="ds-b6075370" class="text-2xl font-bold text-[#17211E] tracking-tight">Kausa Tanggap Bencana Alam</h2>
+          </div>
+          <p data-ds-id="ds-0eb23853" class="text-xs sm:text-sm text-[#73817C]">Bantuan tanggap darurat dan rekonstruksi infrastruktur pasca bencana di wilayah Tulungagung.</p>
+        </div>
+        <span data-ds-id="ds-06a40618" class="text-xs font-semibold text-red-700 bg-red-50 border border-red-200 px-3 py-1 rounded-full w-fit">
+          Prioritas Tanggap Darurat
+        </span>
+      </div>
+
+      <!-- Grid Cards -->
+      <div data-ds-id="ds-e01e0ba5" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+        <!-- Card Bencana 1 -->
+        <article data-ds-id="ds-032789db" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Bantuan Logistik Korban Banjir Bandang Campurdarat" data-location="campurdarat">
+          <div data-ds-id="ds-4b7c932e" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-8a064ec0" src="https://images.unsplash.com/photo-1547683905-f686c993aae5?auto=format&fit=crop&w=800&q=80" 
+              alt="Banjir Campurdarat" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-53746253" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-006d578d" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-600 text-white shadow-xs">
+                DARURAT
+              </span>
+              <span data-ds-id="ds-87190838" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-1d07d5d9" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Campurdarat
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-80eaf6e1" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Badan Penanggulangan Bencana Daerah (BPBD) Tulungagung"
+              data-sk="SK Bupati Tulungagung No: 360/42/013/2026"
+              data-pic="Ir. Budi Santoso, M.Si (Kepala Pelaksana BPBD)"
+              data-nip="19780512 200212 1 004"
+              data-wa="0812-3456-7890"
+              data-status="OPD Resmi Pemkab"
+              data-title="Bantuan Logistik Korban Banjir Bandang Campurdarat"
+            >
+              <i data-ds-id="ds-2fd533d0" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-6f1a57c8">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-fd8296b7" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-167c1597">
+              <div data-ds-id="ds-e87c90c6" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-d76d67c6" class="font-medium text-emerald-800">BPBD Tulungagung</span>
+                <span data-ds-id="ds-377f6571" class="text-slate-500">REG: TA-2026-BN-004</span>
+              </div>
+              <h3 data-ds-id="ds-692ab4dc" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Bantuan Logistik &amp; Dapur Umum Banjir Luapan Campurdarat
+              </h3>
+              <p data-ds-id="ds-09ee5bd8" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Pemenuhan makanan siap saji, perlengkapan bayi, dan perbaikan tanggul darurat bagi 312 KK terdampak di Desa Sawo dan Gamping.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-f0c4de92" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <!-- Progress Bar -->
+              <div data-ds-id="ds-67505ebb">
+                <div data-ds-id="ds-d54301e1" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-d6badd8b" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-a0d2e86d" class="text-[#17211E]">Rp 68.450.000</strong></span>
+                  <span data-ds-id="ds-c847e677" class="font-bold text-[#087F5B]">68%</span>
+                </div>
+                <div data-ds-id="ds-1a775ecd" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-f1c766ae" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 68%"></div>
+                </div>
+                <div data-ds-id="ds-f23cb8de" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-62c455d7">Target: <strong data-ds-id="ds-4443cc81">Rp 100.000.000</strong></span>
+                  <span data-ds-id="ds-c2a0937e" class="flex items-center gap-1 text-red-600 font-semibold">
+                    <i data-ds-id="ds-14327dfa" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 5 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <!-- Action Row -->
+              <div data-ds-id="ds-d49f3b52" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-d11c3f65" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Bantuan Logistik Dapur Umum Campurdarat"
+                  data-target="Rp 100.000.000"
+                  data-terkumpul="Rp 68.450.000"
+                  data-persen="68%"
+                  data-donatur="423"
+                  data-desa="Desa Sawo &amp; Gamping, Kec. Campurdarat"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-55dc3385" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Bantuan Logistik Korban Banjir Bandang Campurdarat"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card Bencana 2 -->
+        <article data-ds-id="ds-4f3e482d" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Pemulihan Akses Tanah Longsor Jalur Sendang" data-location="sendang">
+          <div data-ds-id="ds-d3d7b916" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-0172d536" src="https://images.unsplash.com/photo-1545642352-8868615bc0fd?auto=format&fit=crop&w=800&q=80" 
+              alt="Longsor Jalur Sendang" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-a78aff41" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-de2fe02b" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-600 text-white shadow-xs">
+                REKONS
+              </span>
+              <span data-ds-id="ds-1c960ebb" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-20c8fc98" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Sendang
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-7d1f0488" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Dinas PUPR &amp; Tanggap Bencana Tulungagung"
+              data-sk="SK Kepala Dinas PUPR Tulungagung No: 620/190/04/2026"
+              data-pic="H. Ahmad Zainuri, ST (Koordinator Bina Marga)"
+              data-nip="19810315 200604 1 009"
+              data-wa="0813-9876-5432"
+              data-status="OPD Resmi Pemkab"
+              data-title="Pemulihan Akses Tanah Longsor Jalur Sendang"
+            >
+              <i data-ds-id="ds-fede20ea" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-f2b71532">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-13998f11" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-d16cc2e4">
+              <div data-ds-id="ds-40e0af4e" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-3f83814f" class="font-medium text-emerald-800">Dinas PUPR &amp; Desa Nglurup</span>
+                <span data-ds-id="ds-06f6d71b" class="text-slate-500">REG: TA-2026-BN-002</span>
+              </div>
+              <h3 data-ds-id="ds-76703c90" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Penyediaan Bronjong &amp; Terpal Penahan Longsor Desa Nglurup Sendang
+              </h3>
+              <p data-ds-id="ds-9f375dd2" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Pengadaan material kawat bronjong penahan tebing jalan desa penghubung perkebunan teh yang terputus total.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-52f783a7" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-20044494">
+                <div data-ds-id="ds-4e2a06a5" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-1aafe318" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-d58aa6f5" class="text-[#17211E]">Rp 42.100.000</strong></span>
+                  <span data-ds-id="ds-78174749" class="font-bold text-[#087F5B]">76%</span>
+                </div>
+                <div data-ds-id="ds-71756e7d" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-c08fd296" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 76%"></div>
+                </div>
+                <div data-ds-id="ds-4b855b12" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-bbab12e8">Target: <strong data-ds-id="ds-b674642f">Rp 55.000.000</strong></span>
+                  <span data-ds-id="ds-493d3f1e" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-fa34110f" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 12 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-baa0208e" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-da1d449e" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Penyediaan Bronjong Longsor Nglurup Sendang"
+                  data-target="Rp 55.000.000"
+                  data-terkumpul="Rp 42.100.000"
+                  data-persen="76%"
+                  data-donatur="289"
+                  data-desa="Desa Nglurup, Kec. Sendang"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-8fd444bd" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Pemulihan Akses Tanah Longsor Jalur Sendang"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== GROUP 2: PANTI ASUHAN ==================== -->
+    <section data-ds-id="ds-7d0b16d1" id="kategori-panti" class="kausa-group-section space-y-6 pt-2" data-category="panti">
+      <div data-ds-id="ds-1356b032" class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-[#D9E2DE] pb-4">
+        <div data-ds-id="ds-067d56c2" class="space-y-1">
+          <div data-ds-id="ds-8df0247b" class="flex items-center gap-2">
+            <span data-ds-id="ds-3de91af0" class="p-1.5 rounded-lg bg-amber-100 text-amber-700">
+              <i data-ds-id="ds-913c9af5" data-lucide="heart-handshake" stroke-width="2.5" class="w-5 h-5"></i>
+            </span>
+            <h2 data-ds-id="ds-701c7748" class="text-2xl font-bold text-[#17211E] tracking-tight">Kausa Panti Asuhan &amp; Lembaga Kesejahteraan</h2>
+          </div>
+          <p data-ds-id="ds-688e97d6" class="text-xs sm:text-sm text-[#73817C]">Dukungan pemenuhan gizi, seragam sekolah, dan fasilitas asrama LKSA terdaftar Dinas Sosial Tulungagung.</p>
+        </div>
+        <span data-ds-id="ds-a30ba0c0" class="text-xs font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full w-fit">
+          Terverifikasi LKSA Dinsos
+        </span>
+      </div>
+
+      <div data-ds-id="ds-e5cea9cb" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+        <!-- Card Panti 1 -->
+        <article data-ds-id="ds-7a25a85d" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Beasiswa Pendidikan Santri Yatim LKSA Al-Kautsar Ngunut" data-location="ngunut">
+          <div data-ds-id="ds-e84c9bf0" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-07314209" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" 
+              alt="Anak Panti Asuhan" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-25cce441" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-803bccde" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-600 text-white shadow-xs">
+                PENDIDIKAN
+              </span>
+              <span data-ds-id="ds-046307cb" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-32ec9045" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Ngunut
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-7d9234b4" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Yayasan LKSA Al-Kautsar Tulungagung"
+              data-sk="AHU-0012948.AH.01.04.Tahun 2019 / Izin Dinsos: 466/81/104/2024"
+              data-pic="Ustadz H. Mukhlisin, S.Pd.I"
+              data-nip="NIK KTP: 3504081904720003"
+              data-wa="0852-3344-5566"
+              data-status="Lembaga Sosial Berbadan Hukum"
+              data-title="Beasiswa Pendidikan Santri Yatim LKSA Al-Kautsar Ngunut"
+            >
+              <i data-ds-id="ds-614fc971" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-58a6ac34">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-a41662e2" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-9b7ba675">
+              <div data-ds-id="ds-feea9fcf" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-9a659788" class="font-medium text-emerald-800">LKSA Al-Kautsar</span>
+                <span data-ds-id="ds-bf46aaed" class="text-slate-500">REG: TA-2026-PA-011</span>
+              </div>
+              <h3 data-ds-id="ds-31bc03c2" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Bantuan Seragam, Buku, dan Paket Nutrisi 64 Anak Asuh Panti Al-Kautsar
+              </h3>
+              <p data-ds-id="ds-c4d7d825" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Menjamin keberlanjutan sekolah tingkat SMP-SMA untuk 64 anak yatim piatu pra-sejahtera binaan resmi Dinsos Tulungagung.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-d26bf01e" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-e5f2e446">
+                <div data-ds-id="ds-ccc0b041" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-3685ef48" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-31e04c73" class="text-[#17211E]">Rp 38.900.000</strong></span>
+                  <span data-ds-id="ds-84f415db" class="font-bold text-[#087F5B]">86%</span>
+                </div>
+                <div data-ds-id="ds-248e96c7" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-81602e87" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 86%"></div>
+                </div>
+                <div data-ds-id="ds-cef71491" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-7ba36ce2">Target: <strong data-ds-id="ds-777bfb55">Rp 45.000.000</strong></span>
+                  <span data-ds-id="ds-b1b9a27b" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-c1f7417a" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 18 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-d9cab246" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-e6af811c" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Beasiswa &amp; Nutrisi 64 Anak Asuh LKSA Al-Kautsar"
+                  data-target="Rp 45.000.000"
+                  data-terkumpul="Rp 38.900.000"
+                  data-persen="86%"
+                  data-donatur="318"
+                  data-desa="Kec. Ngunut, Kab. Tulungagung"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-a8e9421d" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Beasiswa Pendidikan Santri Yatim LKSA Al-Kautsar Ngunut"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card Panti 2 -->
+        <article data-ds-id="ds-20fb103d" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Renovasi Ruang Belajar Panti Asuhan Putri Kasih Ibu Kedungwaru" data-location="kedungwaru">
+          <div data-ds-id="ds-e3cf1cf1" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-16917495" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" 
+              alt="Panti Asuhan Kedungwaru" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-b8fcc46d" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-43915e35" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-600 text-white shadow-xs">
+                SARANA
+              </span>
+              <span data-ds-id="ds-fd23e8ec" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-8403eec9" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Kedungwaru
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-87c4fb85" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Lembaga Kesejahteraan Sosial Kasih Ibu"
+              data-sk="AHU-0008412.AH.01.07.Tahun 2021 / Registrasi Dinsos: 460/19/2025"
+              data-pic="Dra. Hj. Siti Romlah (Ketua Pengurus)"
+              data-nip="NIK KTP: 3504104509650001"
+              data-wa="0811-2233-4455"
+              data-status="Lembaga Sosial Berbadan Hukum"
+              data-title="Renovasi Ruang Belajar Panti Asuhan Putri Kasih Ibu Kedungwaru"
+            >
+              <i data-ds-id="ds-a85ea17c" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-d302377e">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-68feb723" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-bdfc88b4">
+              <div data-ds-id="ds-f0b98397" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-e6ea66d6" class="font-medium text-emerald-800">LKS Kasih Ibu</span>
+                <span data-ds-id="ds-f1f20355" class="text-slate-500">REG: TA-2026-PA-018</span>
+              </div>
+              <h3 data-ds-id="ds-b0b702b7" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Perbaikan Atap Bocor &amp; Pengadaan Meja Belajar Komputer LKSA Kasih Ibu
+              </h3>
+              <p data-ds-id="ds-797c3305" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Penggantian genteng dan plafon yang lapuk demi kenyamanan belajar 42 anak asuh usia sekolah dasar.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-f8d1851a" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-1d891373">
+                <div data-ds-id="ds-79c90bae" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-880c9500" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-5ea0f134" class="text-[#17211E]">Rp 22.800.000</strong></span>
+                  <span data-ds-id="ds-b84658bc" class="font-bold text-[#087F5B]">57%</span>
+                </div>
+                <div data-ds-id="ds-1eae840d" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-eeea7764" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 57%"></div>
+                </div>
+                <div data-ds-id="ds-73feb314" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-34abc604">Target: <strong data-ds-id="ds-f46f2f2a">Rp 40.000.000</strong></span>
+                  <span data-ds-id="ds-c709ec84" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-34fc5c30" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 25 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-635bc212" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-62a297e9" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Perbaikan Atap LKSA Kasih Ibu Kedungwaru"
+                  data-target="Rp 40.000.000"
+                  data-terkumpul="Rp 22.800.000"
+                  data-persen="57%"
+                  data-donatur="174"
+                  data-desa="Kec. Kedungwaru, Kab. Tulungagung"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-3042d726" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Renovasi Ruang Belajar Panti Asuhan Putri Kasih Ibu Kedungwaru"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== GROUP 3: TEMPAT IBADAH ==================== -->
+    <section data-ds-id="ds-bf333c72" id="kategori-ibadah" class="kausa-group-section space-y-6 pt-2" data-category="ibadah">
+      <div data-ds-id="ds-27ea0ca1" class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-[#D9E2DE] pb-4">
+        <div data-ds-id="ds-f9fd2281" class="space-y-1">
+          <div data-ds-id="ds-6a36e8c9" class="flex items-center gap-2">
+            <span data-ds-id="ds-a96e0297" class="p-1.5 rounded-lg bg-blue-100 text-blue-700">
+              <i data-ds-id="ds-3754b1c4" data-lucide="building" stroke-width="2.5" class="w-5 h-5"></i>
+            </span>
+            <h2 data-ds-id="ds-aa146884" class="text-2xl font-bold text-[#17211E] tracking-tight">Kausa Sarana Tempat Ibadah</h2>
+          </div>
+          <p data-ds-id="ds-bb647828" class="text-xs sm:text-sm text-[#73817C]">Renovasi sarana ibadah lintas komunitas umat beragama dengan rekomendasi Kantor Kemenag Tulungagung.</p>
+        </div>
+        <span data-ds-id="ds-e441d51a" class="text-xs font-semibold text-blue-800 bg-blue-50 border border-blue-200 px-3 py-1 rounded-full w-fit">
+          Rekomendasi Kemenag &amp; FKUB
+        </span>
+      </div>
+
+      <div data-ds-id="ds-a585bbf6" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+        <!-- Card Ibadah 1 -->
+        <article data-ds-id="ds-f0aa9f02" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Renovasi Masjid Baiturrahman Boyolangu Tulungagung" data-location="boyolangu">
+          <div data-ds-id="ds-c78a6297" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-ee27a21f" src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?auto=format&fit=crop&w=800&q=80" 
+              alt="Masjid Boyolangu" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-d0c06944" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-3a77d251" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-600 text-white shadow-xs">
+                RENOVASI
+              </span>
+              <span data-ds-id="ds-2bf83962" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-2c28858f" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Boyolangu
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-7aa9aa17" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Takmir Masjid Baiturrahman Boyolangu"
+              data-sk="SK Kepala Desa Boyolangu No: 141/08/2025 &amp; Kemenag TA: B-120/Kua.15/2025"
+              data-pic="H. Mahfudz Anwar (Ketua Takmir)"
+              data-nip="NIK KTP: 3504031206680002"
+              data-wa="0812-4455-6677"
+              data-status="Lembaga Keagamaan Terdaftar"
+              data-title="Renovasi Masjid Baiturrahman Boyolangu Tulungagung"
+            >
+              <i data-ds-id="ds-987f614d" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-9783b965">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-607cddc8" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-28f8e756">
+              <div data-ds-id="ds-5e366afc" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-e11c70a5" class="font-medium text-emerald-800">Takmir Baiturrahman</span>
+                <span data-ds-id="ds-61c013af" class="text-slate-500">REG: TA-2026-IB-007</span>
+              </div>
+              <h3 data-ds-id="ds-db907643" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Pembangunan Tempat Wudhu Ramah Lansia &amp; Saluran Air Masjid Baiturrahman
+              </h3>
+              <p data-ds-id="ds-76f4a38b" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Pembuatan pegangan besi dan lantai anti-licin khusus bagi jamaah sepuh serta perbaikan tangki air penampungan.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-4ab44ad7" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-48512acf">
+                <div data-ds-id="ds-b0c8d56c" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-5fc798eb" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-15d4f168" class="text-[#17211E]">Rp 18.250.000</strong></span>
+                  <span data-ds-id="ds-06e3aacc" class="font-bold text-[#087F5B]">73%</span>
+                </div>
+                <div data-ds-id="ds-0b5c488a" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-f5ba58ba" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 73%"></div>
+                </div>
+                <div data-ds-id="ds-6a37271f" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-1aef256a">Target: <strong data-ds-id="ds-757fe23b">Rp 25.000.000</strong></span>
+                  <span data-ds-id="ds-c1bb46f7" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-59a919a2" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 9 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-f5274b05" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-4a0cc5fb" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Pembangunan Tempat Wudhu Ramah Lansia Boyolangu"
+                  data-target="Rp 25.000.000"
+                  data-terkumpul="Rp 18.250.000"
+                  data-persen="73%"
+                  data-donatur="195"
+                  data-desa="Desa Boyolangu, Kec. Boyolangu"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-c4d9258d" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Renovasi Masjid Baiturrahman Boyolangu Tulungagung"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card Ibadah 2 -->
+        <article data-ds-id="ds-e1680a3c" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Pengecoran Dinding Pura Penataran Luhur Kalidawir" data-location="kalidawir">
+          <div data-ds-id="ds-6a74a63b" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-e61ca2af" src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?auto=format&fit=crop&w=800&q=80" 
+              alt="Pura Luhur Kalidawir" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-7bbb7462" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-559930d5" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-600 text-white shadow-xs">
+                KULTUR
+              </span>
+              <span data-ds-id="ds-45d335a3" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-fdb96761" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Kalidawir
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-1adbf6a3" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Parisada Hindu Dharma Indonesia (PHDI) Tulungagung"
+              data-sk="SK PHDI Wilayah Jawa Timur No: 042/PHDI-JTM/XI/2024"
+              data-pic="Wayan Sutrisno, S.Ag (Pengurus Harian)"
+              data-nip="NIK KTP: 3504122108740004"
+              data-wa="0821-7788-9900"
+              data-status="Lembaga Keagamaan Berbadan Hukum"
+              data-title="Pengecoran Dinding Pura Penataran Luhur Kalidawir"
+            >
+              <i data-ds-id="ds-30bf1b89" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-fd0d763e">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-1b9912ca" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-33e4cbcd">
+              <div data-ds-id="ds-e3a56874" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-34a1c8d9" class="font-medium text-emerald-800">PHDI Tulungagung</span>
+                <span data-ds-id="ds-e8f4a4c0" class="text-slate-500">REG: TA-2026-IB-009</span>
+              </div>
+              <h3 data-ds-id="ds-1a0261ba" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Perbaikan Pagar Pelinggih &amp; Penataan Balai Pasraman Kalidawir
+              </h3>
+              <p data-ds-id="ds-dc5398f9" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Penguatan struktur dinding penahan tanah dan peremajaan ruang belajar anak-anak pasraman keagamaan di lereng Kalidawir.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-d3d88689" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-2d87be2b">
+                <div data-ds-id="ds-c75972c0" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-88faf2e2" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-678ed70c" class="text-[#17211E]">Rp 15.600.000</strong></span>
+                  <span data-ds-id="ds-cc1726d0" class="font-bold text-[#087F5B]">44%</span>
+                </div>
+                <div data-ds-id="ds-00a0f0e8" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-0f491e1c" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 44%"></div>
+                </div>
+                <div data-ds-id="ds-9aabadf2" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-cf03c2ca">Target: <strong data-ds-id="ds-f914cf09">Rp 35.000.000</strong></span>
+                  <span data-ds-id="ds-586f1cf9" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-82cccdbb" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 30 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-f15cb2e5" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-66fb86ab" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Perbaikan Balai Pasraman Kalidawir"
+                  data-target="Rp 35.000.000"
+                  data-terkumpul="Rp 15.600.000"
+                  data-persen="44%"
+                  data-donatur="110"
+                  data-desa="Kec. Kalidawir, Kab. Tulungagung"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-3c6ed0d9" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Pengecoran Dinding Pura Penataran Luhur Kalidawir"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== GROUP 4: LANSIA & DHUAFA ==================== -->
+    <section data-ds-id="ds-1f40f458" id="kategori-lansia" class="kausa-group-section space-y-6 pt-2" data-category="lansia">
+      <div data-ds-id="ds-9d4e350a" class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-[#D9E2DE] pb-4">
+        <div data-ds-id="ds-70c9ca14" class="space-y-1">
+          <div data-ds-id="ds-87401ad1" class="flex items-center gap-2">
+            <span data-ds-id="ds-f3f0a504" class="p-1.5 rounded-lg bg-purple-100 text-purple-700">
+              <i data-ds-id="ds-47ebaa66" data-lucide="user-check" stroke-width="2.5" class="w-5 h-5"></i>
+            </span>
+            <h2 data-ds-id="ds-88fcaefb" class="text-2xl font-bold text-[#17211E] tracking-tight">Kausa Lansia Sebatang Kara &amp; Dhuafa</h2>
+          </div>
+          <p data-ds-id="ds-7ae199cc" class="text-xs sm:text-sm text-[#73817C]">Bantuan pemenuhan paket makan harian, popok, serta obat rutin bagi lansia non-potensial.</p>
+        </div>
+        <span data-ds-id="ds-6dc6091d" class="text-xs font-semibold text-purple-800 bg-purple-50 border border-purple-200 px-3 py-1 rounded-full w-fit">
+          Validasi TKSK Dinsos Tulungagung
+        </span>
+      </div>
+
+      <div data-ds-id="ds-10e4f564" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+
+        <!-- Card Lansia 1 -->
+        <article data-ds-id="ds-7188908e" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Bantuan Paket Makanan &amp; Popok Mbah Sarinem Besuki" data-location="besuki">
+          <div data-ds-id="ds-e62928d4" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-2aab1f1d" src="https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=800&q=80" 
+              alt="Lansia Tulungagung" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-8db18963" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-d52c3c1f" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-600 text-white shadow-xs">
+                KESEHATAN
+              </span>
+              <span data-ds-id="ds-006dc450" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-d88ad89f" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Besuki
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-62fe64ea" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Tenaga Kesejahteraan Sosial Kecamatan (TKSK) Besuki"
+              data-sk="SK Dinsos Kab. Tulungagung No: 460/312/03/2026"
+              data-pic="Rina Wulandari, S.Sos (Koordinator Pendamping Lansia)"
+              data-nip="19890724 201402 2 003"
+              data-wa="0822-1100-2233"
+              data-status="Pendamping Resmi Dinas Sosial"
+              data-title="Bantuan Paket Makanan &amp; Popok Mbah Sarinem Besuki"
+            >
+              <i data-ds-id="ds-4cf0ab34" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-6391051f">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-35c78041" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-b6ebedcf">
+              <div data-ds-id="ds-0247867b" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-dfe9ac45" class="font-medium text-emerald-800">TKSK &amp; Dinsos Tulungagung</span>
+                <span data-ds-id="ds-217221f2" class="text-slate-500">REG: TA-2026-LS-014</span>
+              </div>
+              <h3 data-ds-id="ds-54e79142" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Bantuan Nutrisi, Popok Dewasa, &amp; Kasur Medis untuk 12 Lansia Bedridden Besuki
+              </h3>
+              <p data-ds-id="ds-439f89f1" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Pendampingan lansia terlantar yang hidup sebatang kara dan mengalami kelumpuhan di wilayah pesisir Besuki.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-4a508e1a" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-7f44cb1b">
+                <div data-ds-id="ds-77e9eecd" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-64bdffea" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-e8d2fce0" class="text-[#17211E]">Rp 14.200.000</strong></span>
+                  <span data-ds-id="ds-79266f58" class="font-bold text-[#087F5B]">94%</span>
+                </div>
+                <div data-ds-id="ds-a5e5d1f2" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-4284fce5" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 94%"></div>
+                </div>
+                <div data-ds-id="ds-4ac87c4b" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-888f0f29">Target: <strong data-ds-id="ds-e934bce8">Rp 15.000.000</strong></span>
+                  <span data-ds-id="ds-4bbf54ba" class="flex items-center gap-1 text-red-600 font-semibold">
+                    <i data-ds-id="ds-da79bb78" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 3 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-81874830" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-5178893e" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="Bantuan Nutrisi &amp; Kasur Medis Lansia Besuki"
+                  data-target="Rp 15.000.000"
+                  data-terkumpul="Rp 14.200.000"
+                  data-persen="94%"
+                  data-donatur="180"
+                  data-desa="Kec. Besuki, Kab. Tulungagung"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-3c965176" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Bantuan Paket Makanan &amp; Popok Mbah Sarinem Besuki"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card Lansia 2 -->
+        <article data-ds-id="ds-963dfeca" class="kausa-card bg-white border border-[#D9E2DE] rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group" data-title="Bantuan Kursi Roda dan Pengobatan Rutin Lansia Dhuafa Tulungagung Kota" data-location="tulungagung-kota">
+          <div data-ds-id="ds-540cb2e0" class="relative h-52 overflow-hidden bg-slate-200">
+            <img data-ds-id="ds-db8aaaba" src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?auto=format&fit=crop&w=800&q=80" 
+              alt="Lansia Kursi Roda" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            >
+            <div data-ds-id="ds-da2e0891" class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+              <span data-ds-id="ds-6ef88e98" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-700 text-white shadow-xs">
+                ALAT BANTU
+              </span>
+              <span data-ds-id="ds-b8dff944" class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/95 text-slate-800 shadow-xs flex items-center gap-1">
+                <i data-ds-id="ds-a32d02cb" data-lucide="map-pin" stroke-width="2.5" class="w-3 h-3 text-red-500"></i> Kec. Tulungagung
+              </span>
+            </div>
+            <!-- Clickable Badge Legitimasi Pemkab [PUB-8] -->
+            <button data-ds-id="ds-c6ad4c42" type="button" 
+              class="open-legality-modal-btn absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-800 text-white shadow-md hover:bg-emerald-900 flex items-center gap-1.5 transition-transform active:scale-95"
+              data-instansi="Baznas Kabupaten Tulungagung &amp; Kelurahan Kepatihan"
+              data-sk="SK BAZNAS Pusat RI No: 120/BAZNAS/2023"
+              data-pic="Drs. H. Samsul Hadi (Komisioner Pendistribusian)"
+              data-nip="19690412 199403 1 005"
+              data-wa="0813-3322-1144"
+              data-status="Lembaga Resmi Pemerintah Non-Struktural"
+              data-title="Bantuan Kursi Roda dan Pengobatan Rutin Lansia Dhuafa Tulungagung Kota"
+            >
+              <i data-ds-id="ds-f50f261d" data-lucide="badge-check" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-300"></i>
+              <span data-ds-id="ds-bedc4653">Terverifikasi Pemkab</span>
+            </button>
+          </div>
+
+          <div data-ds-id="ds-cf5e757d" class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div data-ds-id="ds-f3f40cfc">
+              <div data-ds-id="ds-f93fe057" class="flex items-center justify-between text-xs text-[#73817C] mb-1.5">
+                <span data-ds-id="ds-9116eaf3" class="font-medium text-emerald-800">BAZNAS Tulungagung</span>
+                <span data-ds-id="ds-1793df19" class="text-slate-500">REG: TA-2026-LS-008</span>
+              </div>
+              <h3 data-ds-id="ds-22418217" class="text-base font-bold text-[#17211E] group-hover:text-[#087F5B] transition-colors line-clamp-2">
+                Penyediaan 10 Kursi Roda Adaptif &amp; Bantuan Sembako Lansia Pra-Sejahtera
+              </h3>
+              <p data-ds-id="ds-82ba9c38" class="text-xs text-[#52615C] mt-2 line-clamp-2 leading-relaxed">
+                Pemberian fasilitas mobilitas fisik untuk kakek-nenek penyandang disabilitas fisik di wilayah perkotaan Tulungagung.
+              </p>
+            </div>
+
+            <div data-ds-id="ds-6b97748e" class="space-y-3 pt-2 border-t border-[#EEF3F1]">
+              <div data-ds-id="ds-24b5e9e2">
+                <div data-ds-id="ds-48bfd49c" class="flex justify-between items-center text-xs mb-1">
+                  <span data-ds-id="ds-87771dc3" class="text-[#73817C]">Terkumpul: <strong data-ds-id="ds-a741462e" class="text-[#17211E]">Rp 18.500.000</strong></span>
+                  <span data-ds-id="ds-bc9024c9" class="font-bold text-[#087F5B]">84%</span>
+                </div>
+                <div data-ds-id="ds-d22cdf2d" class="w-full h-2.5 bg-[#EEF3F1] rounded-full overflow-hidden">
+                  <div data-ds-id="ds-639b782a" class="h-full bg-[#087F5B] rounded-full transition-all duration-500" style="width: 84%"></div>
+                </div>
+                <div data-ds-id="ds-a2dab210" class="flex justify-between items-center text-[11px] text-[#73817C] mt-1.5">
+                  <span data-ds-id="ds-a56649be">Target: <strong data-ds-id="ds-67297b22">Rp 22.000.000</strong></span>
+                  <span data-ds-id="ds-6777febf" class="flex items-center gap-1 text-slate-600 font-semibold">
+                    <i data-ds-id="ds-0d89cfa0" data-lucide="clock" stroke-width="2.5" class="w-3 h-3"></i> 14 Hari Tersisa
+                  </span>
+                </div>
+              </div>
+
+              <div data-ds-id="ds-355c5de5" class="flex items-center gap-2 pt-1">
+                <button data-ds-id="ds-0b740748" type="button" 
+                  class="open-detail-preview-btn flex-1 py-2 px-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#087F5B] font-semibold text-xs tracking-wide transition-all text-center"
+                  data-kausa="10 Kursi Roda Adaptif &amp; Sembako Lansia"
+                  data-target="Rp 22.000.000"
+                  data-terkumpul="Rp 18.500.000"
+                  data-persen="84%"
+                  data-donatur="240"
+                  data-desa="Kel. Kepatihan, Kec. Tulungagung"
+                >
+                  Lihat Detail &amp; Laporan
+                </button>
+                <button data-ds-id="ds-688b0915" type="button" 
+                  class="open-donation-quick-btn py-2 px-4 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs tracking-wide transition-all active:scale-95 shadow-xs"
+                  data-title="Bantuan Kursi Roda dan Pengobatan Rutin Lansia Dhuafa Tulungagung Kota"
+                >
+                  Donasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== TRANSPARENCY EXPLAINER CARD ==================== -->
+    <section data-ds-id="ds-94e979db" id="transparansi-info" class="bg-gradient-to-r from-emerald-900 to-[#123B32] rounded-2xl p-6 sm:p-8 text-white shadow-sm border border-emerald-800">
+      <div data-ds-id="ds-ea71b17c" class="flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div data-ds-id="ds-3e166bb6" class="space-y-2 max-w-2xl">
+          <div data-ds-id="ds-455abc18" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 text-emerald-300 text-xs font-semibold">
+            <i data-ds-id="ds-5a6d3b4b" data-lucide="file-text" stroke-width="2.5" class="w-3.5 h-3.5"></i> Standar Keterbukaan Informasi Publik
+          </div>
+          <h2 data-ds-id="ds-074ed5a0" class="text-xl sm:text-2xl font-bold font-heading">Setiap Penyaluran Dilengkapi Foto Nota &amp; BAST Fisik</h2>
+          <p data-ds-id="ds-4b0ac5cb" class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+            Pemerintah Kabupaten Tulungagung menerapkan verifikasi berlapis. Dana tidak langsung dicairkan tanpa Berita Acara Serah Terima (BAST) dan nota kuitansi bermeterai yang dipublikasikan langsung ke halaman detail kausa.
+          </p>
+        </div>
+        <div data-ds-id="ds-703550ad" class="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
+          <button data-ds-id="ds-8f4e336b" id="view-sample-report-btn" type="button" class="px-5 py-2.5 rounded-xl bg-white text-[#123B32] hover:bg-emerald-50 text-xs sm:text-sm font-bold tracking-wide transition-all shadow-sm active:scale-95 text-center">
+            Lihat Contoh Laporan Transparansi
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer data-ds-id="ds-ec2c0fad" class="bg-white border-t border-[#D9E2DE] mt-16 text-slate-600 text-xs">
+    <div data-ds-id="ds-11efc580" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div data-ds-id="ds-567f370e" class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Col 1: Identitas -->
+        <div data-ds-id="ds-eaea8fa4" class="space-y-3 md:col-span-1">
+          <div data-ds-id="ds-493c0764" class="flex items-center gap-2.5">
+            <div data-ds-id="ds-b95c35aa" class="w-8 h-8 rounded-lg bg-[#087F5B] flex items-center justify-center text-white">
+              <i data-ds-id="ds-b8f31b98" data-lucide="landmark" stroke-width="2.5" class="w-4 h-4"></i>
+            </div>
+            <span data-ds-id="ds-5d51773a" class="font-heading font-bold text-sm text-[#123B32]">SI-PEDULI TULUNGAGUNG</span>
+          </div>
+          <p data-ds-id="ds-efc41eb7" class="text-[12px] text-[#73817C] leading-relaxed">
+            Portal resmi penggalangan dana sosial kemasyarakatan dan kedaruratan di bawah naungan Pemerintah Kabupaten Tulungagung.
+          </p>
+          <div data-ds-id="ds-c591e4d4" class="flex items-center gap-2 pt-1 text-slate-400">
+            <span data-ds-id="ds-bd76d7d5" class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-medium text-[10px]">v0.2-MVP</span>
+            <span data-ds-id="ds-f8c0f3d6" class="text-[11px]">&bull; Terintegrasi PPID Kab. Tulungagung</span>
+          </div>
+        </div>
+
+        <!-- Col 2: Kategori Kausa -->
+        <div data-ds-id="ds-5a4fdbae" class="space-y-2">
+          <p data-ds-id="ds-a60a8051" class="font-bold text-[#17211E] text-xs uppercase tracking-wider">Kategori Program</p>
+          <ul data-ds-id="ds-c1247514" class="space-y-1.5 text-xs text-[#52615C]">
+            <li data-ds-id="ds-a3d86ba4"><a data-ds-id="ds-ac305fee" href="#kategori-bencana" class="hover:text-[#087F5B] transition-colors">Bencana Alam</a></li>
+            <li data-ds-id="ds-7f730a11"><a data-ds-id="ds-ac033996" href="#kategori-panti" class="hover:text-[#087F5B] transition-colors">Panti Asuhan &amp; LKSA</a></li>
+            <li data-ds-id="ds-e7dd93c2"><a data-ds-id="ds-14d33881" href="#kategori-ibadah" class="hover:text-[#087F5B] transition-colors">Tempat Ibadah</a></li>
+            <li data-ds-id="ds-22485827"><a data-ds-id="ds-ca8a3f2b" href="#kategori-lansia" class="hover:text-[#087F5B] transition-colors">Lansia &amp; Dhuafa</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Regulasi & Verifikasi -->
+        <div data-ds-id="ds-aa2cf6f9" class="space-y-2">
+          <p data-ds-id="ds-740bf635" class="font-bold text-[#17211E] text-xs uppercase tracking-wider">Regulasi &amp; Integritas</p>
+          <ul data-ds-id="ds-bfa2fa0a" class="space-y-1.5 text-xs text-[#52615C]">
+            <li data-ds-id="ds-3d513876"><a data-ds-id="ds-3ba222fd" href="#" class="hover:text-[#087F5B] transition-colors">SOP Pengajuan Kausa Resmi</a></li>
+            <li data-ds-id="ds-30978b8b"><a data-ds-id="ds-55b7f16d" href="#" class="hover:text-[#087F5B] transition-colors">Petunjuk Verifikasi Dokumen Lembaga</a></li>
+            <li data-ds-id="ds-083b967f"><a data-ds-id="ds-39a66905" href="#" class="hover:text-[#087F5B] transition-colors">Standar Audit Pengeluaran Dana</a></li>
+            <li data-ds-id="ds-81b64a4d"><a data-ds-id="ds-4461b4bc" href="#" class="hover:text-[#087F5B] transition-colors">Kebijakan Privasi Donatur Anonim</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Kontak Pengelola -->
+        <div data-ds-id="ds-f86e9d11" class="space-y-2">
+          <p data-ds-id="ds-33634789" class="font-bold text-[#17211E] text-xs uppercase tracking-wider">Sekretariat Verifikator</p>
+          <p data-ds-id="ds-34671210" class="text-xs text-[#52615C] leading-relaxed">
+            Gedung Dinas Komunikasi dan Informatika &bull; Dinsos Tulungagung<br>
+            Jl. RA Kartini No. 01, Kepatihan, Kec. Tulungagung, Jawa Timur 66212
+          </p>
+          <p data-ds-id="ds-127a1815" class="text-xs font-semibold text-emerald-800">Email: ppid@tulungagung.go.id</p>
+        </div>
+
+      </div>
+
+      <div data-ds-id="ds-1d96788f" class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px]">
+        <p data-ds-id="ds-afb50a4e">&copy; 2026 Pemerintah Kabupaten Tulungagung. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p data-ds-id="ds-5a8812a2" class="text-slate-400">Portal Penggalangan Bantuan Terakreditasi &amp; Amanah</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL STATES: AUTHENTICATION MULTI-JALUR [AUT-1, AUT-2, AUT-3, AUT-4]      -->
+  <!-- ========================================================================= -->
+  <div data-ds-id="ds-c0326d4c" id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs hidden animate-in fade-in duration-200">
+    <div data-ds-id="ds-7fd36088" class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative pointer-events-auto">
+      
+      <!-- Close Button -->
+      <button data-ds-id="ds-b9d5222b" id="close-auth-modal-btn" type="button" aria-label="Tutup Dialog Masuk" class="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+        <i data-ds-id="ds-e1587ad5" data-lucide="x" stroke-width="2.5" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div data-ds-id="ds-363384fc" class="text-center space-y-1 mb-6">
+        <div data-ds-id="ds-749c3933" class="w-12 h-12 rounded-xl bg-emerald-50 text-[#087F5B] flex items-center justify-center mx-auto mb-2">
+          <i data-ds-id="ds-2378cd32" data-lucide="lock" stroke-width="2.5" class="w-6 h-6"></i>
+        </div>
+        <h3 data-ds-id="ds-88681886" class="font-heading font-bold text-xl text-[#17211E]">Akses Pengaju Program</h3>
+        <p data-ds-id="ds-6210baba" class="text-xs text-[#73817C] max-w-xs mx-auto">
+          Hanya untuk Instansi/OPD Pemkab Tulungagung dan Lembaga Sosial Berbadan Hukum.
+        </p>
+      </div>
+
+      <!-- Auth Tabs Switcher [AUT-2] -->
+      <div data-ds-id="ds-427a3954" class="grid grid-cols-2 gap-1 p-1 bg-[#EEF3F1] rounded-xl mb-5 text-xs font-semibold">
+        <button data-ds-id="ds-5ee7aeb8" id="auth-tab-sso" type="button" class="py-2 rounded-lg bg-white text-[#123B32] shadow-xs transition-all">
+          Jalur 1: SSO ASN Pemkab
+        </button>
+        <button data-ds-id="ds-fa1f7738" id="auth-tab-lembaga" type="button" class="py-2 rounded-lg text-[#73817C] hover:text-[#17211E] transition-all">
+          Jalur 2: NIK &amp; Lembaga
+        </button>
+      </div>
+
+      <!-- TAB CONTENT 1: SSO PEMKAB [AUT-3] -->
+      <div data-ds-id="ds-22486192" id="auth-panel-sso" class="space-y-4">
+        <div data-ds-id="ds-db90c4cb" class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs text-emerald-900 flex items-start gap-2.5">
+          <i data-ds-id="ds-31da615d" data-lucide="info" stroke-width="2.5" class="w-4 h-4 text-emerald-700 shrink-0 mt-0.5"></i>
+          <div data-ds-id="ds-9d1b694a">
+            <span data-ds-id="ds-c0894b7d" class="font-bold">Otomatis Terverifikasi:</span>
+            Aparatur sipil menggunakan email kedinasan domain <strong data-ds-id="ds-bbecc655">@tulungagung.go.id</strong> tidak perlu unggah legalitas manual.
+          </div>
+        </div>
+
+        <form data-ds-id="ds-3c7388c4" id="form-sso-login" class="space-y-3">
+          <div data-ds-id="ds-2ccb4721">
+            <label data-ds-id="ds-cd872cae" class="block text-xs font-semibold text-[#17211E] mb-1">Email Kedinasan Resmi</label>
+            <div data-ds-id="ds-f8768783" class="relative">
+              <input data-ds-id="ds-a74fe6fa" type="email" placeholder="nama_aparatur@tulungagung.go.id" required class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-lg text-xs outline-none transition-all">
+              <i data-ds-id="ds-56cd2500" data-lucide="mail" stroke-width="2.5" class="w-4 h-4 text-emerald-700 absolute left-3 top-2.5"></i>
+            </div>
+          </div>
+
+          <div data-ds-id="ds-6afa22c6">
+            <label data-ds-id="ds-2c79c9f6" class="block text-xs font-semibold text-[#17211E] mb-1">Kata Sandi Akun SSO</label>
+            <div data-ds-id="ds-c376305c" class="relative">
+              <input data-ds-id="ds-5e307b5e" type="password" placeholder="••••••••••••" required class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-lg text-xs outline-none transition-all">
+              <i data-ds-id="ds-bd2c5a52" data-lucide="key" stroke-width="2.5" class="w-4 h-4 text-emerald-700 absolute left-3 top-2.5"></i>
+            </div>
+          </div>
+
+          <button data-ds-id="ds-e4f0ca30" type="submit" class="w-full py-2.5 px-4 bg-[#087F5B] hover:bg-[#066A4C] text-white rounded-lg font-semibold text-xs tracking-wide transition-all shadow-xs active:scale-95 flex items-center justify-center gap-2">
+            <i data-ds-id="ds-1c6eb593" data-lucide="shield-check" stroke-width="2.5" class="w-4 h-4 text-white"></i>
+            <span data-ds-id="ds-6dc984cc">Masuk via Portal SSO Pemkab</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB CONTENT 2: NIK & OTP WHATSAPP [AUT-4] -->
+      <div data-ds-id="ds-e87e3328" id="auth-panel-lembaga" class="space-y-4 hidden">
+        <div data-ds-id="ds-dd304dfb" class="p-3 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-start gap-2.5">
+          <i data-ds-id="ds-f7272a81" data-lucide="alert-triangle" stroke-width="2.5" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+          <div data-ds-id="ds-afcbfe50">
+            <span data-ds-id="ds-1d94e3a2" class="font-bold">Lembaga Terdaftar:</span> Masukkan NIK KTP penanggung jawab lembaga dan nomor WhatsApp aktif untuk menerima kode OTP.
+          </div>
+        </div>
+
+        <form data-ds-id="ds-c8e9d221" id="form-nik-otp" class="space-y-3">
+          <div data-ds-id="ds-4b82b755">
+            <label data-ds-id="ds-418111c0" class="block text-xs font-semibold text-[#17211E] mb-1">NIK e-KTP Penanggung Jawab</label>
+            <div data-ds-id="ds-a11a7567" class="relative">
+              <input data-ds-id="ds-695cf52e" type="text" maxlength="16" placeholder="3504xxxxxxxxxxxx" required class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-lg text-xs outline-none transition-all">
+              <i data-ds-id="ds-ee02a8c2" data-lucide="credit-card" stroke-width="2.5" class="w-4 h-4 text-emerald-700 absolute left-3 top-2.5"></i>
+            </div>
+          </div>
+
+          <div data-ds-id="ds-0fd8353d">
+            <label data-ds-id="ds-311da35f" class="block text-xs font-semibold text-[#17211E] mb-1">Nomor WhatsApp Aktif</label>
+            <div data-ds-id="ds-a9b0a717" class="relative">
+              <input data-ds-id="ds-3d0e7587" type="tel" placeholder="08xxxxxxxxxx" required class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-lg text-xs outline-none transition-all">
+              <i data-ds-id="ds-2d385953" data-lucide="message-square" stroke-width="2.5" class="w-4 h-4 text-emerald-700 absolute left-3 top-2.5"></i>
+            </div>
+          </div>
+
+          <!-- Simulated OTP Field -->
+          <div data-ds-id="ds-a98805bf" id="otp-input-container" class="hidden space-y-1 pt-1">
+            <label data-ds-id="ds-642ede51" class="block text-xs font-semibold text-emerald-800">Masukkan 6 Digit OTP WhatsApp</label>
+            <input data-ds-id="ds-bd370fc2" type="text" maxlength="6" placeholder="123456" class="w-full text-center tracking-widest text-base font-bold py-2 bg-emerald-50 border border-emerald-300 rounded-lg outline-none">
+            <p data-ds-id="ds-e77cbd68" class="text-[11px] text-slate-500">Kode OTP simulasi dikirim ke WhatsApp Anda.</p>
+          </div>
+
+          <button data-ds-id="ds-e016d755" id="submit-otp-step-btn" type="submit" class="w-full py-2.5 px-4 bg-[#123B32] hover:bg-[#1A5144] text-white rounded-lg font-semibold text-xs tracking-wide transition-all shadow-xs active:scale-95 flex items-center justify-center gap-2">
+            <i data-ds-id="ds-a18e8408" data-lucide="send" stroke-width="2.5" class="w-4 h-4 text-white"></i>
+            <span data-ds-id="ds-d844d7ed" id="otp-btn-label">Kirim Kode OTP WhatsApp</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Notice Footnote -->
+      <div data-ds-id="ds-ba2dc126" class="mt-4 pt-3 border-t border-slate-100 text-center">
+        <p data-ds-id="ds-682d43d8" class="text-[11px] text-[#73817C]">
+          Donatur umum tidak perlu membuat akun untuk menyalurkan donasi.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: LEGALITAS & PROFIL PENANGGUNG JAWAB RESMI [PUB-8]                   -->
+  <!-- ========================================================================= -->
+  <div data-ds-id="ds-21ac96ff" id="legality-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs hidden animate-in fade-in duration-200">
+    <div data-ds-id="ds-42ee9ff2" class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative pointer-events-auto">
+      
+      <button data-ds-id="ds-e69b00e3" id="close-legality-modal-btn" type="button" aria-label="Tutup Dialog Legalitas" class="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+        <i data-ds-id="ds-951879ba" data-lucide="x" stroke-width="2.5" class="w-5 h-5"></i>
+      </button>
+
+      <div data-ds-id="ds-733de6ce" class="flex items-start gap-3 mb-4">
+        <div data-ds-id="ds-e5d13800" class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+          <i data-ds-id="ds-ac027490" data-lucide="shield-check" stroke-width="2.5" class="w-7 h-7"></i>
+        </div>
+        <div data-ds-id="ds-a9c86469">
+          <span data-ds-id="ds-2252b73a" class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 mb-1">
+            <i data-ds-id="ds-084eaff5" data-lucide="check-circle" stroke-width="2.5" class="w-3 h-3 text-emerald-600"></i> DIVERIFIKASI RESMI PEMKAB
+          </span>
+          <h3 data-ds-id="ds-c94bf498" id="legality-modal-title" class="font-heading font-bold text-base text-[#17211E] leading-snug">
+            Profil Legalitas Penanggung Jawab
+          </h3>
+          <p data-ds-id="ds-075bdd60" id="legality-program-name" class="text-xs text-[#73817C] mt-0.5 line-clamp-1">Program Kausa</p>
+        </div>
+      </div>
+
+      <div data-ds-id="ds-64133827" class="space-y-3 bg-[#F6F8F7] p-4 rounded-xl border border-[#D9E2DE] text-xs">
+        <div data-ds-id="ds-2b9c26de">
+          <span data-ds-id="ds-51e5eea1" class="text-slate-500 block text-[11px]">Nama Instansi / Lembaga Pemohon:</span>
+          <p data-ds-id="ds-1d4df38a" id="legality-instansi" class="font-bold text-[#17211E] text-sm mt-0.5">Badan Penanggulangan Bencana Daerah</p>
+        </div>
+
+        <div data-ds-id="ds-e5b74a92">
+          <span data-ds-id="ds-32597e39" class="text-slate-500 block text-[11px]">Status Entitas Hukum:</span>
+          <p data-ds-id="ds-89a4cd13" id="legality-status" class="font-semibold text-emerald-800">OPD Resmi Pemerintah Kabupaten Tulungagung</p>
+        </div>
+
+        <div data-ds-id="ds-d2def0ea">
+          <span data-ds-id="ds-88552277" class="text-slate-500 block text-[11px]">Dasar Hukum / Nomor SK Legalitas:</span>
+          <p data-ds-id="ds-dc35fcf8" id="legality-sk" class="text-slate-800 bg-white px-2 py-1 rounded border border-slate-200 mt-0.5">
+            SK Bupati Tulungagung No: 360/42/013/2026
+          </p>
+        </div>
+
+        <div data-ds-id="ds-f827643d" class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-200">
+          <div data-ds-id="ds-53892380">
+            <span data-ds-id="ds-e9fa9a14" class="text-slate-500 block text-[11px]">Nama Penanggung Jawab:</span>
+            <p data-ds-id="ds-236920a8" id="legality-pic" class="font-semibold text-slate-800">Ir. Budi Santoso, M.Si</p>
+          </div>
+          <div data-ds-id="ds-29829c17">
+            <span data-ds-id="ds-fbb4148f" class="text-slate-500 block text-[11px]">NIP / Identitas KTP:</span>
+            <p data-ds-id="ds-fab5261e" id="legality-nip" class="font-medium text-slate-800">19780512 200212 1 004</p>
+          </div>
+        </div>
+
+        <div data-ds-id="ds-e8d38c33">
+          <span data-ds-id="ds-ddc3f39d" class="text-slate-500 block text-[11px]">Kontak Resmi Penyaluran:</span>
+          <p data-ds-id="ds-9b89c0d4" id="legality-wa" class="font-semibold text-emerald-800">0812-3456-7890 (Terkonfirmasi)</p>
+        </div>
+      </div>
+
+      <div data-ds-id="ds-8b9da728" class="mt-4 p-3 bg-emerald-50 rounded-xl flex items-center gap-2.5 text-xs text-emerald-900">
+        <i data-ds-id="ds-dcffbe77" data-lucide="file-check" stroke-width="2.5" class="w-4 h-4 text-emerald-700 shrink-0"></i>
+        <span data-ds-id="ds-f95146d9">Dokumen legalitas fisik telah diaudit dan divalidasi oleh Tim Verifikasi PPID Pemkab Tulungagung.</span>
+      </div>
+
+      <button data-ds-id="ds-af4b8389" id="close-legality-modal-confirm-btn" type="button" class="mt-5 w-full py-2.5 bg-[#087F5B] hover:bg-[#066A4C] text-white font-semibold text-xs rounded-lg transition-all">
+        Tutup Verifikasi
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: NOTIFIKASI PENGGUNA REAL-TIME [NOT-1, NOT-2, NOT-3, NOT-4]          -->
+  <!-- ========================================================================= -->
+  <div data-ds-id="ds-0561db09" id="notification-modal" class="fixed inset-0 z-50 flex items-start justify-end p-4 sm:p-6 bg-slate-900/40 backdrop-blur-2xs hidden animate-in fade-in duration-150">
+    <div data-ds-id="ds-2e6f785b" class="bg-white rounded-2xl max-w-sm sm:max-w-md w-full p-5 shadow-2xl border border-slate-200 mt-16 relative pointer-events-auto">
+      
+      <div data-ds-id="ds-1e49a7c2" class="flex items-center justify-between pb-3 border-b border-slate-200">
+        <div data-ds-id="ds-3b288e62" class="flex items-center gap-2">
+          <i data-ds-id="ds-fa98d6ae" data-lucide="bell" stroke-width="2.5" class="w-4 h-4 text-[#087F5B]"></i>
+          <h3 data-ds-id="ds-2538f1a2" class="font-heading font-bold text-sm text-[#17211E]">Pemberitahuan Sistem</h3>
+        </div>
+        <button data-ds-id="ds-115fc0a0" id="close-notification-modal-btn" type="button" aria-label="Tutup Dialog Notifikasi" class="p-1 rounded text-slate-400 hover:text-slate-600">
+          <i data-ds-id="ds-40ac0b87" data-lucide="x" stroke-width="2.5" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Notification List -->
+      <div data-ds-id="ds-74511869" class="divide-y divide-slate-100 max-h-80 overflow-y-auto custom-scrollbar my-2 text-xs">
+        
+        <!-- [NOT-1] Status Program -->
+        <div data-ds-id="ds-23fb02ce" class="py-3 flex gap-3 hover:bg-slate-50 px-2 rounded-lg transition-colors">
+          <div data-ds-id="ds-74d0d8e6" class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+            <i data-ds-id="ds-322caec6" data-lucide="check" stroke-width="2.5" class="w-4 h-4"></i>
+          </div>
+          <div data-ds-id="ds-6e8fecc3">
+            <p data-ds-id="ds-cceb92b7" class="font-bold text-[#17211E] text-xs">Program Pengajuan Disetujui</p>
+            <p data-ds-id="ds-877d3ad6" class="text-[#52615C] mt-0.5">Kausa "Bantuan Logistik Banjir Campurdarat" telah disetujui verifikator dan ditayangkan di katalog publik.</p>
+            <span data-ds-id="ds-4853ac16" class="text-[10px] text-slate-400 mt-1 block">15 Menit Lalu &bull; Notifikasi Kausa</span>
+          </div>
+        </div>
+
+        <!-- [NOT-2] Status Pembayaran Donasi -->
+        <div data-ds-id="ds-372a25f3" class="py-3 flex gap-3 hover:bg-slate-50 px-2 rounded-lg transition-colors">
+          <div data-ds-id="ds-3537117a" class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0">
+            <i data-ds-id="ds-dd28859d" data-lucide="credit-card" stroke-width="2.5" class="w-4 h-4"></i>
+          </div>
+          <div data-ds-id="ds-efd2dc97">
+            <p data-ds-id="ds-c3200332" class="font-bold text-[#17211E] text-xs">Donasi Berhasil Diterima</p>
+            <p data-ds-id="ds-917a0575" class="text-[#52615C] mt-0.5">Donasi sebesar Rp 250.000 via QRIS Midtrans telah tercatat otomatis dan masuk ke akumulasi kausa.</p>
+            <span data-ds-id="ds-d49d7f73" class="text-[10px] text-slate-400 mt-1 block">42 Menit Lalu &bull; Transaksi Donasi</span>
+          </div>
+        </div>
+
+        <!-- [NOT-3] Status Pemeriksaan Laporan Dana -->
+        <div data-ds-id="ds-6d35bc64" class="py-3 flex gap-3 hover:bg-slate-50 px-2 rounded-lg transition-colors">
+          <div data-ds-id="ds-09ce6b82" class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+            <i data-ds-id="ds-83155f46" data-lucide="file-check" stroke-width="2.5" class="w-4 h-4"></i>
+          </div>
+          <div data-ds-id="ds-556cea19">
+            <p data-ds-id="ds-bfaf6466" class="font-bold text-[#17211E] text-xs">Laporan Penyaluran Dipublikasikan</p>
+            <p data-ds-id="ds-f7ad49d9" class="text-[#52615C] mt-0.5">Nota belanja penyaluran logistik beras tahap 1 telah diaudit verifikator dan dibuka ke tab transparansi publik.</p>
+            <span data-ds-id="ds-7000d07f" class="text-[10px] text-slate-400 mt-1 block">2 Jam Lalu &bull; Akuntabilitas Publik</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div data-ds-id="ds-daef0b6e" class="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+        <span data-ds-id="ds-7c183e38" class="text-slate-400">Menampilkan 3 notifikasi terbaru</span>
+        <button data-ds-id="ds-6a01b403" id="mark-all-read-btn" type="button" class="text-[#087F5B] hover:underline font-semibold">Tandai Dibaca</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: QUICK DONATION & TRANSPARENCY PREVIEW SIMULATOR                     -->
+  <!-- ========================================================================= -->
+  <div data-ds-id="ds-d5ee6306" id="quick-action-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs hidden animate-in fade-in duration-200">
+    <div data-ds-id="ds-9e4d6b85" class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative pointer-events-auto">
+      <button data-ds-id="ds-22862619" id="close-quick-action-btn" type="button" aria-label="Tutup Dialog" class="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+        <i data-ds-id="ds-ed96e3a7" data-lucide="x" stroke-width="2.5" class="w-5 h-5"></i>
+      </button>
+
+      <div data-ds-id="ds-c48ed7dd" class="space-y-4">
+        <div data-ds-id="ds-0b3155f2" class="flex items-center gap-3">
+          <div data-ds-id="ds-3eec6226" class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center">
+            <i data-ds-id="ds-49a9fe49" data-lucide="hand-heart" stroke-width="2.5" class="w-5 h-5"></i>
+          </div>
+          <div data-ds-id="ds-cea95c09">
+            <h3 data-ds-id="ds-882c9628" id="quick-modal-heading" class="font-heading font-bold text-base text-[#17211E]">Simulasi Donasi Kausa</h3>
+            <p data-ds-id="ds-b10c6c50" id="quick-modal-sub" class="text-xs text-[#73817C]">Portal Pendanaan Sosial Pemkab Tulungagung</p>
+          </div>
+        </div>
+
+        <div data-ds-id="ds-66df9be4" class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-2">
+          <p data-ds-id="ds-0c90ef9a" class="text-slate-500">Kausa yang Dipilih:</p>
+          <p data-ds-id="ds-a608e72e" id="quick-modal-kausa-title" class="font-bold text-slate-900 text-sm">Bantuan Logistik Dapur Umum Campurdarat</p>
+          <div data-ds-id="ds-789bac17" class="flex justify-between items-center pt-2 border-t border-slate-200 text-[11px]">
+            <span data-ds-id="ds-ca168664" class="text-slate-500">Status Legalitas:</span>
+            <span data-ds-id="ds-d9644c34" class="font-semibold text-emerald-700 flex items-center gap-1">
+              <i data-ds-id="ds-62eef151" data-lucide="check" stroke-width="2.5" class="w-3 h-3"></i> Terverifikasi Pemkab
+            </span>
+          </div>
+        </div>
+
+        <div data-ds-id="ds-6ffdccc5" class="space-y-2">
+          <label data-ds-id="ds-8231fd57" class="block text-xs font-semibold text-slate-700">Pilihan Nominal Cepat:</label>
+          <div data-ds-id="ds-280e72cd" class="grid grid-cols-3 gap-2">
+            <button data-ds-id="ds-17504c98" type="button" class="nominal-preset-btn py-2 text-xs font-semibold rounded-lg border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50 text-slate-700">Rp 25.000</button>
+            <button data-ds-id="ds-1287bb58" type="button" class="nominal-preset-btn py-2 text-xs font-semibold rounded-lg border border-emerald-600 bg-emerald-50 text-emerald-800">Rp 50.000</button>
+            <button data-ds-id="ds-e4d82d5e" type="button" class="nominal-preset-btn py-2 text-xs font-semibold rounded-lg border border-slate-200 hover:border-emerald-600 hover:bg-emerald-50 text-slate-700">Rp 100.000</button>
+          </div>
+        </div>
+
+        <div data-ds-id="ds-963455ba" class="p-3 bg-emerald-50/80 rounded-xl text-xs text-emerald-900 space-y-1">
+          <p data-ds-id="ds-0c7ca8c4" class="font-semibold flex items-center gap-1">
+            <i data-ds-id="ds-57944c9b" data-lucide="info" stroke-width="2.5" class="w-3.5 h-3.5 text-emerald-700"></i> Alur Integrasi Midtrans Snap:
+          </p>
+          <p data-ds-id="ds-7864eef4" class="text-[11px] text-emerald-800">
+            Pada halaman detail kausa lengkap, klik "Donasi Sekarang" akan memanggil pop-up Midtrans Snap Modal (QRIS, VA Bank BRI/BNI/Mandiri, GoPay) dengan callback webhook otomatis.
+          </p>
+        </div>
+
+        <button data-ds-id="ds-b203ab44" id="simulate-proceed-detail-btn" type="button" class="w-full py-2.5 bg-[#087F5B] hover:bg-[#066A4C] text-white text-xs font-bold rounded-lg tracking-wide shadow-xs transition-all active:scale-95">
+          Lanjut ke Pusat Detail &amp; Transparansi Nota
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // -------------------------------------------------------------
+    // Category Dropdown Toggle
+    // -------------------------------------------------------------
+    const categoryBtn = document.getElementById('category-dropdown-btn');
+    const categoryMenu = document.getElementById('category-dropdown-menu');
+
+    if (categoryBtn && categoryMenu) {
+      categoryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryMenu.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!categoryMenu.contains(e.target) && !categoryBtn.contains(e.target)) {
+          categoryMenu.classList.add('hidden');
+        }
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Mobile Drawer Navigation
+    // -------------------------------------------------------------
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMobileMenuBtn = document.getElementById('close-mobile-menu-btn');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMobileMenu() {
+      mobileSidebar.classList.remove('-translate-x-full');
+      mobileSidebar.classList.add('translate-x-0');
+      mobileOverlay.classList.remove('hidden');
+    }
+
+    function closeMobileMenu() {
+      mobileSidebar.classList.add('-translate-x-full');
+      mobileSidebar.classList.remove('translate-x-0');
+      mobileOverlay.classList.add('hidden');
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+    if (closeMobileMenuBtn) closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // -------------------------------------------------------------
+    // Quick Category Filter Tabs (Jump-to & Filtering) [PUB-7]
+    // -------------------------------------------------------------
+    const quickTabs = document.querySelectorAll('.quick-tab-btn');
+    const groupSections = document.querySelectorAll('.kausa-group-section');
+
+    quickTabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        quickTabs.forEach(t => {
+          t.classList.remove('bg-[#087F5B]', 'text-white', 'shadow-xs');
+          t.classList.add('bg-[#EEF3F1]', 'text-[#17211E]');
+        });
+
+        tab.classList.remove('bg-[#EEF3F1]', 'text-[#17211E]');
+        tab.classList.add('bg-[#087F5B]', 'text-white', 'shadow-xs');
+
+        const filter = tab.getAttribute('data-filter');
+        if (filter === 'all') {
+          groupSections.forEach(sec => sec.classList.remove('hidden'));
+        } else {
+          groupSections.forEach(sec => {
+            if (sec.getAttribute('data-category') === filter) {
+              sec.classList.remove('hidden');
+            } else {
+              sec.classList.add('hidden');
+            }
+          });
+        }
+      });
+    });
+
+    // -------------------------------------------------------------
+    // Real-Time Search & Location Filter [PUB-3]
+    // -------------------------------------------------------------
+    const heroSearchInput = document.getElementById('hero-search-input');
+    const navbarSearchInput = document.getElementById('navbar-search-input');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const heroLocationFilter = document.getElementById('hero-location-filter');
+    const heroFilterSubmit = document.getElementById('hero-filter-submit');
+    const searchEmptyState = document.getElementById('search-empty-state');
+    const resetSearchBtn = document.getElementById('reset-search-btn');
+    const kausaCards = document.querySelectorAll('.kausa-card');
+
+    function performSearch() {
+      const keyword = (heroSearchInput.value || navbarSearchInput.value || mobileSearchInput.value).toLowerCase().trim();
+      const location = heroLocationFilter ? heroLocationFilter.value : 'all';
+      let visibleCount = 0;
+
+      kausaCards.forEach(card => {
+        const title = (card.getAttribute('data-title') || '').toLowerCase();
+        const cardLoc = (card.getAttribute('data-location') || '').toLowerCase();
+
+        const matchesKeyword = !keyword || title.includes(keyword);
+        const matchesLocation = (location === 'all') || (cardLoc === location);
+
+        if (matchesKeyword && matchesLocation) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Check section visibility
+      groupSections.forEach(sec => {
+        const hasVisibleCards = sec.querySelectorAll('.kausa-card:not(.hidden)').length > 0;
+        if (hasVisibleCards) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+
+      // Empty State Handling
+      if (visibleCount === 0) {
+        searchEmptyState.classList.remove('hidden');
+      } else {
+        searchEmptyState.classList.add('hidden');
+      }
+    }
+
+    if (heroSearchInput) heroSearchInput.addEventListener('input', performSearch);
+    if (navbarSearchInput) navbarSearchInput.addEventListener('input', () => {
+      heroSearchInput.value = navbarSearchInput.value;
+      performSearch();
+    });
+    if (mobileSearchInput) mobileSearchInput.addEventListener('input', () => {
+      heroSearchInput.value = mobileSearchInput.value;
+      performSearch();
+    });
+    if (heroLocationFilter) heroLocationFilter.addEventListener('change', performSearch);
+    if (heroFilterSubmit) heroFilterSubmit.addEventListener('click', performSearch);
+
+    if (resetSearchBtn) {
+      resetSearchBtn.addEventListener('click', () => {
+        heroSearchInput.value = '';
+        navbarSearchInput.value = '';
+        if (mobileSearchInput) mobileSearchInput.value = '';
+        if (heroLocationFilter) heroLocationFilter.value = 'all';
+        kausaCards.forEach(c => c.classList.remove('hidden'));
+        groupSections.forEach(s => s.classList.remove('hidden'));
+        searchEmptyState.classList.add('hidden');
+      });
+    }
+
+    // Quick tag chips in hero
+    document.querySelectorAll('.quick-tag-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const tag = chip.getAttribute('data-tag');
+        heroSearchInput.value = tag;
+        navbarSearchInput.value = tag;
+        performSearch();
+      });
+    });
+
+    // -------------------------------------------------------------
+    // Auth Modal Multi-Jalur [AUT-1, AUT-2, AUT-3, AUT-4]
+    // -------------------------------------------------------------
+    const authModal = document.getElementById('auth-modal');
+    const openAuthBtn = document.getElementById('open-auth-modal-btn');
+    const openAuthMobileBtn = document.getElementById('open-auth-modal-mobile-btn');
+    const closeAuthBtn = document.getElementById('close-auth-modal-btn');
+    const authTabSso = document.getElementById('auth-tab-sso');
+    const authTabLembaga = document.getElementById('auth-tab-lembaga');
+    const authPanelSso = document.getElementById('auth-panel-sso');
+    const authPanelLembaga = document.getElementById('auth-panel-lembaga');
+    const formNikOtp = document.getElementById('form-nik-otp');
+    const otpContainer = document.getElementById('otp-input-container');
+    const otpBtnLabel = document.getElementById('otp-btn-label');
+    const btnAjukanNav = document.getElementById('btn-ajukan-bantuan-nav');
+    const btnAjukanMobile = document.getElementById('btn-ajukan-bantuan-mobile');
+
+    function openAuthModal() {
+      authModal.classList.remove('hidden');
+      closeMobileMenu();
+    }
+
+    function closeAuthModal() {
+      authModal.classList.add('hidden');
+    }
+
+    if (openAuthBtn) openAuthBtn.addEventListener('click', openAuthModal);
+    if (openAuthMobileBtn) openAuthMobileBtn.addEventListener('click', openAuthModal);
+    if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuthModal);
+
+    // Clicking CTA Ajukan also opens Auth Modal per AUT-1
+    if (btnAjukanNav) btnAjukanNav.addEventListener('click', openAuthModal);
+    if (btnAjukanMobile) btnAjukanMobile.addEventListener('click', openAuthModal);
+
+    if (authTabSso && authTabLembaga) {
+      authTabSso.addEventListener('click', () => {
+        authTabSso.classList.add('bg-white', 'text-[#123B32]', 'shadow-xs');
+        authTabSso.classList.remove('text-[#73817C]');
+        authTabLembaga.classList.remove('bg-white', 'text-[#123B32]', 'shadow-xs');
+        authTabLembaga.classList.add('text-[#73817C]');
+        authPanelSso.classList.remove('hidden');
+        authPanelLembaga.classList.add('hidden');
+      });
+
+      authTabLembaga.addEventListener('click', () => {
+        authTabLembaga.classList.add('bg-white', 'text-[#123B32]', 'shadow-xs');
+        authTabLembaga.classList.remove('text-[#73817C]');
+        authTabSso.classList.remove('bg-white', 'text-[#123B32]', 'shadow-xs');
+        authTabSso.classList.add('text-[#73817C]');
+        authPanelLembaga.classList.remove('hidden');
+        authPanelSso.classList.add('hidden');
+      });
+    }
+
+    // Simulate OTP WhatsApp Trigger [AUT-4]
+    if (formNikOtp) {
+      let otpSent = false;
+      formNikOtp.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!otpSent) {
+          otpContainer.classList.remove('hidden');
+          otpBtnLabel.textContent = 'Verifikasi Kode & Masuk';
+          otpSent = true;
+        } else {
+          alert('Berhasil terotentikasi sebagai Pengaju Lembaga. Membuka Formulir Pengajuan Kausa Baru...');
+          closeAuthModal();
+        }
+      });
+    }
+
+    const formSsoLogin = document.getElementById('form-sso-login');
+    if (formSsoLogin) {
+      formSsoLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Otentikasi SSO Berhasil! Status Akun: OPD Resmi Pemkab Tulungagung Terverifikasi.');
+        closeAuthModal();
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Legality Modal Trigger [PUB-8]
+    // -------------------------------------------------------------
+    const legalityModal = document.getElementById('legality-modal');
+    const closeLegalityBtn = document.getElementById('close-legality-modal-btn');
+    const closeLegalityConfirmBtn = document.getElementById('close-legality-modal-confirm-btn');
+    const openLegalityBtns = document.querySelectorAll('.open-legality-modal-btn');
+
+    const legalityInstansi = document.getElementById('legality-instansi');
+    const legalitySk = document.getElementById('legality-sk');
+    const legalityPic = document.getElementById('legality-pic');
+    const legalityNip = document.getElementById('legality-nip');
+    const legalityWa = document.getElementById('legality-wa');
+    const legalityStatus = document.getElementById('legality-status');
+    const legalityProgramName = document.getElementById('legality-program-name');
+
+    openLegalityBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        legalityInstansi.textContent = btn.getAttribute('data-instansi') || '-';
+        legalitySk.textContent = btn.getAttribute('data-sk') || '-';
+        legalityPic.textContent = btn.getAttribute('data-pic') || '-';
+        legalityNip.textContent = btn.getAttribute('data-nip') || '-';
+        legalityWa.textContent = btn.getAttribute('data-wa') || '-';
+        legalityStatus.textContent = btn.getAttribute('data-status') || '-';
+        legalityProgramName.textContent = btn.getAttribute('data-title') || 'Program Kausa';
+        legalityModal.classList.remove('hidden');
+      });
+    });
+
+    if (closeLegalityBtn) closeLegalityBtn.addEventListener('click', () => legalityModal.classList.add('hidden'));
+    if (closeLegalityConfirmBtn) closeLegalityConfirmBtn.addEventListener('click', () => legalityModal.classList.add('hidden'));
+
+    // -------------------------------------------------------------
+    // Notification Modal [NOT-1, NOT-2, NOT-3, NOT-4]
+    // -------------------------------------------------------------
+    const notificationBtn = document.getElementById('notification-btn');
+    const mobileNotificationBtn = document.getElementById('mobile-notification-btn');
+    const notificationModal = document.getElementById('notification-modal');
+    const closeNotificationBtn = document.getElementById('close-notification-modal-btn');
+    const markAllReadBtn = document.getElementById('mark-all-read-btn');
+
+    function toggleNotificationModal() {
+      notificationModal.classList.toggle('hidden');
+    }
+
+    if (notificationBtn) notificationBtn.addEventListener('click', toggleNotificationModal);
+    if (mobileNotificationBtn) mobileNotificationBtn.addEventListener('click', toggleNotificationModal);
+    if (closeNotificationBtn) closeNotificationBtn.addEventListener('click', () => notificationModal.classList.add('hidden'));
+
+    if (markAllReadBtn) {
+      markAllReadBtn.addEventListener('click', () => {
+        document.querySelectorAll('header span.animate-pulse').forEach(el => el.remove());
+        alert('Semua notifikasi telah ditandai sebagai dibaca.');
+        notificationModal.classList.add('hidden');
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Quick Action / Donation & Report Preview Simulator
+    // -------------------------------------------------------------
+    const quickModal = document.getElementById('quick-action-modal');
+    const closeQuickModalBtn = document.getElementById('close-quick-action-btn');
+    const quickKausaTitle = document.getElementById('quick-modal-kausa-title');
+    const quickModalHeading = document.getElementById('quick-modal-heading');
+    const simulateProceedBtn = document.getElementById('simulate-proceed-detail-btn');
+
+    document.querySelectorAll('.open-donation-quick-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.getAttribute('data-title');
+        quickKausaTitle.textContent = title;
+        quickModalHeading.textContent = 'Salurkan Donasi Online';
+        simulateProceedBtn.textContent = 'Buka Detail & Pembayaran Midtrans';
+        quickModal.classList.remove('hidden');
+      });
+    });
+
+    document.querySelectorAll('.open-detail-preview-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kausa = btn.getAttribute('data-kausa');
+        quickKausaTitle.textContent = kausa;
+        quickModalHeading.textContent = 'Audit & Transparansi Kausa';
+        simulateProceedBtn.textContent = 'Buka Tab Laporan Nota Penyaluran';
+        quickModal.classList.remove('hidden');
+      });
+    });
+
+    if (closeQuickModalBtn) {
+      closeQuickModalBtn.addEventListener('click', () => quickModal.classList.add('hidden'));
+    }
+
+    if (simulateProceedBtn) {
+      simulateProceedBtn.addEventListener('click', () => {
+        alert('Membuka Halaman Detail Kausa, Panel Donasi Sticky Midtrans & Tab Transparansi Penyaluran...');
+        quickModal.classList.add('hidden');
+      });
+    }
+
+    const sampleReportBtn = document.getElementById('view-sample-report-btn');
+    if (sampleReportBtn) {
+      sampleReportBtn.addEventListener('click', () => {
+        quickKausaTitle.textContent = 'Laporan Realisasi Penyaluran Dapur Umum BPBD';
+        quickModalHeading.textContent = 'Contoh Publikasi Nota Belanja & BAST';
+        simulateProceedBtn.textContent = 'Unduh Bukti Pengeluaran Riil (PDF/Nota)';
+        quickModal.classList.remove('hidden');
+      });
+    }
+
+    // Preset donation buttons
+    document.querySelectorAll('.nominal-preset-btn').forEach(pBtn => {
+      pBtn.addEventListener('click', () => {
+        document.querySelectorAll('.nominal-preset-btn').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50', 'text-emerald-800');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+        pBtn.classList.add('border-emerald-600', 'bg-emerald-50', 'text-emerald-800');
+        pBtn.classList.remove('border-slate-200', 'text-slate-700');
+      });
+    });
+
+    // Close Modals on Outer Click
+    window.addEventListener('click', (e) => {
+      if (e.target === authModal) closeAuthModal();
+      if (e.target === legalityModal) legalityModal.classList.add('hidden');
+      if (e.target === quickModal) quickModal.classList.add('hidden');
+      if (e.target === notificationModal) notificationModal.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
