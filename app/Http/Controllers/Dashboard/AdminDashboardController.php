@@ -65,6 +65,10 @@ class AdminDashboardController extends Controller
      */
     public function detail(Kausa $kausa): View
     {
+        if (! $kausa->exists && request()->route('kausa')) {
+            $kausa = Kausa::findOrFail(request()->route('kausa'));
+        }
+
         $kausa->load(['kategori', 'instansi.dokumen', 'dokumen', 'riwayatStatus', 'donasi']);
 
         return view('dashboard.admin.detail', compact('kausa'));
@@ -75,6 +79,10 @@ class AdminDashboardController extends Controller
      */
     public function verify(Kausa $kausa, Request $request): RedirectResponse
     {
+        if (! $kausa->exists && $request->route('kausa')) {
+            $kausa = Kausa::findOrFail($request->route('kausa'));
+        }
+
         abort_unless($kausa->status !== 'disetujui' && $kausa->status !== 'ditolak', 403);
 
         $kausa->update([
@@ -105,6 +113,10 @@ class AdminDashboardController extends Controller
      */
     public function reject(Kausa $kausa, Request $request): RedirectResponse
     {
+        if (! $kausa->exists && $request->route('kausa')) {
+            $kausa = Kausa::findOrFail($request->route('kausa'));
+        }
+
         $request->validate([
             'alasan_penolakan' => 'required|string|min:10',
         ]);
@@ -139,6 +151,10 @@ class AdminDashboardController extends Controller
      */
     public function revise(Kausa $kausa, Request $request): RedirectResponse
     {
+        if (! $kausa->exists && $request->route('kausa')) {
+            $kausa = Kausa::findOrFail($request->route('kausa'));
+        }
+
         $request->validate([
             'catatan_revisi' => 'required|string|min:10',
         ]);
