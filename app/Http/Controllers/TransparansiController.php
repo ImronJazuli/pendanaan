@@ -12,7 +12,7 @@ class TransparansiController extends Controller
     public function index(Request $request): View
     {
         $query = LaporanDana::with(['kausa.kategori', 'kausa.instansi', 'rincian'])
-            ->where('status', 'disetujui')
+            ->whereIn('status', ['disetujui', 'dipublikasikan'])
             ->orderBy('created_at', 'desc');
 
         if ($request->filled('search')) {
@@ -35,8 +35,8 @@ class TransparansiController extends Controller
         $laporan = $query->paginate(10);
         $kategoris = KategoriKausa::where('aktif', true)->get();
 
-        $totalLaporanCount = LaporanDana::where('status', 'disetujui')->count();
-        $totalDanaDisalurkan = (float) LaporanDana::where('status', 'disetujui')->sum('total_digunakan');
+        $totalLaporanCount = LaporanDana::whereIn('status', ['disetujui', 'dipublikasikan'])->count();
+        $totalDanaDisalurkan = (float) LaporanDana::whereIn('status', ['disetujui', 'dipublikasikan'])->sum('total_digunakan');
 
         return view('transparansi.index', compact('laporan', 'kategoris', 'totalLaporanCount', 'totalDanaDisalurkan'));
     }

@@ -14,10 +14,10 @@
 - [x] Notifikasi perubahan status
 
 ## Sprint M9-M10 (Katalog, Donasi, Laporan)
-- [ ] Katalog publik & detail kausa (M9)
-- [ ] Donasi & pembayaran simulasi (M10)
-- [ ] Laporan dana & transparansi (M9-M10)
-- [ ] Feature tests lengkap
+- [x] Katalog publik & detail kausa (M9)
+- [x] Donasi & pembayaran simulasi (M10)
+- [x] Laporan dana & transparansi (M9-M10)
+- [x] Feature tests lengkap
 
 
 
