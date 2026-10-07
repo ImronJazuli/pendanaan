@@ -165,6 +165,12 @@
                                     </td>
                                     <td class="py-4 px-6 text-right whitespace-nowrap">
                                         <div class="flex items-center justify-end gap-2">
+                                            @if (in_array($item->status, ['draf', 'perlu_diperbaiki']))
+                                                <a href="{{ route('dashboard.instansi.edit', $item->id) }}" class="px-3 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-100 text-orange-800 font-semibold text-xs transition-colors flex items-center gap-1" title="Perbaiki / Edit Kausa">
+                                                    <i data-lucide="pencil" class="w-3.5 h-3.5 text-orange-600"></i>
+                                                    <span>Edit</span>
+                                                </a>
+                                            @endif
                                             <a href="{{ route('dashboard.instansi.detail', $item->id) }}" class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold text-xs transition-colors flex items-center gap-1">
                                                 <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-700"></i>
                                                 <span>Kelola</span>

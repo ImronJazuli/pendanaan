@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\DonatarDashboardController;
 use App\Http\Controllers\Dashboard\InstansiDashboardController;
+use App\Http\Controllers\Dashboard\InstansiLaporanDanaController;
 use App\Http\Controllers\KausaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PagesController;
@@ -58,12 +59,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/instansi/dashboard', [InstansiDashboardController::class, 'index'])->name('instansi.dashboard');
         Route::get('/dashboard/instansi/profil', [InstansiDashboardController::class, 'profil'])->name('instansi.profil');
         Route::match(['put', 'post'], '/dashboard/instansi/profil', [InstansiDashboardController::class, 'updateProfil'])->name('instansi.profil.update');
-        Route::get('/dashboard/instansi/laporan', function () {
-            return view('dashboard.instansi.laporan');
-        })->name('instansi.laporan');
-        Route::get('/dashboard/instansi/panduan', function () {
-            return view('dashboard.instansi.panduan');
-        })->name('instansi.panduan');
+
+        // Alur Kausa Edit & Resubmit
+        Route::get('/dashboard/instansi/{kausa}/edit', [InstansiDashboardController::class, 'edit'])->whereNumber('kausa')->name('dashboard.instansi.edit');
+        Route::match(['put', 'patch'], '/dashboard/instansi/{kausa}', [InstansiDashboardController::class, 'update'])->whereNumber('kausa')->name('dashboard.instansi.update');
+
+        // Modul Laporan Penggunaan Dana (LPJ)
+        Route::get('/dashboard/instansi/laporan', [InstansiLaporanDanaController::class, 'index'])->name('instansi.laporan');
+        Route::get('/dashboard/instansi/laporan/buat', [InstansiLaporanDanaController::class, 'create'])->name('instansi.laporan.create');
+        Route::post('/dashboard/instansi/laporan', [InstansiLaporanDanaController::class, 'store'])->name('instansi.laporan.store');
+        Route::get('/dashboard/instansi/laporan/{laporan}', [InstansiLaporanDanaController::class, 'show'])->whereNumber('laporan')->name('instansi.laporan.show');
+
+        // Panduan SPJ & Kuitansi
+        Route::get('/dashboard/instansi/panduan', [InstansiDashboardController::class, 'panduan'])->name('instansi.panduan');
+
+        // Detail Kausa
         Route::get('/dashboard/instansi/{kausa}', [InstansiDashboardController::class, 'detail'])->name('dashboard.instansi.detail');
     });
 
@@ -73,20 +83,18 @@ Route::middleware('auth')->group(function () {
     });
 
     // Route untuk Admin guard web dengan peran admin
-    Route::middleware('peran:admin')->group(function () {
+    Route::middleware('auth.admin')->group(function () {
         Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
-        Route::get('/dashboard/admin/kausa-aktif', function () {
-            return view('dashboard.admin.kausa-aktif');
-        })->name('admin.kausa.aktif');
-        Route::get('/dashboard/admin/donasi', function () {
-            return view('dashboard.admin.donasi');
-        })->name('admin.donasi');
-        Route::get('/dashboard/admin/laporan', function () {
-            return view('dashboard.admin.laporan');
-        })->name('admin.laporan');
-        Route::get('/dashboard/admin/legalitas', function () {
-            return view('dashboard.admin.legalitas');
-        })->name('admin.legalitas');
+        Route::get('/dashboard/admin/kausa-aktif', [AdminDashboardController::class, 'kausaAktif'])->name('admin.kausa.aktif');
+        Route::post('/dashboard/admin/kausa/{kausa}/selesai', [AdminDashboardController::class, 'selesaikanKausa'])->name('admin.kausa.selesai');
+        Route::get('/dashboard/admin/donasi', [AdminDashboardController::class, 'donasi'])->name('admin.donasi');
+        Route::get('/dashboard/admin/laporan', [AdminDashboardController::class, 'laporan'])->name('admin.laporan');
+        Route::post('/dashboard/admin/laporan/{laporan}/verify', [AdminDashboardController::class, 'verifyLaporan'])->name('admin.laporan.verify');
+        Route::post('/dashboard/admin/laporan/{laporan}/revise', [AdminDashboardController::class, 'reviseLaporan'])->name('admin.laporan.revise');
+        Route::post('/dashboard/admin/laporan/{laporan}/reject', [AdminDashboardController::class, 'rejectLaporan'])->name('admin.laporan.reject');
+        Route::get('/dashboard/admin/legalitas', [AdminDashboardController::class, 'legalitas'])->name('admin.legalitas');
+        Route::post('/dashboard/admin/legalitas/{instansi}/verify', [AdminDashboardController::class, 'verifyInstansi'])->name('admin.legalitas.verify');
+        Route::post('/dashboard/admin/legalitas/{instansi}/reject', [AdminDashboardController::class, 'rejectInstansi'])->name('admin.legalitas.reject');
         Route::get('/dashboard/admin/kausa/{kausa}', [AdminDashboardController::class, 'detail'])->name('dashboard.admin.detail');
         Route::post('/dashboard/admin/kausa/{kausa}/verify', [AdminDashboardController::class, 'verify'])->name('dashboard.admin.verify');
         Route::post('/dashboard/admin/kausa/{kausa}/reject', [AdminDashboardController::class, 'reject'])->name('dashboard.admin.reject');

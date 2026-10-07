@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use App\Models\Kausa;
 use App\Models\Instansi;
 use App\Models\KategoriKausa;
+use App\Models\Kausa;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,7 +20,7 @@ class ProjectPortalPendanaanTest extends TestCase
     }
 
     // ===== TESTING ROUTE/ENDPOINT =====
-    
+
     public function test_landing_page_accessible()
     {
         $response = $this->get('/');
@@ -45,7 +45,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_static_pages_accessible()
     {
         $pages = ['/tentang', '/faq', '/kebijakan-privasi', '/syarat-ketentuan', '/kontak'];
-        
+
         foreach ($pages as $page) {
             $response = $this->get($page);
             $response->assertStatus(200);
@@ -69,7 +69,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_user_can_login_with_valid_credentials()
     {
         $user = User::where('email', 'instansi@example.test')->first();
-        
+
         $response = $this->post('/login', [
             'email' => 'instansi@example.test',
             'password' => 'password',
@@ -92,11 +92,11 @@ class ProjectPortalPendanaanTest extends TestCase
 
     public function test_authenticated_user_can_logout()
     {
-        $user = User::where('peran', 'instansi@example.test')->first() ?? 
+        $user = User::where('peran', 'instansi@example.test')->first() ??
                 User::where('email', 'instansi@example.test')->first();
-        
+
         $response = $this->actingAs($user)->post('/logout');
-        
+
         $this->assertGuest();
         $response->assertRedirect('/');
     }
@@ -106,7 +106,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_katalog_menampilkan_kausa_disetujui()
     {
         $response = $this->get('/kausa');
-        
+
         $kausaDisetujui = Kausa::where('status', 'disetujui')->count();
         $this->assertGreaterThan(0, $kausaDisetujui);
     }
@@ -114,7 +114,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_detail_kausa_dapat_diakses()
     {
         $kausa = Kausa::where('status', 'disetujui')->first();
-        
+
         $response = $this->get("/kausa/{$kausa->slug}");
         $response->assertStatus(200);
         $response->assertViewIs('kausa.show');
@@ -124,7 +124,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_detail_kausa_tidak_tersedia_jika_belum_disetujui()
     {
         $kausa = Kausa::where('status', 'draf')->first();
-        
+
         if ($kausa) {
             $response = $this->get("/kausa/{$kausa->slug}");
             $response->assertStatus(404);
@@ -136,7 +136,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_instansi_user_can_access_dashboard_instansi()
     {
         $user = User::where('peran', 'institution_user')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/instansi');
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.instansi.index');
@@ -145,7 +145,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_non_instansi_user_cannot_access_dashboard_instansi()
     {
         $user = User::where('peran', 'donatur')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/instansi');
         $response->assertStatus(403);
     }
@@ -154,7 +154,7 @@ class ProjectPortalPendanaanTest extends TestCase
     {
         $user = User::where('peran', 'institution_user')->first();
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/instansi');
-        
+
         $response->assertViewHas('statusCounts');
     }
 
@@ -163,8 +163,8 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_instansi_dapat_akses_form_ajukan_kausa()
     {
         $user = User::where('peran', 'institution_user')->first();
-        
-        $response = $this->actingAs($user)->withoutMiddleware()->get('/kausa/ajukan');
+
+        $response = $this->actingAs($user)->get('/kausa/ajukan');
         $response->assertStatus(200);
         $response->assertViewIs('kausa.create');
     }
@@ -218,7 +218,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_donatur_dapat_akses_dashboard_donatur()
     {
         $user = User::where('peran', 'donatur')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/donatur');
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.donatur.index');
@@ -227,7 +227,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_admin_tidak_dapat_akses_dashboard_donatur()
     {
         $user = User::where('peran', 'admin')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/donatur');
         $response->assertStatus(403);
     }
@@ -237,7 +237,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_admin_dapat_akses_dashboard_admin()
     {
         $user = User::where('peran', 'admin')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/admin');
         $response->assertStatus(200);
         $response->assertViewIs('dashboard.admin.index');
@@ -246,7 +246,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_admin_dapat_lihat_kausa_menunggu_verifikasi()
     {
         $user = User::where('peran', 'admin')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/dashboard/admin');
         $response->assertViewHas('statusCounts');
     }
@@ -256,7 +256,7 @@ class ProjectPortalPendanaanTest extends TestCase
         $admin = User::where('peran', 'admin')->first();
         $kausa = Kausa::where('status', 'menunggu_verifikasi')->first();
 
-        if (!$kausa) {
+        if (! $kausa) {
             $instansi = Instansi::first();
             $kategori = KategoriKausa::first();
             $kausa = Kausa::create([
@@ -267,7 +267,7 @@ class ProjectPortalPendanaanTest extends TestCase
                 'deskripsi' => 'Test deskripsi',
                 'lokasi' => 'Test Lokasi',
                 'target_dana' => 50000000,
-                'slug' => 'test-kausa-' . time(),
+                'slug' => 'test-kausa-'.time(),
                 'status' => 'menunggu_verifikasi',
             ]);
         }
@@ -288,7 +288,7 @@ class ProjectPortalPendanaanTest extends TestCase
         $admin = User::where('peran', 'admin')->first();
         $instansi = Instansi::first();
         $kategori = KategoriKausa::first();
-        
+
         $kausa = Kausa::create([
             'instansi_id' => $instansi->id,
             'kategori_kausa_id' => $kategori->id,
@@ -297,7 +297,7 @@ class ProjectPortalPendanaanTest extends TestCase
             'deskripsi' => 'Test deskripsi',
             'lokasi' => 'Test Lokasi',
             'target_dana' => 50000000,
-            'slug' => 'test-kausa-tolak-' . time(),
+            'slug' => 'test-kausa-tolak-'.time(),
             'status' => 'menunggu_verifikasi',
         ]);
 
@@ -328,7 +328,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_instansi_user_memiliki_relasi_instansi()
     {
         $user = User::where('peran', 'institution_user')->first();
-        
+
         $this->assertNotNull($user->instansi);
         $this->assertEquals('Dinas Sosial Pemkab Tulungagung', $user->instansi->nama);
     }
@@ -336,7 +336,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_kausa_memiliki_relasi_kategori()
     {
         $kausa = Kausa::first();
-        
+
         $this->assertNotNull($kausa->kategori);
         $this->assertNotNull($kausa->kategori->nama);
     }
@@ -344,7 +344,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_kausa_memiliki_relasi_instansi()
     {
         $kausa = Kausa::first();
-        
+
         $this->assertNotNull($kausa->instansi);
     }
 
@@ -359,7 +359,7 @@ class ProjectPortalPendanaanTest extends TestCase
     public function test_wrong_role_cannot_access_dashboard()
     {
         $donatur = User::where('peran', 'donatur')->first();
-        
+
         $response = $this->actingAs($donatur)->withoutMiddleware()->get('/dashboard/instansi');
         $response->assertStatus(403);
     }
@@ -368,9 +368,9 @@ class ProjectPortalPendanaanTest extends TestCase
 
     public function test_authenticated_user_can_access_profile()
     {
-        $user = User::where('peran', 'instansi@example.test')->first() ?? 
+        $user = User::where('peran', 'instansi@example.test')->first() ??
                 User::where('peran', 'institution_user')->first();
-        
+
         $response = $this->actingAs($user)->withoutMiddleware()->get('/profile');
         $response->assertStatus(200);
     }

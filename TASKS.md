@@ -34,15 +34,15 @@
   - [x] Pastikan middleware role seragam (`instansi`, `donatur`, `admin`) tanpa konflik
 
 ## TAHAP 2: Perbaikan Role Instansi / OPD (Pengaju Kausa)
-- [ ] Alur Revisi Kausa (Resubmit Revision)
-  - [ ] Buat tampilan edit kausa `/dashboard/instansi/{kausa}/edit` dengan kotak catatan revisi dari Admin Pemkab
-  - [ ] Logic resubmit di Controller (ubah status `perlu_diperbaiki` → `menunggu_verifikasi`)
-- [ ] Modul Laporan Penggunaan Dana (LPJ Instansi)
-  - [ ] Ganti placeholder `resources/views/dashboard/instansi/laporan.blade.php` dengan daftar kausa selesai & tombol buat laporan baru
-  - [ ] Buat form input laporan realisasi & tabel rincian pengeluaran dinamis (item belanja, nominal, upload foto/nota/BAST)
-  - [ ] Buat `LaporanDanaController` untuk simpan data ke `laporan_dana` dan `rincian_laporan_dana` (status awal `draf` / `menunggu_verifikasi`)
-- [ ] Halaman Panduan SPJ & Kuitansi
-  - [ ] Isi `resources/views/dashboard/instansi/panduan.blade.php` dengan pedoman SPJ, format kuitansi resmi Pemkab, dan checklist dokumen
+- [x] Alur Revisi Kausa (Resubmit Revision)
+  - [x] Buat tampilan edit kausa `/dashboard/instansi/{kausa}/edit` dengan kotak catatan revisi dari Admin Pemkab
+  - [x] Logic resubmit di Controller (ubah status `perlu_diperbaiki` → `menunggu_verifikasi`)
+- [x] Modul Laporan Penggunaan Dana (LPJ Instansi)
+  - [x] Ganti placeholder `resources/views/dashboard/instansi/laporan.blade.php` dengan daftar kausa selesai & tombol buat laporan baru
+  - [x] Buat form input laporan realisasi & tabel rincian pengeluaran dinamis (item belanja, nominal, upload foto/nota/BAST)
+  - [x] Buat `LaporanDanaController` untuk simpan data ke `laporan_dana` dan `rincian_laporan_dana` (status awal `draf` / `menunggu_verifikasi`)
+- [x] Halaman Panduan SPJ & Kuitansi
+  - [x] Isi `resources/views/dashboard/instansi/panduan.blade.php` dengan pedoman SPJ, format kuitansi resmi Pemkab, dan checklist dokumen
 
 ## TAHAP 3: Perbaikan Role Donatur & Modul Donasi (Fitur Inti)
 - [ ] Database & Model Donasi
@@ -60,19 +60,19 @@
   - [ ] Tambahkan fitur unduh / modal cetak Bukti Donasi Digital berlogo Pemkab Tulungagung di `/dashboard/donatur`
 
 ## TAHAP 4: Perbaikan Role Admin Pemkab (Verifikasi & Pengawasan)
-- [ ] Halaman Legalitas Instansi (`/dashboard/admin/legalitas`)
-  - [ ] View & Controller untuk tabel pendaftaran instansi/yayasan baru
-  - [ ] Action preview dokumen SK/NPWP, tombol Verifikasi Instansi, dan tombol Tolak dengan catatan
-- [ ] Halaman Verifikasi LPJ (`/dashboard/admin/laporan`)
-  - [ ] View & Controller antrean LPJ instansi (`resources/views/dashboard/admin/laporan.blade.php`)
-  - [ ] Action approval: [Setujui & Publikasikan] atau [Minta Revisi SPJ]
-- [ ] Halaman Monitoring Kausa Aktif (`/dashboard/admin/kausa-aktif`)
-  - [ ] View & Controller monitoring seluruh kausa yang tayang (progress bar, sisa hari, tombol darurat nonaktifkan/tutup)
-- [ ] Halaman Rekap Donasi Masuk (`/dashboard/admin/donasi`)
-  - [ ] View & Controller rekapitulasi mutasi donasi per hari/minggu & filter per kausa
+- [x] Halaman Legalitas Instansi (`/dashboard/admin/legalitas`)
+  - [x] View & Controller untuk tabel pendaftaran instansi/yayasan baru
+  - [x] Action preview dokumen SK/NPWP, tombol Verifikasi Instansi, dan tombol Tolak dengan catatan
+- [x] Halaman Verifikasi LPJ (`/dashboard/admin/laporan`)
+  - [x] View & Controller antrean LPJ instansi (`resources/views/dashboard/admin/laporan.blade.php`)
+  - [x] Action approval: [Setujui & Publikasikan] atau [Minta Revisi SPJ]
+- [x] Halaman Monitoring Kausa Aktif (`/dashboard/admin/kausa-aktif`)
+  - [x] View & Controller monitoring seluruh kausa yang tayang (progress bar, sisa hari, tombol darurat nonaktifkan/tutup)
+- [x] Halaman Rekap Donasi Masuk (`/dashboard/admin/donasi`)
+  - [x] View & Controller rekapitulasi mutasi donasi per hari/minggu & filter per kausa
 
 ## TAHAP 5: Transparansi Publik & Finishing Tampilan
-- [ ] Portal Transparansi Publik (`/transparansi`)
-  - [ ] Connect data LPJ yang disetujui Admin ke portal publik `/transparansi` (tampilkan rincian nota & foto penyaluran)
-- [ ] Finishing Visual & UI Consistency
-  - [ ] Penyesuaian warna khas Pemkab Tulungagung (`#087F5B`), kartu metrik, status badge, dan animasi transisi seragam di semua dashboard
+- [x] Portal Transparansi Publik (`/transparansi`)
+  - [x] Connect data LPJ yang disetujui Admin ke portal publik `/transparansi` (tampilkan rincian nota & foto penyaluran)
+- [x] Finishing Visual & UI Consistency
+  - [x] Penyesuaian warna khas Pemkab Tulungagung (`#087F5B`), kartu metrik, status badge, dan animasi transisi seragam di semua dashboard

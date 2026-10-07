@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateKausaRequest;
 use App\Http\Requests\UpdateProfilInstansiRequest;
+use App\Models\DokumenKausa;
 use App\Models\Instansi;
+use App\Models\KategoriKausa;
 use App\Models\Kausa;
+use App\Models\Notifikasi;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class InstansiDashboardController extends Controller
@@ -124,5 +131,114 @@ class InstansiDashboardController extends Controller
         }
 
         return redirect()->route('instansi.profil')->with('success', 'Profil instansi berhasil diperbarui.');
+    }
+
+    public function panduan(): View
+    {
+        return view('dashboard.instansi.panduan');
+    }
+
+    public function edit(Kausa $kausa): View
+    {
+        $instansi = auth()->user()->instansi;
+        abort_unless($instansi && $kausa->instansi_id === $instansi->id, 403, 'Akses ditolak.');
+        abort_unless(in_array($kausa->status, ['draf', 'perlu_diperbaiki'], true), 403, 'Kausa dengan status ini tidak dapat diedit.');
+
+        $kausa->load(['kategori', 'dokumen', 'riwayatStatus' => function ($query) {
+            $query->latest();
+        }]);
+
+        $kategoris = KategoriKausa::where('aktif', true)->get();
+
+        // Cari catatan revisi terbaru dari Admin
+        $catatanRevisi = $kausa->catatan_admin;
+        if (! $catatanRevisi) {
+            $catatanRevisi = $kausa->riwayatStatus
+                ->where('status_baru', 'perlu_diperbaiki')
+                ->first()?->catatan;
+        }
+
+        return view('dashboard.instansi.edit', compact('kausa', 'kategoris', 'catatanRevisi'));
+    }
+
+    public function update(UpdateKausaRequest $request, Kausa $kausa): RedirectResponse
+    {
+        $instansi = auth()->user()->instansi;
+        abort_unless($instansi && $kausa->instansi_id === $instansi->id, 403, 'Akses ditolak.');
+        abort_unless(in_array($kausa->status, ['draf', 'perlu_diperbaiki'], true), 403, 'Kausa dengan status ini tidak dapat diubah.');
+
+        $isSubmit = $request->input('action') === 'submit';
+        $statusBaru = $isSubmit ? 'menunggu_verifikasi' : 'draf';
+
+        DB::transaction(function () use ($request, $kausa, $instansi, $isSubmit, $statusBaru) {
+            $data = $request->safe()->only([
+                'judul', 'kategori_kausa_id', 'lokasi', 'ringkasan',
+                'deskripsi', 'target_dana', 'tanggal_mulai', 'tanggal_berakhir',
+            ]);
+
+            $data['status'] = $statusBaru;
+            $kausa->update($data);
+
+            // 1. Hapus dokumen yang ditandai hapus
+            if ($request->filled('hapus_dokumen')) {
+                $dokumenToDelete = DokumenKausa::where('kausa_id', $kausa->id)
+                    ->whereIn('id', $request->input('hapus_dokumen'))
+                    ->get();
+
+                foreach ($dokumenToDelete as $dok) {
+                    if ($dok->path_file && Storage::exists($dok->path_file)) {
+                        Storage::delete($dok->path_file);
+                    }
+                    $dok->delete();
+                }
+            }
+
+            // 2. Tambah dokumen pendukung baru
+            if ($request->hasFile('dokumen')) {
+                foreach ($request->file('dokumen', []) as $file) {
+                    $kausa->dokumen()->create([
+                        'jenis_dokumen' => 'dokumen_pendukung',
+                        'nama_file' => $file->getClientOriginalName(),
+                        'path_file' => $file->store('dokumen/kausa'),
+                        'mime_type' => $file->getMimeType(),
+                        'ukuran_file' => $file->getSize(),
+                    ]);
+                }
+            }
+
+            // 3. Catat riwayat status
+            $catatanLog = $isSubmit
+                ? ($request->filled('catatan_perbaikan')
+                    ? 'Perbaikan diajukan ulang oleh instansi: '.$request->input('catatan_perbaikan')
+                    : 'Pengajuan kausa diperbaiki dan dikirim ulang untuk verifikasi Admin.')
+                : 'Draf kausa diperbarui oleh instansi.';
+
+            $kausa->riwayatStatus()->create([
+                'user_id' => auth()->id(),
+                'status_baru' => $statusBaru,
+                'catatan' => $catatanLog,
+            ]);
+
+            // 4. Notifikasi untuk Admin jika diajukan ulang
+            if ($isSubmit) {
+                $adminUsers = User::where('peran', 'admin')->orWhere('role', 'admin')->get();
+                foreach ($adminUsers as $admin) {
+                    Notifikasi::create([
+                        'user_id' => $admin->id,
+                        'jenis' => 'kausa_diperbaiki',
+                        'judul' => 'Pengajuan Kausa Diperbaiki',
+                        'isi' => "Instansi {$instansi->nama} telah memperbarui dan mengirimkan ulang kausa '{$kausa->judul}' untuk diverifikasi.",
+                        'tautan' => route('dashboard.admin.detail', $kausa->id),
+                        'dibaca_pada' => null,
+                    ]);
+                }
+            }
+        });
+
+        $message = $isSubmit
+            ? 'Pengajuan kausa berhasil diperbaiki dan dikirimkan kembali ke Admin Pemkab untuk verifikasi.'
+            : 'Perubahan draf kausa berhasil disimpan.';
+
+        return redirect()->route('dashboard.instansi.detail', $kausa->id)->with('status', $message);
     }
 }

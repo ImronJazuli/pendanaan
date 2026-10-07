@@ -16,10 +16,10 @@ class EnsureAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::guard('admin')->check()) {
-            return redirect()->route('login', ['tab' => 'admin']);
+        if (Auth::guard('admin')->check() || (Auth::check() && in_array(Auth::user()->role ?? Auth::user()->peran, ['admin'], true))) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect()->route('login', ['tab' => 'admin']);
     }
 }

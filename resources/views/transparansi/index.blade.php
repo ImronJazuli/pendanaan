@@ -37,17 +37,19 @@
                     <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Laporan Dipublikasi</span>
                     <i data-lucide="file-check-2" class="w-5 h-5 text-emerald-600"></i>
                 </div>
-                <p class="text-2xl sm:text-3xl font-extrabold text-[#17211E] font-heading">{{ $laporan->count() }} Laporan</p>
-                <span class="text-[11px] text-emerald-700 font-semibold mt-1 block">&check; 100% Diaudit Verifikator</span>
+                <p class="text-2xl sm:text-3xl font-extrabold text-[#17211E] font-heading">{{ $totalLaporanCount ?? $laporan->total() }} Laporan</p>
+                <span class="text-[11px] text-emerald-700 font-semibold mt-1 block">&check; 100% Diaudit Verifikator Pemkab</span>
             </div>
 
             <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Standar Verifikasi</span>
-                    <i data-lucide="award" class="w-5 h-5 text-[#087F5B]"></i>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Dana Tervalidasi</span>
+                    <i data-lucide="wallet" class="w-5 h-5 text-[#087F5B]"></i>
                 </div>
-                <p class="text-lg font-bold text-[#123B32] font-heading">Perbup No. 42/2026</p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Regulasi Resmi Pemkab Tulungagung</span>
+                <p class="text-xl sm:text-2xl font-bold text-[#123B32] font-heading">
+                    Rp {{ number_format($totalDanaDisalurkan ?? 0, 0, ',', '.') }}
+                </p>
+                <span class="text-[11px] text-slate-500 mt-1 block">Tersalurkan Tepat Sasaran</span>
             </div>
 
             <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">
@@ -106,8 +108,8 @@
             <div class="space-y-6">
                 @foreach ($laporan as $item)
                     @php
-                        $danaTerkumpul = $item->total_dana_terkumpul ?? 0;
-                        $danaDigunakan = $item->total_dana_digunakan ?? 0;
+                        $danaTerkumpul = (float) ($item->kausa->dana_terkumpul ?? $item->kausa->total_terkumpul ?? 0);
+                        $danaDigunakan = (float) ($item->total_digunakan ?? 0);
                         $persen = $danaTerkumpul > 0 ? min(100, round(($danaDigunakan / $danaTerkumpul) * 100)) : 0;
                     @endphp
                     <div class="bg-white rounded-3xl border border-[#D9E2DE] overflow-hidden shadow-xs">
@@ -119,11 +121,11 @@
                                 </span>
                                 <h3 class="font-heading font-extrabold text-base sm:text-lg text-[#17211E] mt-1">
                                     <a href="{{ route('kausa.show', $item->kausa->slug) }}" class="hover:text-[#087F5B] transition-colors">
-                                        {{ $item->kausa->judul }}
+                                        {{ $item->judul ?? $item->kausa->judul }}
                                     </a>
                                 </h3>
                                 <p class="text-xs text-slate-500">
-                                    Lokasi: {{ $item->kausa->lokasi ?? 'Kab. Tulungagung' }} &bull; Penanggung Jawab: <strong class="text-slate-700">{{ $item->kausa->instansi->nama ?? 'Instansi' }}</strong>
+                                    Program: <strong class="text-slate-800">{{ $item->kausa->judul }}</strong> &bull; Lokasi: {{ $item->kausa->lokasi ?? 'Kab. Tulungagung' }} &bull; Penanggung Jawab: <strong class="text-slate-700">{{ $item->kausa->instansi->nama ?? 'Instansi' }}</strong>
                                 </p>
                             </div>
                             <a href="{{ route('kausa.show', $item->kausa->slug) }}" class="px-4 py-2 rounded-xl bg-white border border-[#D9E2DE] hover:border-[#087F5B] text-slate-700 hover:text-[#087F5B] text-xs font-bold transition-all shadow-xs shrink-0 flex items-center gap-1.5 self-start sm:self-center">
@@ -174,11 +176,21 @@
                                                 <div class="flex items-center gap-3">
                                                     <i data-lucide="receipt" class="w-4 h-4 text-emerald-600 shrink-0"></i>
                                                     <div>
-                                                        <p class="font-bold text-slate-800">{{ $rincian->keterangan }}</p>
-                                                        <span class="text-[10px] text-slate-400">{{ $rincian->created_at ? $rincian->created_at->format('d M Y') : '-' }}</span>
+                                                        <p class="font-bold text-slate-800">{{ $rincian->uraian ?? $rincian->keterangan }}</p>
+                                                        <span class="text-[10px] text-slate-400">
+                                                            Penerima: {{ $rincian->penerima_manfaat ?? '-' }} &bull; Tgl: {{ $rincian->tanggal_pengeluaran ? $rincian->tanggal_pengeluaran->format('d M Y') : ($rincian->created_at ? $rincian->created_at->format('d M Y') : '-') }}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <span class="font-bold text-slate-900">Rp {{ number_format($rincian->nominal, 0, ',', '.') }}</span>
+                                                <div class="flex items-center gap-3">
+                                                    <span class="font-bold text-slate-900">Rp {{ number_format($rincian->nominal, 0, ',', '.') }}</span>
+                                                    @if ($rincian->path_bukti)
+                                                        <a href="{{ asset('storage/' . $rincian->path_bukti) }}" target="_blank" class="px-2 py-1 rounded bg-white border border-slate-200 text-[#087F5B] hover:underline font-semibold text-[10px] flex items-center gap-1" title="Lihat Bukti Nota">
+                                                            <i data-lucide="paperclip" class="w-3 h-3"></i>
+                                                            <span>Nota</span>
+                                                        </a>
+                                                    @endif
+                                                </div>
                                             </div>
                                         @endforeach
                                     </div>

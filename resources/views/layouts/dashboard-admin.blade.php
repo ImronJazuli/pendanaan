@@ -44,6 +44,9 @@
     ></div>
 
     {{-- Mobile Sidebar Drawer --}}
+    @php
+        $adminUser = auth('admin')->user() ?? auth()->user();
+    @endphp
     <aside
         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
         class="fixed inset-y-0 left-0 z-50 w-64 bg-white p-5 transform transition-transform duration-300 ease-in-out flex flex-col justify-between overflow-y-auto lg:hidden shadow-2xl border-r border-[#D9E2DE]"
@@ -66,8 +69,8 @@
             </nav>
         </div>
         <div class="pt-4 border-t border-[#D9E2DE] text-xs text-[#52615C]">
-            <p class="font-semibold text-[#17211E]">{{ auth()->user()->name }}</p>
-            <p class="text-[11px] text-[#73817C]">Admin Verifikator Pemkab {{ auth()->user()->nip ? '(NIP. '.auth()->user()->nip.')' : 'Tulungagung' }}</p>
+            <p class="font-semibold text-[#17211E]">{{ $adminUser?->name ?? 'Admin Pemkab' }}</p>
+            <p class="text-[11px] text-[#73817C]">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
         </div>
     </aside>
 
@@ -124,11 +127,11 @@
                 {{-- Admin Profile --}}
                 <div class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-full bg-emerald-800 flex items-center justify-center text-xs font-bold text-white ring-2 ring-emerald-400/40">
-                        {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 2)) }}
+                        {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 2)) }}
                     </div>
                     <div class="hidden sm:block text-left">
-                        <p class="text-sm font-semibold text-white leading-tight">{{ auth()->user()->name ?? 'Admin Verifikator' }}</p>
-                        <p class="text-[11px] text-emerald-200/90 leading-tight">Admin Verifikator Pemkab {{ auth()->user()->nip ? '(NIP. '.auth()->user()->nip.')' : 'Tulungagung' }}</p>
+                        <p class="text-sm font-semibold text-white leading-tight">{{ $adminUser?->name ?? 'Admin Verifikator' }}</p>
+                        <p class="text-[11px] text-emerald-200/90 leading-tight">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
                     </div>
                     {{-- Logout --}}
                     <form method="POST" action="{{ route('admin.logout') }}" class="ml-1">
@@ -156,7 +159,7 @@
                     </div>
                     <div class="min-w-0">
                         <h4 class="text-xs font-bold uppercase tracking-wider text-[#123B32]">
-                            {{ auth()->user()->instansi->nama ?? 'Biro Kesejahteraan Rakyat' }}
+                            {{ $adminUser?->instansi->nama ?? 'Biro Kesejahteraan Rakyat' }}
                         </h4>
                         <p class="text-[11px] text-[#52615C] truncate">Setda Kab. Tulungagung</p>
                     </div>

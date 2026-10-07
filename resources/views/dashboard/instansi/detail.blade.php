@@ -79,7 +79,7 @@
                     @endif
 
                     @if (in_array($kausa->status, ['draf', 'perlu_diperbaiki']))
-                        <a href="{{ route('kausa.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold shadow-sm transition-all active:scale-98">
+                        <a href="{{ route('dashboard.instansi.edit', $kausa->id) }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-semibold shadow-sm transition-all active:scale-98">
                             <i data-lucide="pencil" class="w-4 h-4"></i>
                             Perbaiki / Edit Kausa
                         </a>
