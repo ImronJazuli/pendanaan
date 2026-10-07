@@ -26,7 +26,7 @@ class Donasi extends Model
     ];
 
     protected $fillable = [
-        'kausa_id', 'user_id', 'pesanan_pembayaran', 'nama_donatur', 'anonim',
+        'kausa_id', 'user_id', 'pesanan_pembayaran', 'nama_donatur', 'anonim', 'doa_dukungan',
         'email_donatur', 'telepon_donatur', 'nominal', 'metode_pembayaran',
         'status', 'dibayar_pada',
     ];

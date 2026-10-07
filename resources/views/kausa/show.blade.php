@@ -401,134 +401,143 @@
                         </div>
                     </div>
 
-                    <!-- Quick Nominal Selector -->
-                    <div class="space-y-2 pt-4 border-t border-slate-100">
-                        <label class="block text-xs font-bold text-[#17211E] uppercase tracking-wider">Pilih Nominal Donasi</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 25000; customNominal = ''" 
-                                :class="selectedNominal === 25000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 25.000
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 50000; customNominal = ''" 
-                                :class="selectedNominal === 50000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 50.000
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 100000; customNominal = ''" 
-                                :class="selectedNominal === 100000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 100.000
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 250000; customNominal = ''" 
-                                :class="selectedNominal === 250000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 250.000
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 500000; customNominal = ''" 
-                                :class="selectedNominal === 500000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 500.000
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="selectedNominal = 1000000; customNominal = ''" 
-                                :class="selectedNominal === 1000000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
-                                class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
-                            >
-                                Rp 1 Juta
-                            </button>
+                    <!-- FORMULIR DONASI AKTIF -->
+                    <form method="POST" action="{{ route('donasi.store', $kausa->slug) }}" class="space-y-4">
+                        @csrf
+                        <input type="hidden" name="nominal" :value="selectedNominal">
+                        <input type="hidden" name="metode_pembayaran" :value="paymentMethod">
+                        <input type="hidden" name="anonim" :value="isAnonim ? '1' : '0'">
+                        <input type="hidden" name="nama_donatur" :value="donorName">
+                        <input type="hidden" name="doa_dukungan" :value="doaDukungan">
+
+                        <!-- Quick Nominal Selector -->
+                        <div class="space-y-2 pt-4 border-t border-slate-100">
+                            <label class="block text-xs font-bold text-[#17211E] uppercase tracking-wider">Pilih Nominal Donasi</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 25000; customNominal = ''" 
+                                    :class="selectedNominal === 25000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 25.000
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 50000; customNominal = ''" 
+                                    :class="selectedNominal === 50000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 50.000
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 100000; customNominal = ''" 
+                                    :class="selectedNominal === 100000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 100.000
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 250000; customNominal = ''" 
+                                    :class="selectedNominal === 250000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 250.000
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 500000; customNominal = ''" 
+                                    :class="selectedNominal === 500000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 500.000
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="selectedNominal = 1000000; customNominal = ''" 
+                                    :class="selectedNominal === 1000000 && !customNominal ? 'bg-[#087F5B] text-white border-[#087F5B]' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-emerald-50'"
+                                    class="py-2.5 text-xs font-bold rounded-xl border transition-all text-center"
+                                >
+                                    Rp 1 Juta
+                                </button>
+                            </div>
+
+                            <!-- Custom Input -->
+                            <div class="relative pt-1">
+                                <span class="absolute left-3.5 top-3.5 text-xs font-bold text-slate-400">Rp</span>
+                                <input 
+                                    type="number" 
+                                    x-model="customNominal" 
+                                    @input="if(customNominal) selectedNominal = parseInt(customNominal) || 0"
+                                    placeholder="Nominal lainnya (minimal Rp 10.000)" 
+                                    class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all"
+                                >
+                            </div>
                         </div>
 
-                        <!-- Custom Input -->
-                        <div class="relative pt-1">
-                            <span class="absolute left-3.5 top-3.5 text-xs font-bold text-slate-400">Rp</span>
-                            <input 
-                                type="number" 
-                                x-model="customNominal" 
-                                @input="if(customNominal) selectedNominal = parseInt(customNominal) || 0"
-                                placeholder="Nominal lainnya (minimal Rp 10.000)" 
-                                class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all"
-                            >
+                        <!-- Donor Details & Message -->
+                        <div class="space-y-3 pt-2">
+                            <div>
+                                <label class="block text-xs font-bold text-[#17211E] mb-1">Nama Lengkap Donatur</label>
+                                <input 
+                                    type="text" 
+                                    x-model="donorName" 
+                                    placeholder="Nama Anda" 
+                                    :disabled="isAnonim"
+                                    class="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all disabled:opacity-50"
+                                >
+                            </div>
+
+                            <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-700">
+                                <input type="checkbox" x-model="isAnonim" class="rounded text-[#087F5B] focus:ring-[#087F5B]">
+                                <span>Sembunyikan nama saya (Hamba Allah)</span>
+                            </label>
+
+                            <div>
+                                <label class="block text-xs font-bold text-[#17211E] mb-1">Doa atau Dukungan (Opsional)</label>
+                                <textarea 
+                                    x-model="doaDukungan"
+                                    rows="2" 
+                                    placeholder="Tuliskan doa atau pesan penyemangat bagi penerima bantuan..." 
+                                    class="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all"
+                                ></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Donor Details & Message -->
-                    <div class="space-y-3 pt-2">
-                        <div>
-                            <label class="block text-xs font-bold text-[#17211E] mb-1">Nama Lengkap Donatur</label>
-                            <input 
-                                type="text" 
-                                x-model="donorName" 
-                                placeholder="Nama Anda" 
-                                :disabled="isAnonim"
-                                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all disabled:opacity-50"
-                            >
+                        <!-- Payment Simulation Option -->
+                        <div class="space-y-2 pt-2">
+                            <label class="block text-xs font-bold text-[#17211E] uppercase tracking-wider">Metode Pembayaran</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button 
+                                    type="button" 
+                                    @click="paymentMethod = 'qris'" 
+                                    :class="paymentMethod === 'qris' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
+                                    class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                                >
+                                    <i data-lucide="qr-code" class="w-4 h-4"></i> QRIS Instan
+                                </button>
+                                <button 
+                                    type="button" 
+                                    @click="paymentMethod = 'bank'" 
+                                    :class="paymentMethod === 'bank' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
+                                    class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                                >
+                                    <i data-lucide="landmark" class="w-4 h-4"></i> Virtual Account
+                                </button>
+                            </div>
                         </div>
 
-                        <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-700">
-                            <input type="checkbox" x-model="isAnonim" class="rounded text-[#087F5B] focus:ring-[#087F5B]">
-                            <span>Sembunyikan nama saya (Hamba Allah)</span>
-                        </label>
-
-                        <div>
-                            <label class="block text-xs font-bold text-[#17211E] mb-1">Doa atau Dukungan (Opsional)</label>
-                            <textarea 
-                                x-model="doaDukungan"
-                                rows="2" 
-                                placeholder="Tuliskan doa atau pesan penyemangat bagi penerima bantuan..." 
-                                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:border-[#087F5B] focus:bg-white rounded-xl text-xs outline-none transition-all"
-                            ></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Payment Simulation Option -->
-                    <div class="space-y-2 pt-2">
-                        <label class="block text-xs font-bold text-[#17211E] uppercase tracking-wider">Metode Pembayaran</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button 
-                                type="button" 
-                                @click="paymentMethod = 'qris'" 
-                                :class="paymentMethod === 'qris' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
-                                class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
-                            >
-                                <i data-lucide="qr-code" class="w-4 h-4"></i> QRIS Instan
-                            </button>
-                            <button 
-                                type="button" 
-                                @click="paymentMethod = 'bank'" 
-                                :class="paymentMethod === 'bank' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
-                                class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
-                            >
-                                <i data-lucide="landmark" class="w-4 h-4"></i> Virtual Account
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- CTA Salurkan Donasi -->
-                    <button 
-                        @click="checkoutSimulate()"
-                        type="button" 
-                        class="w-full py-3.5 px-4 rounded-xl bg-[#087F5B] hover:bg-[#066A4C] text-white font-extrabold text-sm tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2"
-                    >
-                        <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
-                        <span>Salurkan Donasi Sekarang</span>
-                    </button>
+                        <!-- CTA Salurkan Donasi -->
+                        <button 
+                            type="submit" 
+                            class="w-full py-3.5 px-4 rounded-xl bg-[#087F5B] hover:bg-[#066A4C] text-white font-extrabold text-sm tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                            <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
+                            <span>Salurkan Donasi Sekarang</span>
+                        </button>
+                    </form>
 
                     <!-- Trust Badge -->
                     <div class="pt-2 text-center space-y-1">

@@ -45,19 +45,19 @@
   - [x] Isi `resources/views/dashboard/instansi/panduan.blade.php` dengan pedoman SPJ, format kuitansi resmi Pemkab, dan checklist dokumen
 
 ## TAHAP 3: Perbaikan Role Donatur & Modul Donasi (Fitur Inti)
-- [ ] Database & Model Donasi
-  - [ ] Migration & Model `donations` (`id`, `kode_donasi`, `kausa_id`, `user_id`, `nominal`, `doa_dukungan`, `anonim`, `status`)
-  - [ ] Migration & Model `payment_transactions` (`id`, `donation_id`, `metode_pembayaran`, `nomor_referensi`, `waktu_bayar`)
-- [ ] Checkout & Form Donasi di Detail Kausa (`/kausa/{slug}`)
-  - [ ] Di `resources/views/kausa/show.blade.php`: Modal/card donasi dengan pilihan preset nominal, anonim, doa, dan metode pembayaran
-  - [ ] Route & Endpoint `POST /kausa/{slug}/donasi` → `DonasiController@store` (validasi nominal, generate kode `INV-YYYYMM-XXXX`, status `menunggu_pembayaran`)
-- [ ] Simulasi Pembayaran (Fake Payment Gateway)
-  - [ ] Route `GET /donasi/{kode}/bayar` → `DonasiController@payment` (halaman instruksi & QRIS dummy)
-  - [ ] Route `POST /donasi/{kode}/simulasi` → `DonasiController@simulate` (ubah status `menunggu_pembayaran` → `berhasil`, auto-increment `kausa.total_terkumpul`)
-  - [ ] Route `GET /donasi/{kode}/sukses` → `DonasiController@success` (halaman terima kasih)
-  - [ ] Sinkronkan donasi berhasil ke tabel riwayat di `/dashboard/donatur`
-- [ ] Kuitansi / Bukti Donasi Digital
-  - [ ] Tambahkan fitur unduh / modal cetak Bukti Donasi Digital berlogo Pemkab Tulungagung di `/dashboard/donatur`
+- [x] Database & Model Donasi
+  - [x] Migration & Model `donations` (`id`, `kode_donasi`, `kausa_id`, `user_id`, `nominal`, `doa_dukungan`, `anonim`, `status`)
+  - [x] Migration & Model `payment_transactions` (`id`, `donation_id`, `metode_pembayaran`, `nomor_referensi`, `waktu_bayar`)
+- [x] Checkout & Form Donasi di Detail Kausa (`/kausa/{slug}`)
+  - [x] Di `resources/views/kausa/show.blade.php`: Modal/card donasi dengan pilihan preset nominal, anonim, doa, dan metode pembayaran
+  - [x] Route & Endpoint `POST /kausa/{slug}/donasi` → `DonasiController@store` (validasi nominal, generate kode `INV-YYYYMM-XXXX`, status `menunggu_pembayaran`)
+- [x] Simulasi Pembayaran (Fake Payment Gateway)
+  - [x] Route `GET /donasi/{kode}/bayar` → `DonasiController@payment` (halaman instruksi & QRIS dummy)
+  - [x] Route `POST /donasi/{kode}/simulasi` → `DonasiController@simulate` (ubah status `menunggu_pembayaran` → `berhasil`, auto-increment `kausa.total_terkumpul`)
+  - [x] Route `GET /donasi/{kode}/sukses` → `DonasiController@success` (halaman terima kasih)
+  - [x] Sinkronkan donasi berhasil ke tabel riwayat di `/dashboard/donatur`
+- [x] Kuitansi / Bukti Donasi Digital
+  - [x] Tambahkan fitur unduh / modal cetak Bukti Donasi Digital berlogo Pemkab Tulungagung di `/dashboard/donatur`
 
 ## TAHAP 4: Perbaikan Role Admin Pemkab (Verifikasi & Pengawasan)
 - [x] Halaman Legalitas Instansi (`/dashboard/admin/legalitas`)

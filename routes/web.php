@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\DonatarDashboardController;
 use App\Http\Controllers\Dashboard\InstansiDashboardController;
 use App\Http\Controllers\Dashboard\InstansiLaporanDanaController;
+use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\KausaController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PagesController;
@@ -26,6 +27,19 @@ Route::middleware(['auth', 'peran:institution_user'])->group(function () {
     Route::get('/kausa/ajukan', [KausaController::class, 'create'])->name('kausa.create');
     Route::post('/kausa', [KausaController::class, 'store'])->name('kausa.store');
 });
+
+// Alur Donasi Publik & Simulasi Pembayaran
+Route::post('/kausa/{slug}/donasi', [DonasiController::class, 'store'])->name('donasi.store');
+Route::get('/donasi/{kode}/bayar', [DonasiController::class, 'payment'])->name('donasi.bayar');
+Route::post('/donasi/{kode}/simulasi', [DonasiController::class, 'simulate'])->name('donasi.simulate');
+Route::get('/donasi/{kode}/sukses', [DonasiController::class, 'success'])->name('donasi.sukses');
+Route::get('/donasi/{kode}/kuitansi', [DonasiController::class, 'kuitansi'])->name('donasi.kuitansi');
+
+// Route aliases untuk kompatibilitas
+Route::post('/kausa/{slug}/donasi/submit', [DonasiController::class, 'store'])->name('kausa.donasi.store');
+Route::get('/donasi/{kode}/receipt', [DonasiController::class, 'kuitansi'])->name('donasi.receipt');
+Route::get('/donasi/{kode}/payment', [DonasiController::class, 'payment'])->name('donasi.payment');
+Route::get('/donasi/{kode}/success', [DonasiController::class, 'success'])->name('donasi.success');
 
 // Parameterized route MUST be last
 Route::get('/kausa/{slug}', [KausaController::class, 'show'])->name('kausa.show');
@@ -80,6 +94,7 @@ Route::middleware('auth')->group(function () {
     // Route untuk Donatur (support middleware baru dan lama)
     Route::middleware('peran:donatur')->group(function () {
         Route::get('/dashboard/donatur', [DonatarDashboardController::class, 'index'])->name('donatur.dashboard');
+        Route::get('/donatur/dashboard', [DonatarDashboardController::class, 'index'])->name('dashboard.donatur');
     });
 
     // Route untuk Admin guard web dengan peran admin
