@@ -12,6 +12,10 @@ class DonatarDashboardController extends Controller
     public function index(Request $request): View
     {
         $user = auth()->user();
+        $isNotDonatur = ! $user
+            || in_array($user->peran, ['admin', 'institution_user', 'instansi'], true)
+            || in_array($user->role, ['admin', 'institution_user', 'instansi'], true);
+        abort_if($isNotDonatur, 403, 'Akses hanya untuk donatur.');
 
         $query = Donasi::where('user_id', $user->id)
             ->with(['kausa.kategori', 'transaksi']);
