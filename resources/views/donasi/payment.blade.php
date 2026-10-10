@@ -86,11 +86,71 @@
                         <i data-lucide="landmark" class="w-4 h-4 text-[#087F5B]"></i>
                         Rekening Penampungan Donasi Kasda (Bank Jatim)
                     </span>
-                    <span class="font-mono text-slate-500 font-bold">0123-456-7890</span>
+                    <span class="font-mono text-slate-500 font-bold">0151-0012-34</span>
                 </div>
                 <p class="text-[11px] text-slate-500">
                     Atas Nama: <strong>PEMKAB TULUNGAGUNG - REKENING PENAMPUNGAN BANTUAN SOSIAL</strong>
                 </p>
+            </div>
+
+            @if($donasi->status === \App\Models\Donasi::STATUS_MENUNGGU_VERIFIKASI_MANUAL)
+                <!-- Status Menunggu Verifikasi Manual -->
+                <div class="p-5 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-amber-600"></i>
+                        <h4 class="font-bold text-sm">Bukti Pembayaran Sedang Diverifikasi Admin</h4>
+                    </div>
+                    <p class="text-xs text-amber-800 leading-relaxed">
+                        Terima kasih, berkas bukti transfer Anda telah tersimpan. Tim Admin Pemkab Tulungagung sedang memverifikasi dana masuk ke Kasda. Status donasi akan otomatis diperbarui dan kuitansi digital dapat diakses segera setelah diverifikasi.
+                    </p>
+                    @if($donasi->path_bukti_manual)
+                        <div class="pt-1">
+                            <a href="{{ \Illuminate\Support\Facades\Storage::url($donasi->path_bukti_manual) }}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#087F5B] hover:underline">
+                                <i data-lucide="file-check" class="w-4 h-4"></i> Lihat File Bukti Yang Diunggah
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            @elseif($donasi->status === \App\Models\Donasi::STATUS_DITOLAK_MANUAL)
+                <!-- Status Ditolak Manual -->
+                <div class="p-5 rounded-2xl bg-rose-50 border border-rose-300 text-rose-900 space-y-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-rose-600"></i>
+                        <h4 class="font-bold text-sm">Bukti Transfer Ditolak</h4>
+                    </div>
+                    <p class="text-xs text-rose-800 leading-relaxed">
+                        Bukti transfer sebelumnya ditolak oleh admin. Alasan: <strong>{{ $donasi->catatan_verifikasi_manual ?? 'Bukti tidak terbaca / nominal tidak sesuai.' }}</strong>. Silakan unggah kembali bukti transfer yang valid di bawah ini.
+                    </p>
+                </div>
+            @endif
+
+            <!-- Form Unggah Bukti Transfer Manual -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 space-y-4">
+                <div class="flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-900">Unggah Bukti Transfer Bank</h4>
+                        <p class="text-[11px] text-slate-500">Unggah foto struk transfer ATM, mutasi m-banking, atau kuitansi setor tunai.</p>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ route('donasi.uploadBukti', $donasi->pesanan_pembayaran) }}" enctype="multipart/form-data" class="space-y-3">
+                    @csrf
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Berkas Bukti (Maks. 2MB, JPG/PNG/PDF):</label>
+                        <input type="file" name="bukti_transfer" required accept="image/jpeg,image/png,image/jpg,application/pdf"
+                               class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-[#087F5B] hover:file:bg-emerald-100 cursor-pointer border border-slate-300 rounded-xl p-1 bg-white">
+                        @error('bukti_transfer')
+                            <p class="text-xs text-rose-600 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-xs">
+                        <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                        <span>Kirim Bukti Transfer untuk Verifikasi</span>
+                    </button>
+                </form>
             </div>
 
             <!-- Simulation Gateway Action Button -->

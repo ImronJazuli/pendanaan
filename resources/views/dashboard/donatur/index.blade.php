@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <span class="font-display font-bold text-2xl sm:text-3xl text-primary">
+                        <span class="font-display font-bold text-2xl sm:text-3xl text-primary tabular-nums">
                             Rp {{ number_format($totalDonasi, 0, ',', '.') }}
                         </span>
                     </div>

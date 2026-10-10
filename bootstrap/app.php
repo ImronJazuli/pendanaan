@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->validateCsrfTokens(except: [
+            'webhook/midtrans',
+        ]);
+
         $middleware->alias([
             'peran' => PeranMiddleware::class,
             'auth.donatur' => EnsureDonatur::class,

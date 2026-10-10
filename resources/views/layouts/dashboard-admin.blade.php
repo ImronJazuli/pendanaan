@@ -17,14 +17,34 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { background-color: #F6F8F7; color: #17211E; font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, .font-heading, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background-color: #F6F8F7; 
+            color: #17211E; 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .font-heading, .font-display { 
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; 
+            letter-spacing: -0.02em;
+        }
+        ::selection {
+            background-color: #E6F4EF;
+            color: #066A4C;
+        }
+        :focus-visible {
+            outline: 2px solid #087F5B;
+            outline-offset: 2px;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 
     @stack('styles')
 </head>
 <body
-    class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen selection:bg-emerald-100 selection:text-emerald-900"
+    class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen"
     x-data="{ sidebarOpen: false }"
     @resize.window="if (window.innerWidth >= 1024) sidebarOpen = false"
 >

@@ -29,6 +29,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Donasi::class);
     }
 
+    public function notifikasi(): HasMany
+    {
+        return $this->hasMany(Notifikasi::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

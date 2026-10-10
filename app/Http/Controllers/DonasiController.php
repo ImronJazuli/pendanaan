@@ -6,6 +6,7 @@ use App\Models\Donasi;
 use App\Models\Kausa;
 use App\Models\Notifikasi;
 use App\Models\TransaksiPembayaran;
+use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,7 @@ class DonasiController extends Controller
             'telepon_donatur' => ['nullable', 'string', 'max:30'],
             'anonim' => ['nullable', 'boolean'],
             'doa_dukungan' => ['nullable', 'string', 'max:1000'],
-            'metode_pembayaran' => ['nullable', 'string', 'in:qris,bank,va,transfer'],
+            'metode_pembayaran' => ['nullable', 'string', 'in:qris,bank,va,transfer,manual'],
         ], [
             'nominal.required' => 'Nominal donasi wajib diisi.',
             'nominal.min' => 'Nominal donasi minimal Rp 10.000.',
@@ -135,26 +136,24 @@ class DonasiController extends Controller
             // Notifikasi ke Instansi pemilik kausa
             $instansiUser = $donasiLocked->kausa->instansi?->user;
             if ($instansiUser) {
-                Notifikasi::create([
-                    'user_id' => $instansiUser->id,
-                    'jenis' => 'donasi_masuk',
-                    'judul' => 'Donasi Baru Diterima',
-                    'isi' => 'Donasi sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." diterima untuk kausa '{$donasiLocked->kausa->judul}'.",
-                    'tautan' => route('dashboard.instansi.detail', $donasiLocked->kausa_id),
-                    'dibaca_pada' => null,
-                ]);
+                NotifikasiService::kirim(
+                    $instansiUser->id,
+                    'donasi_masuk',
+                    'Donasi Baru Diterima',
+                    'Donasi sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." diterima untuk kausa '{$donasiLocked->kausa->judul}'.",
+                    route('dashboard.instansi.detail', $donasiLocked->kausa_id)
+                );
             }
 
             // Notifikasi ke Donatur jika terdaftar
             if ($donasiLocked->user_id) {
-                Notifikasi::create([
-                    'user_id' => $donasiLocked->user_id,
-                    'jenis' => 'donasi_berhasil',
-                    'judul' => 'Pembayaran Donasi Berhasil',
-                    'isi' => 'Terima kasih! Donasi Anda sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." untuk kausa '{$donasiLocked->kausa->judul}' telah tercatat.",
-                    'tautan' => route('dashboard.donatur'),
-                    'dibaca_pada' => null,
-                ]);
+                NotifikasiService::kirim(
+                    $donasiLocked->user_id,
+                    'donasi_berhasil',
+                    'Pembayaran Donasi Berhasil',
+                    'Terima kasih! Donasi Anda sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." untuk kausa '{$donasiLocked->kausa->judul}' telah tercatat.",
+                    route('donatur.dashboard')
+                );
             }
         });
 
@@ -184,6 +183,31 @@ class DonasiController extends Controller
             ->firstOrFail();
 
         return view('donasi.kuitansi', compact('donasi'));
+    }
+
+    /**
+     * Unggah bukti transfer manual untuk donasi.
+     */
+    public function uploadBukti(Request $request, string $kode): RedirectResponse
+    {
+        $donasi = Donasi::where('pesanan_pembayaran', $kode)->firstOrFail();
+
+        $request->validate([
+            'bukti_transfer' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+        ], [
+            'bukti_transfer.required' => 'File bukti transfer wajib diunggah.',
+            'bukti_transfer.mimes' => 'Format file bukti harus berupa JPG, PNG, atau PDF.',
+            'bukti_transfer.max' => 'Ukuran file bukti maksimal 2MB.',
+        ]);
+
+        $path = $request->file('bukti_transfer')->store('bukti-manual', 'public');
+
+        $donasi->update([
+            'path_bukti_manual' => $path,
+            'status' => Donasi::STATUS_MENUNGGU_VERIFIKASI_MANUAL,
+        ]);
+
+        return redirect()->route('donasi.bayar', $kode)->with('status', 'Bukti transfer berhasil diunggah. Menunggu verifikasi manual dari Admin Pemkab Tulungagung.');
     }
 
     public function receipt(string $kode): View

@@ -646,22 +646,32 @@
                                      :class="dragOver ? 'border-[#087F5B] bg-[#E6F4EF]/50 scale-[1.01]' : 'border-slate-300 hover:border-[#087F5B] bg-slate-50/50 hover:bg-[#E6F4EF]/20'">
                                     
                                     <input type="file" 
-                                           name="dokumen[]" 
+                                           name="foto_kausa[]" 
                                            x-ref="fileInput"
                                            @change="handleFileInput($event)"
                                            multiple 
-                                           accept="image/png, image/jpeg, image/webp, application/pdf" 
+                                           accept="image/png, image/jpeg, image/webp" 
                                            class="hidden">
                                     
                                     <div class="mx-auto w-12 h-12 rounded-full bg-[#E6F4EF] text-[#087F5B] flex items-center justify-center mb-3">
                                         <i data-lucide="upload-cloud" class="w-6 h-6"></i>
                                     </div>
                                     <p class="text-sm font-bold text-slate-800">Tarik berkas foto ke sini atau <span class="text-[#087F5B] underline">Pilih dari Komputer</span></p>
-                                    <p class="text-xs text-slate-500 mt-1">Format JPG, PNG, WEBP, atau PDF (Maksimal 5MB per file)</p>
+                                    <p class="text-xs text-slate-500 mt-1">Format JPG, PNG, WEBP (Maksimal 5MB per file)</p>
                                     <div class="mt-3 inline-flex items-center gap-2 text-[11px] font-medium text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200">
-                                        <i data-lucide="check-check" class="w-3.5 h-3.5 text-emerald-600"></i> Validasi berkas otomatis tersimpan aman di server
+                                        <i data-lucide="check-check" class="w-3.5 h-3.5 text-emerald-600"></i> Foto galeri dokumentasi kegiatan lapangan
                                     </div>
                                 </div>
+                                @error('foto_kausa')
+                                    <p class="text-xs text-rose-600 mt-1 flex items-center gap-1">
+                                        <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> {{ $message }}
+                                    </p>
+                                @enderror
+                                @error('foto_kausa.*')
+                                    <p class="text-xs text-rose-600 mt-1 flex items-center gap-1">
+                                        <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> {{ $message }}
+                                    </p>
+                                @enderror
                                 @error('dokumen')
                                     <p class="text-xs text-rose-600 mt-1 flex items-center gap-1">
                                         <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> {{ $message }}

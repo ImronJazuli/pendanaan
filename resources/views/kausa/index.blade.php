@@ -23,12 +23,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <!-- Header Title -->
         <div class="mb-8">
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-2">
-                <i data-lucide="layers" class="w-3.5 h-3.5"></i> Portal Keterbukaan Informasi Publik
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#17211E] font-heading tracking-tight">Katalog Program Kausa Pemkab Tulungagung</h1>
-            <p class="text-xs sm:text-sm text-[#73817C] mt-1 max-w-2xl">
-                Daftar program bantuan sosial, kebencanaan, panti asuhan, dan tempat ibadah yang telah diaudit dan disetujui untuk penggalangan dana publik.
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#17211E] font-heading tracking-tight leading-tight">
+                Katalog Program Kausa Pemkab Tulungagung
+            </h1>
+            <p class="text-xs sm:text-sm text-[#52615C] mt-1.5 max-w-2xl leading-relaxed">
+                Seluruh program bantuan sosial, kedaruratan bencana, panti asuhan, dan rehabilitasi sosial yang telah diverifikasi kelayakan dan legalitasnya oleh tim verifikator Pemkab Tulungagung.
             </p>
         </div>
 

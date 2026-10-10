@@ -77,7 +77,18 @@
                             'institution_user' => route('dashboard.instansi'),
                             default => route('dashboard'),
                         };
+                        $navUnreadNotifCount = auth()->check() ? \App\Models\Notifikasi::where('user_id', auth()->id())->whereNull('dibaca_pada')->count() : 0;
                     @endphp
+
+                    <!-- Notification Bell -->
+                    <a href="{{ route('notifikasi.index') }}" class="relative p-2 rounded-lg border border-[#D9E2DE] hover:border-[#087F5B] bg-white text-[#52615C] hover:text-[#087F5B] transition-all inline-flex items-center justify-center" title="Pemberitahuan">
+                        <i data-lucide="bell" class="w-4 h-4"></i>
+                        @if($navUnreadNotifCount > 0)
+                            <span class="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-rose-500 text-white font-bold text-[10px] flex items-center justify-center ring-2 ring-white">
+                                {{ $navUnreadNotifCount > 9 ? '9+' : $navUnreadNotifCount }}
+                            </span>
+                        @endif
+                    </a>
 
                     <!-- User Dropdown -->
                     <div class="relative" @click.outside="userDropdownOpen = false">

@@ -10,8 +10,10 @@ use App\Models\Kausa;
 use App\Models\LaporanDana;
 use App\Models\Notifikasi;
 use App\Models\RiwayatStatusKausa;
+use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class AdminDashboardController extends Controller
@@ -300,14 +302,13 @@ class AdminDashboardController extends Controller
         ]);
 
         if ($instansi->user_id) {
-            Notifikasi::create([
-                'user_id' => $instansi->user_id,
-                'jenis' => 'legalitas_disetujui',
-                'judul' => 'Legalitas Instansi Terverifikasi',
-                'isi' => 'Selamat, akun dan berkas legalitas lembaga Anda telah diverifikasi oleh Admin Pemkab Tulungagung.',
-                'tautan' => route('instansi.profil'),
-                'dibaca_pada' => null,
-            ]);
+            NotifikasiService::kirim(
+                $instansi->user_id,
+                'legalitas_disetujui',
+                'Legalitas Instansi Terverifikasi',
+                'Selamat, akun dan berkas legalitas lembaga Anda telah diverifikasi oleh Admin Pemkab Tulungagung.',
+                route('instansi.profil')
+            );
         }
 
         return redirect()->route('admin.legalitas')->with('status', "Instansi '{$instansi->nama}' berhasil diverifikasi resmi.");
@@ -329,14 +330,13 @@ class AdminDashboardController extends Controller
         ]);
 
         if ($instansi->user_id) {
-            Notifikasi::create([
-                'user_id' => $instansi->user_id,
-                'jenis' => 'legalitas_ditolak',
-                'judul' => 'Legalitas Instansi Ditolak',
-                'isi' => "Berkas legalitas instansi ditolak oleh Admin Pemkab. Catatan: {$alasan}",
-                'tautan' => route('instansi.profil'),
-                'dibaca_pada' => null,
-            ]);
+            NotifikasiService::kirim(
+                $instansi->user_id,
+                'legalitas_ditolak',
+                'Legalitas Instansi Ditolak',
+                "Berkas legalitas instansi ditolak oleh Admin Pemkab. Catatan: {$alasan}",
+                route('instansi.profil')
+            );
         }
 
         return redirect()->route('admin.legalitas')->with('status', "Pendaftaran instansi '{$instansi->nama}' telah ditolak.");
@@ -388,14 +388,13 @@ class AdminDashboardController extends Controller
         ]);
 
         if ($laporan->user_id) {
-            Notifikasi::create([
-                'user_id' => $laporan->user_id,
-                'jenis' => 'lpj_disetujui',
-                'judul' => 'Laporan Pertanggungjawaban Disetujui',
-                'isi' => "Laporan realisasi penggunaan dana '{$laporan->judul}' telah disetujui dan resmi dipublikasikan ke Portal Transparansi Publik.",
-                'tautan' => route('instansi.laporan'),
-                'dibaca_pada' => null,
-            ]);
+            NotifikasiService::kirim(
+                $laporan->user_id,
+                'lpj_disetujui',
+                'Laporan Pertanggungjawaban Disetujui',
+                "Laporan realisasi penggunaan dana '{$laporan->judul}' telah disetujui dan resmi dipublikasikan ke Portal Transparansi Publik.",
+                route('instansi.laporan')
+            );
         }
 
         return redirect()->route('admin.laporan')->with('status', "Laporan '{$laporan->judul}' berhasil diverifikasi dan dipublikasikan.");
@@ -418,14 +417,13 @@ class AdminDashboardController extends Controller
         ]);
 
         if ($laporan->user_id) {
-            Notifikasi::create([
-                'user_id' => $laporan->user_id,
-                'jenis' => 'lpj_perlu_revisi',
-                'judul' => 'LPJ Memerlukan Revisi',
-                'isi' => "Laporan '{$laporan->judul}' memerlukan perbaikan nota/kuitansi. Catatan: {$catatan}",
-                'tautan' => route('instansi.laporan'),
-                'dibaca_pada' => null,
-            ]);
+            NotifikasiService::kirim(
+                $laporan->user_id,
+                'lpj_perlu_revisi',
+                'LPJ Memerlukan Revisi',
+                "Laporan '{$laporan->judul}' memerlukan perbaikan nota/kuitansi. Catatan: {$catatan}",
+                route('instansi.laporan')
+            );
         }
 
         return redirect()->route('admin.laporan')->with('status', 'Permintaan revisi laporan berhasil dikirim ke instansi.');
@@ -448,14 +446,13 @@ class AdminDashboardController extends Controller
         ]);
 
         if ($laporan->user_id) {
-            Notifikasi::create([
-                'user_id' => $laporan->user_id,
-                'jenis' => 'lpj_ditolak',
-                'judul' => 'LPJ Ditolak',
-                'isi' => "Laporan '{$laporan->judul}' ditolak oleh Admin. Alasan: {$catatan}",
-                'tautan' => route('instansi.laporan'),
-                'dibaca_pada' => null,
-            ]);
+            NotifikasiService::kirim(
+                $laporan->user_id,
+                'lpj_ditolak',
+                'LPJ Ditolak',
+                "Laporan '{$laporan->judul}' ditolak oleh Admin. Alasan: {$catatan}",
+                route('instansi.laporan')
+            );
         }
 
         return redirect()->route('admin.laporan')->with('status', 'Laporan berhasil ditolak.');
@@ -487,16 +484,118 @@ class AdminDashboardController extends Controller
 
         $donasis = $query->paginate(20);
 
+        $manualQueue = Donasi::where('status', Donasi::STATUS_MENUNGGU_VERIFIKASI_MANUAL)
+            ->with(['kausa', 'user'])
+            ->latest()
+            ->get();
+
         $kausaList = Kausa::select('id', 'judul')->latest()->get();
 
         $stats = [
             'totalBerhasil' => (float) Donasi::where('status', Donasi::STATUS_SUCCESS)->sum('nominal'),
             'countBerhasil' => Donasi::where('status', Donasi::STATUS_SUCCESS)->count(),
             'countPending' => Donasi::where('status', Donasi::STATUS_PENDING)->count(),
+            'countManualPending' => $manualQueue->count(),
             'donasiHariIni' => (float) Donasi::where('status', Donasi::STATUS_SUCCESS)->whereDate('dibayar_pada', today())->sum('nominal'),
         ];
 
-        return view('dashboard.admin.donasi', compact('donasis', 'kausaList', 'stats'));
+        return view('dashboard.admin.donasi', compact('donasis', 'kausaList', 'stats', 'manualQueue'));
+    }
+
+    /**
+     * Setujui pembayaran donasi via transfer manual.
+     */
+    public function approveManual(Donasi $donasi, Request $request): RedirectResponse
+    {
+        if (! $donasi->exists && $request->route('donasi')) {
+            $donasi = Donasi::findOrFail($request->route('donasi'));
+        }
+
+        if ($donasi->status === Donasi::STATUS_SUCCESS || $donasi->status === 'berhasil') {
+            return redirect()->route('admin.donasi')->with('status', 'Donasi ini sudah berstatus berhasil sebelumnya.');
+        }
+
+        DB::transaction(function () use ($donasi, $request) {
+            $donasiLocked = Donasi::where('id', $donasi->id)
+                ->lockForUpdate()
+                ->first();
+
+            if ($donasiLocked->status === Donasi::STATUS_SUCCESS || $donasiLocked->status === 'berhasil') {
+                return;
+            }
+
+            $catatan = $request->input('catatan_verifikasi_manual', 'Pembayaran transfer manual diverifikasi dan disetujui oleh Admin Pemkab.');
+
+            $donasiLocked->update([
+                'status' => Donasi::STATUS_SUCCESS,
+                'dibayar_pada' => now(),
+                'catatan_verifikasi_manual' => $catatan,
+            ]);
+
+            // Tambah dana terkumpul kausa
+            $donasiLocked->kausa->tambahDanaTerkumpul((float) $donasiLocked->nominal);
+
+            // Notifikasi ke donatur jika ada
+            if ($donasiLocked->user_id) {
+                NotifikasiService::kirim(
+                    $donasiLocked->user_id,
+                    'donasi_berhasil',
+                    'Bukti Transfer Terverifikasi',
+                    'Bukti transfer donasi sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." untuk kausa '{$donasiLocked->kausa->judul}' telah disetujui oleh Admin Pemkab Tulungagung.",
+                    route('donatur.dashboard')
+                );
+            }
+
+            // Notifikasi ke instansi pemilik kausa
+            $instansiUser = $donasiLocked->kausa->instansi?->user;
+            if ($instansiUser) {
+                NotifikasiService::kirim(
+                    $instansiUser->id,
+                    'donasi_masuk',
+                    'Donasi Transfer Manual Masuk',
+                    'Donasi transfer manual sebesar Rp '.number_format($donasiLocked->nominal, 0, ',', '.')." diterima untuk kausa '{$donasiLocked->kausa->judul}'.",
+                    route('dashboard.instansi.detail', $donasiLocked->kausa_id)
+                );
+            }
+        });
+
+        return redirect()->route('admin.donasi')->with('status', "Pembayaran transfer manual '{$donasi->pesanan_pembayaran}' berhasil disetujui dan dana dicatat.");
+    }
+
+    /**
+     * Tolak bukti pembayaran donasi via transfer manual.
+     */
+    public function rejectManual(Donasi $donasi, Request $request): RedirectResponse
+    {
+        if (! $donasi->exists && $request->route('donasi')) {
+            $donasi = Donasi::findOrFail($request->route('donasi'));
+        }
+
+        $request->validate([
+            'catatan_verifikasi_manual' => ['required', 'string', 'min:5'],
+        ], [
+            'catatan_verifikasi_manual.required' => 'Catatan alasan penolakan wajib diisi.',
+            'catatan_verifikasi_manual.min' => 'Catatan penolakan minimal 5 karakter.',
+        ]);
+
+        $catatan = $request->input('catatan_verifikasi_manual');
+
+        $donasi->update([
+            'status' => Donasi::STATUS_DITOLAK_MANUAL,
+            'catatan_verifikasi_manual' => $catatan,
+        ]);
+
+        if ($donasi->user_id) {
+            NotifikasiService::kirim(
+                $donasi->user_id,
+                'donasi_ditolak',
+                'Bukti Transfer Donasi Ditolak',
+                "Bukti transfer Anda untuk transaksi '{$donasi->pesanan_pembayaran}' ditolak oleh Admin Pemkab. Catatan: {$catatan}",
+                route('donasi.bayar', $donasi->pesanan_pembayaran)
+            );
+        }
+
+        return redirect()->route('admin.donasi')->with('status', "Bukti transfer donasi '{$donasi->pesanan_pembayaran}' telah ditolak.");
     }
 
     protected function createNotifikasi(Kausa $kausa, string $jenis, string $judul, string $isi): void
@@ -510,13 +609,16 @@ class AdminDashboardController extends Controller
             return;
         }
 
-        Notifikasi::create([
-            'user_id' => $userId,
-            'jenis' => $jenis,
-            'judul' => $judul,
-            'isi' => $isi,
-            'tautan' => route('dashboard.instansi.detail', $kausa->id),
-            'dibaca_pada' => null,
-        ]);
+        $tautan = ($jenis === 'kausa_perlu_diperbaiki')
+            ? route('dashboard.instansi.edit', $kausa->id)
+            : route('dashboard.instansi.detail', $kausa->id);
+
+        NotifikasiService::kirim(
+            $userId,
+            $jenis,
+            $judul,
+            $isi,
+            $tautan
+        );
     }
 }

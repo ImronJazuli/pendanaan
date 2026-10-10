@@ -27,18 +27,14 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 
                 <!-- Left: Welcoming & Real-time Search Box -->
+                <!-- Left: Welcoming & Real-time Search Box -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 text-xs font-semibold backdrop-blur-sm">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        Amanah, Transparan, dan Diaudit Resmi oleh Tim Verifikator Pemkab Tulungagung
-                    </div>
-
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-heading">
-                        Gotong Royong Nyata untuk Kesejahteraan Warga <span class="text-emerald-400">Tulungagung</span>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold text-white tracking-tight leading-[1.15] font-heading">
+                        Gotong royong nyata untuk kesejahteraan warga <span class="text-emerald-400">Tulungagung</span>.
                     </h1>
 
                     <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed max-w-xl">
-                        Satu pintu donasi kemanusiaan yang terverifikasi legalitasnya. Setiap rupiah disalurkan secara akuntabel dengan laporan nota belanja fisik terbuka untuk publik.
+                        Satu pintu donasi sosial kemanusiaan resmi pemerintah daerah. Setiap rupiah diaudit langsung oleh verifikator Pemkab dengan laporan nota belanja fisik yang dapat dipantau siapa saja.
                     </p>
 
                     <!-- Search Filter Bar -->

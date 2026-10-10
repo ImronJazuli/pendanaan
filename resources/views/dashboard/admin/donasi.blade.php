@@ -53,11 +53,11 @@
 
         <div class="bg-white rounded-2xl border border-[#D9E2DE] p-4 sm:p-5 shadow-xs">
             <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-[11px] font-bold uppercase tracking-wider">Menunggu Bayar</span>
-                <i data-lucide="clock" class="w-4 h-4 text-amber-500"></i>
+                <span class="text-[11px] font-bold uppercase tracking-wider">Verifikasi Manual</span>
+                <i data-lucide="receipt" class="w-4 h-4 text-amber-500"></i>
             </div>
-            <p class="text-2xl sm:text-3xl font-extrabold text-amber-900 font-heading">{{ $stats['countPending'] }}</p>
-            <span class="text-[10px] text-amber-700 font-semibold mt-1 block">Menunggu Konfirmasi Bayar</span>
+            <p class="text-2xl sm:text-3xl font-extrabold text-amber-900 font-heading">{{ $stats['countManualPending'] ?? 0 }}</p>
+            <span class="text-[10px] text-amber-700 font-semibold mt-1 block">Antrean Perlu Dicek</span>
         </div>
 
         <div class="bg-white rounded-2xl border border-[#D9E2DE] p-4 sm:p-5 shadow-xs">
@@ -71,6 +71,99 @@
             <span class="text-[10px] text-slate-400 mt-1 block">Pergerakan 24 Jam Terakhir</span>
         </div>
     </div>
+
+    @if(isset($manualQueue) && $manualQueue->count() > 0)
+        <!-- Section Antrean Verifikasi Transfer Manual -->
+        <div class="bg-amber-50/70 rounded-3xl border border-amber-300 p-5 sm:p-6 shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold">
+                        <i data-lucide="receipt" class="w-4 h-4"></i>
+                    </span>
+                    <div>
+                        <h2 class="font-heading font-extrabold text-base text-amber-950">Antrean Verifikasi Transfer Manual</h2>
+                        <p class="text-xs text-amber-800">Terdapat {{ $manualQueue->count() }} donasi menunggu pengecekan mutasi bank dan bukti transfer fisik.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-2xl border border-amber-200">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-amber-100/60 text-amber-900 font-bold border-b border-amber-200 uppercase text-[10px] tracking-wider">
+                            <th class="py-3 px-4">Kode / Waktu</th>
+                            <th class="py-3 px-4">Donatur</th>
+                            <th class="py-3 px-4">Kausa</th>
+                            <th class="py-3 px-4">Nominal</th>
+                            <th class="py-3 px-4">Bukti Transfer</th>
+                            <th class="py-3 px-4 text-right">Aksi Verifikasi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-amber-100">
+                        @foreach($manualQueue as $item)
+                            <tr class="hover:bg-amber-50/40">
+                                <td class="py-3.5 px-4 font-mono font-bold text-slate-800">
+                                    {{ $item->pesanan_pembayaran }}
+                                    <span class="block text-[10px] font-normal text-slate-400">{{ $item->created_at ? $item->created_at->diffForHumans() : '' }}</span>
+                                </td>
+                                <td class="py-3.5 px-4">
+                                    <p class="font-bold text-slate-800">{{ $item->anonim ? 'Hamba Allah (Anonim)' : ($item->nama_donatur ?? ($item->user->name ?? 'Donatur')) }}</p>
+                                    <p class="text-[11px] text-slate-400">{{ $item->email_donatur ?? '-' }}</p>
+                                </td>
+                                <td class="py-3.5 px-4 max-w-xs truncate">
+                                    {{ $item->kausa->judul ?? '-' }}
+                                </td>
+                                <td class="py-3.5 px-4 font-extrabold text-[#087F5B]">
+                                    Rp {{ number_format($item->nominal, 0, ',', '.') }}
+                                </td>
+                                <td class="py-3.5 px-4">
+                                    @if($item->path_bukti_manual)
+                                        <a href="{{ \Illuminate\Support\Facades\Storage::url($item->path_bukti_manual) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-[#087F5B] border border-emerald-300 font-bold text-[11px] hover:bg-emerald-100">
+                                            <i data-lucide="eye" class="w-3.5 h-3.5"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <span class="text-slate-400 italic">Belum ada file</span>
+                                    @endif
+                                </td>
+                                <td class="py-3.5 px-4 text-right">
+                                    <div class="flex items-center justify-end gap-2" x-data="{ rejectOpen: false, rejectNote: '' }">
+                                        <!-- Approve Form -->
+                                        <form method="POST" action="{{ route('admin.donasi.approveManual', $item) }}" onsubmit="return confirm('Apakah Anda yakin ingin menyetujui donasi ini dan memasukkannya ke dana terkumpul?');">
+                                            @csrf
+                                            <button type="submit" class="px-3 py-1.5 rounded-lg bg-[#087F5B] hover:bg-[#066A4C] text-white font-bold text-xs flex items-center gap-1 shadow-xs transition-all active:scale-95">
+                                                <i data-lucide="check" class="w-3.5 h-3.5"></i> Setujui
+                                            </button>
+                                        </form>
+
+                                        <!-- Reject Trigger -->
+                                        <button @click="rejectOpen = !rejectOpen" type="button" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-xs flex items-center gap-1 transition-all">
+                                            <i data-lucide="x" class="w-3.5 h-3.5"></i> Tolak
+                                        </button>
+
+                                        <!-- Inline Reject Modal / Box -->
+                                        <div x-show="rejectOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+                                            <div @click.outside="rejectOpen = false" class="bg-white rounded-2xl p-5 max-w-md w-full space-y-3 text-left">
+                                                <h3 class="font-heading font-bold text-sm text-slate-900">Tolak Bukti Transfer Manual</h3>
+                                                <p class="text-xs text-slate-500">Berikan catatan alasan penolakan yang jelas agar donatur dapat memperbaiki:</p>
+                                                <form method="POST" action="{{ route('admin.donasi.rejectManual', $item) }}">
+                                                    @csrf
+                                                    <textarea name="catatan_verifikasi_manual" required minlength="5" rows="3" placeholder="Contoh: Nominal pada struk transfer tidak sesuai, atau rekening tujuan salah..." class="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-rose-500/30"></textarea>
+                                                    <div class="flex items-center justify-end gap-2 pt-2">
+                                                        <button type="button" @click="rejectOpen = false" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100">Batal</button>
+                                                        <button type="submit" class="px-4 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs">Kirim Penolakan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
 
     <!-- Filter & Search Toolbar -->
     <div class="bg-white rounded-2xl border border-[#D9E2DE] p-4 shadow-xs">
@@ -189,13 +282,21 @@
 
                                 <!-- Status Badge -->
                                 <td class="py-4 px-6 text-right whitespace-nowrap">
-                                    @if ($item->status === 'success')
+                                    @if (in_array($item->status, ['success', 'berhasil'], true))
                                         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
                                             <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> Berhasil
                                         </span>
-                                    @elseif ($item->status === 'pending')
+                                    @elseif ($item->status === \App\Models\Donasi::STATUS_MENUNGGU_VERIFIKASI_MANUAL)
                                         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
-                                            <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i> Pending
+                                            <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i> Verif Manual
+                                        </span>
+                                    @elseif ($item->status === \App\Models\Donasi::STATUS_DITOLAK_MANUAL)
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300">
+                                            <i data-lucide="x-circle" class="w-3.5 h-3.5 text-rose-600"></i> Ditolak Manual
+                                        </span>
+                                    @elseif ($item->status === 'pending')
+                                        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-300">
+                                            <i data-lucide="clock" class="w-3.5 h-3.5 text-slate-500"></i> Pending
                                         </span>
                                     @else
                                         <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300">

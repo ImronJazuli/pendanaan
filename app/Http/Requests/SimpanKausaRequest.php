@@ -33,6 +33,8 @@ class SimpanKausaRequest extends FormRequest
             'tanggal_berakhir' => ['nullable', 'date', 'after_or_equal:tanggal_mulai'],
             'dokumen' => ['nullable', 'array', 'max:10'],
             'dokumen.*' => ['file', 'mimes:pdf,jpg,jpeg,png', 'max:5120'],
+            'foto_kausa' => ['nullable', 'array', 'max:10'],
+            'foto_kausa.*' => ['file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ];
     }
 }

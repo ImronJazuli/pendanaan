@@ -7,10 +7,19 @@
     $persen = $kausa->persentase_progress;
     $sisaHari = $kausa->tanggal_berakhir ? max(0, now()->diffInDays($kausa->tanggal_berakhir, false)) : 30;
     $kausaIdCode = 'KSA-TA-'.($kausa->created_at ? $kausa->created_at->format('Y') : date('Y')).'-'.str_pad($kausa->id, 3, '0', STR_PAD_LEFT);
+
+    $fotoGaleri = $kausa->dokumen ? $kausa->dokumen->filter(function($doc) {
+        return $doc->jenis_dokumen === 'foto_galeri' 
+            || str_starts_with($doc->mime_type ?? '', 'image/')
+            || in_array(pathinfo($doc->path_file ?? '', PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'webp'], true);
+    }) : collect();
+    $defaultPlaceholder = 'https://images.unsplash.com/photo-1547496502-affa22d38842?w=1000&auto=format&fit=crop&q=80';
+    $primaryFotoUrl = $kausa->foto_url ?? ($fotoGaleri->first() ? \Illuminate\Support\Facades\Storage::url($fotoGaleri->first()->path_file) : $defaultPlaceholder);
 @endphp
 
 <div x-data="{
     activeTab: 'deskripsi',
+    currentPhoto: '{{ $primaryFotoUrl }}',
     selectedNominal: 50000,
     customNominal: '',
     isAnonim: false,
@@ -86,25 +95,39 @@
             <div class="lg:col-span-8 space-y-8">
                 
                 <!-- Hero Media / Image Gallery -->
-                <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-[#D9E2DE] shadow-sm">
-                    <div class="aspect-[16/9] w-full bg-slate-100 overflow-hidden">
-                        <img 
-                            src="{{ $kausa->foto_url ?? 'https://images.unsplash.com/photo-1547496502-affa22d38842?w=1000&auto=format&fit=crop&q=80' }}" 
-                            alt="{{ $kausa->judul }}" 
-                            class="w-full h-full object-cover"
-                        >
-                    </div>
-                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3 text-white">
-                        <div class="flex items-center gap-2 text-xs">
-                            <span class="bg-emerald-600/90 text-white font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
-                                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Audit Bebas Manipulasi
-                            </span>
-                            <span class="text-emerald-100 hidden sm:inline">&bull; Dipublikasikan secara resmi oleh Pemkab</span>
+                <div class="space-y-3">
+                    <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-[#D9E2DE] shadow-sm">
+                        <div class="aspect-[16/9] w-full bg-slate-100 overflow-hidden">
+                            <img 
+                                :src="currentPhoto" 
+                                alt="{{ $kausa->judul }}" 
+                                class="w-full h-full object-cover transition-all duration-300"
+                            >
                         </div>
-                        <span class="text-xs text-slate-300">
-                            Terakhir diupdate: {{ $kausa->updated_at ? $kausa->updated_at->diffForHumans() : 'Baru saja' }}
-                        </span>
+                        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3 text-white">
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="bg-emerald-600/90 text-white font-bold px-2.5 py-1 rounded-lg flex items-center gap-1">
+                                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Audit Bebas Manipulasi
+                                </span>
+                                <span class="text-emerald-100 hidden sm:inline">&bull; Dipublikasikan secara resmi oleh Pemkab</span>
+                            </div>
+                            <span class="text-xs text-slate-300">
+                                Terakhir diupdate: {{ $kausa->updated_at ? $kausa->updated_at->diffForHumans() : 'Baru saja' }}
+                            </span>
+                        </div>
                     </div>
+
+                    @if($fotoGaleri->count() > 1)
+                        <!-- Thumbnails Galeri Dokumentasi -->
+                        <div class="flex items-center gap-2 overflow-x-auto p-2 bg-white rounded-2xl border border-[#D9E2DE] shadow-xs custom-scrollbar">
+                            @foreach($fotoGaleri as $fg)
+                                @php $fgUrl = \Illuminate\Support\Facades\Storage::url($fg->path_file); @endphp
+                                <button type="button" @click="currentPhoto = '{{ $fgUrl }}'" class="w-20 h-14 rounded-xl overflow-hidden border-2 transition-all shrink-0 cursor-pointer" :class="currentPhoto === '{{ $fgUrl }}' ? 'border-[#087F5B] ring-2 ring-[#087F5B]/30' : 'border-transparent opacity-70 hover:opacity-100'">
+                                    <img src="{{ $fgUrl }}" alt="{{ $fg->nama_file }}" class="w-full h-full object-cover">
+                                </button>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Navigation Tabs -->
@@ -251,58 +274,71 @@
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                         <div>
                             <h2 class="font-heading font-bold text-lg sm:text-xl text-[#17211E]">Keterbukaan Pengeluaran Dana &amp; Bukti Nota</h2>
-                            <p class="text-xs text-slate-500 mt-1">Transparansi langsung: Setiap kuitansi diverifikasi petugas sebelum ditampilkan.</p>
+                            <p class="text-xs text-slate-500 mt-1">Transparansi langsung: Setiap kuitansi diverifikasi petugas sebelum dipublikasikan.</p>
                         </div>
                         <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center gap-1.5 shrink-0">
                             <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-                            Audit Status: Bersih &amp; Sesuai SOP
+                            Audit Status: Publikasi Resmi Pemkab
                         </span>
                     </div>
 
-                    <!-- Timeline Bukti Pengeluaran -->
-                    <div class="space-y-4">
-                        <div class="p-4 rounded-2xl bg-[#F6F8F7] border border-[#D9E2DE] space-y-3">
-                            <div class="flex flex-wrap items-center justify-between gap-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#087F5B] text-white">Tahap 1</span>
-                                    <h4 class="font-bold text-slate-900 text-xs sm:text-sm">Pembelian Sembako &amp; Beras Dapur Umum</h4>
-                                </div>
-                                <span class="font-mono font-bold text-emerald-800 text-xs sm:text-sm">Rp {{ number_format($terkumpul * 0.4, 0, ',', '.') }}</span>
-                            </div>
-                            <p class="text-xs text-slate-600 leading-relaxed">
-                                Penyaluran bahan pokok darurat untuk dapur umum warga di posko utama. Dilengkapi kuitansi resmi toko mitra dan berita acara penyerahan.
-                            </p>
-                            
-                            <!-- Bukti Foto Nota Thumbnails -->
-                            <div class="flex items-center gap-3 pt-2">
-                                <button 
-                                    @click="openReceipt('Kuitansi Pembelian Beras & Sembako Dapur Umum', 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80')" 
-                                    type="button" 
-                                    class="group relative w-20 h-20 rounded-xl overflow-hidden border border-slate-300 hover:border-emerald-600 transition-colors shrink-0"
-                                >
-                                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=200&auto=format&fit=crop&q=80" alt="Kuitansi Toko" class="w-full h-full object-cover">
-                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
-                                        Perbesar
+                    @if($kausa->logTransparansi && $kausa->logTransparansi->count() > 0)
+                        <!-- Timeline Bukti Pengeluaran Riil -->
+                        <div class="space-y-4">
+                            @foreach($kausa->logTransparansi as $idx => $log)
+                                <div class="p-5 rounded-2xl bg-[#F6F8F7] border border-[#D9E2DE] space-y-3">
+                                    <div class="flex flex-wrap items-center justify-between gap-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#087F5B] text-white">
+                                                Realisasi #{{ $idx + 1 }}
+                                            </span>
+                                            <h4 class="font-bold text-slate-900 text-xs sm:text-sm">{{ $log->judul }}</h4>
+                                        </div>
+                                        <span class="font-mono font-bold text-[#087F5B] text-xs sm:text-sm">
+                                            Rp {{ number_format($log->nominal, 0, ',', '.') }}
+                                        </span>
                                     </div>
-                                </button>
-                                <button 
-                                    @click="openReceipt('Foto Penyerahan Bantuan ke Posko Warga', 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&auto=format&fit=crop&q=80')" 
-                                    type="button" 
-                                    class="group relative w-20 h-20 rounded-xl overflow-hidden border border-slate-300 hover:border-emerald-600 transition-colors shrink-0"
-                                >
-                                    <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=200&auto=format&fit=crop&q=80" alt="Foto Serah Terima" class="w-full h-full object-cover">
-                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
-                                        Perbesar
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        {{ $log->deskripsi }}
+                                    </p>
+                                    
+                                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200/60">
+                                        <div class="flex items-center gap-3">
+                                            @if($log->path_bukti)
+                                                @php $buktiUrl = \Illuminate\Support\Facades\Storage::url($log->path_bukti); @endphp
+                                                <button 
+                                                    @click="openReceipt('{{ addslashes($log->judul) }}', '{{ $buktiUrl }}')" 
+                                                    type="button" 
+                                                    class="group relative w-16 h-16 rounded-xl overflow-hidden border border-slate-300 hover:border-[#087F5B] transition-colors shrink-0 cursor-pointer"
+                                                >
+                                                    <img src="{{ $buktiUrl }}" alt="{{ $log->judul }}" class="w-full h-full object-cover">
+                                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] font-bold">
+                                                        Perbesar
+                                                    </div>
+                                                </button>
+                                                <a href="{{ $buktiUrl }}" target="_blank" class="text-xs font-bold text-[#087F5B] hover:underline flex items-center gap-1">
+                                                    <i data-lucide="file-text" class="w-4 h-4"></i> Lihat Dokumen Bukti
+                                                </a>
+                                            @else
+                                                <span class="text-[11px] text-slate-400 italic">Dokumen fisik terarsip di PPID Dinsos</span>
+                                            @endif
+                                        </div>
+                                        <span class="text-[11px] text-slate-400">
+                                            Dipublikasikan: {{ $log->dipublikasikan_pada ? $log->dipublikasikan_pada->isoFormat('D MMMM Y') : ($log->created_at ? $log->created_at->isoFormat('D MMMM Y') : '-') }}
+                                        </span>
                                     </div>
-                                </button>
-                                <div class="text-[11px] text-slate-500 pl-2">
-                                    <p class="font-semibold text-slate-700">Verifikator Pemeriksa:</p>
-                                    <p>Tim Inspektorat &amp; Dinsos Tulungagung</p>
-                                    <span class="text-emerald-700 font-bold">&check; BAST Fisik Tersimpan di PPID</span>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                    </div>
+                    @else
+                        <div class="p-8 rounded-2xl bg-[#F6F8F7] border border-dashed border-[#D9E2DE] text-center space-y-2">
+                            <i data-lucide="file-question" class="w-10 h-10 text-slate-400 mx-auto"></i>
+                            <h4 class="font-bold text-sm text-slate-800">Belum Ada Laporan Realisasi yang Dipublikasikan</h4>
+                            <p class="text-xs text-slate-500 max-w-md mx-auto">
+                                Penyaluran dana dan bukti nota fisik kuitansi akan dipublikasikan secara terbuka setelah program memasuki tahap realisasi dan diverifikasi oleh Admin Pemkab Tulungagung.
+                            </p>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- TAB 4: DONATUR -->
@@ -312,9 +348,13 @@
                         <span class="text-xs text-slate-500">{{ $jumlahDonatur ?? 0 }} Donatur Berpartisipasi</span>
                     </div>
 
-                    @if ($kausa->donasi && $kausa->donasi->where('status', \App\Models\Donasi::STATUS_SUCCESS)->count() > 0)
+                    @php
+                        $donasiList = $kausa->donasi ? $kausa->donasi->whereIn('status', [\App\Models\Donasi::STATUS_SUCCESS, 'berhasil']) : collect();
+                    @endphp
+
+                    @if ($donasiList->count() > 0)
                         <div class="divide-y divide-slate-100">
-                            @foreach ($kausa->donasi->where('status', \App\Models\Donasi::STATUS_SUCCESS) as $d)
+                            @foreach ($donasiList as $d)
                                 <div class="py-3 flex items-start gap-3">
                                     <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center shrink-0">
                                         {{ $d->anonim ? 'HA' : strtoupper(substr($d->nama_donatur ?? ($d->user->name ?? 'D'), 0, 2)) }}
@@ -322,7 +362,7 @@
                                     <div class="flex-1 min-w-0">
                                         <div class="flex items-center justify-between">
                                             <p class="text-xs font-bold text-slate-800">
-                                                {{ $d->anonim ? 'Hamba Allah (Anonim)' : ($d->nama_donatur ?? ($d->user->name ?? 'Donatur')) }}
+                                                {{ $d->anonim ? 'Hamba Allah' : ($d->nama_donatur ?? ($d->user->name ?? 'Donatur')) }}
                                             </p>
                                             <span class="font-bold text-xs text-[#087F5B]">
                                                 Rp {{ number_format($d->nominal, 0, ',', '.') }}
@@ -339,34 +379,12 @@
                             @endforeach
                         </div>
                     @else
-                        <!-- Sample Donatur Stream for demonstration -->
-                        <div class="divide-y divide-slate-100 text-xs">
-                            <div class="py-3 flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">
-                                    HA
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-center">
-                                        <p class="font-bold text-slate-800">Hamba Allah (Anonim)</p>
-                                        <span class="font-bold text-[#087F5B]">Rp 250.000</span>
-                                    </div>
-                                    <p class="text-[11px] text-slate-400">15 menit lalu &bull; via QRIS</p>
-                                    <p class="text-slate-600 mt-1 italic">"Semoga lekas surut dan saudara kita di Besuki diberikan kesabaran."</p>
-                                </div>
-                            </div>
-
-                            <div class="py-3 flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center shrink-0">
-                                    BS
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-center">
-                                        <p class="font-bold text-slate-800">Budi Santoso</p>
-                                        <span class="font-bold text-[#087F5B]">Rp 100.000</span>
-                                    </div>
-                                    <p class="text-[11px] text-slate-400">1 jam lalu &bull; via Bank Jatim</p>
-                                </div>
-                            </div>
+                        <div class="p-8 rounded-2xl bg-[#F6F8F7] border border-dashed border-[#D9E2DE] text-center space-y-2">
+                            <i data-lucide="heart" class="w-10 h-10 text-slate-300 mx-auto"></i>
+                            <h4 class="font-bold text-sm text-slate-800">Belum Ada Donatur Terverifikasi</h4>
+                            <p class="text-xs text-slate-500 max-w-sm mx-auto">
+                                Jadilah orang pertama yang menyalurkan kebaikan untuk program kausa ini.
+                            </p>
                         </div>
                     @endif
                 </div>
@@ -386,7 +404,7 @@
                             </span>
                         </div>
 
-                        <div class="text-2xl sm:text-3xl font-extrabold text-[#087F5B] font-heading">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-[#087F5B] font-heading tabular-nums">
                             Rp {{ number_format($terkumpul, 0, ',', '.') }}
                         </div>
 
@@ -396,8 +414,8 @@
                         </div>
 
                         <div class="flex justify-between items-center text-xs text-[#73817C] pt-1">
-                            <span>Target: <strong class="text-slate-800">Rp {{ number_format($kausa->target_dana, 0, ',', '.') }}</strong></span>
-                            <span>Sisa <strong class="text-slate-800">{{ $sisaHari }}</strong> hari</span>
+                            <span>Target: <strong class="text-slate-800 tabular-nums">Rp {{ number_format($kausa->target_dana, 0, ',', '.') }}</strong></span>
+                            <span>Sisa <strong class="text-slate-800 tabular-nums">{{ $sisaHari }}</strong> hari</span>
                         </div>
                     </div>
 
@@ -509,23 +527,36 @@
                         <!-- Payment Simulation Option -->
                         <div class="space-y-2 pt-2">
                             <label class="block text-xs font-bold text-[#17211E] uppercase tracking-wider">Metode Pembayaran</label>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-3 gap-2">
                                 <button 
                                     type="button" 
                                     @click="paymentMethod = 'qris'" 
                                     :class="paymentMethod === 'qris' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
-                                    class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                                    class="py-2 px-2 border rounded-xl font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all"
                                 >
-                                    <i data-lucide="qr-code" class="w-4 h-4"></i> QRIS Instan
+                                    <i data-lucide="qr-code" class="w-3.5 h-3.5 shrink-0"></i> QRIS
                                 </button>
                                 <button 
                                     type="button" 
                                     @click="paymentMethod = 'bank'" 
                                     :class="paymentMethod === 'bank' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
-                                    class="py-2 px-3 border rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all"
+                                    class="py-2 px-2 border rounded-xl font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all"
                                 >
-                                    <i data-lucide="landmark" class="w-4 h-4"></i> Virtual Account
+                                    <i data-lucide="landmark" class="w-3.5 h-3.5 shrink-0"></i> Virtual Acc
                                 </button>
+                                <button 
+                                    type="button" 
+                                    @click="paymentMethod = 'transfer'" 
+                                    :class="paymentMethod === 'transfer' ? 'border-[#087F5B] bg-emerald-50 text-[#087F5B]' : 'border-slate-200 text-slate-700'"
+                                    class="py-2 px-2 border rounded-xl font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all"
+                                >
+                                    <i data-lucide="receipt" class="w-3.5 h-3.5 shrink-0"></i> Manual
+                                </button>
+                            </div>
+                            <div x-show="paymentMethod === 'transfer'" class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-[11px] text-emerald-900 space-y-1">
+                                <p class="font-bold flex items-center gap-1"><i data-lucide="info" class="w-3.5 h-3.5"></i> Rekening Kasda Pemkab Tulungagung</p>
+                                <p>Bank Jatim: <strong class="font-mono font-bold">0151-0012-34</strong> (a.n. Kasda Pemkab TA - Bansos)</p>
+                                <p class="text-[10px] text-emerald-700">Unggah bukti transfer pada langkah selanjutnya setelah checkout.</p>
                             </div>
                         </div>
 

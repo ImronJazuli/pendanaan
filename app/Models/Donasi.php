@@ -19,6 +19,10 @@ class Donasi extends Model
 
     public const STATUS_EXPIRED = 'expired';
 
+    public const STATUS_MENUNGGU_VERIFIKASI_MANUAL = 'menunggu_verifikasi_manual';
+
+    public const STATUS_DITOLAK_MANUAL = 'ditolak_manual';
+
     protected $table = 'donasi';
 
     protected $attributes = [
@@ -28,7 +32,7 @@ class Donasi extends Model
     protected $fillable = [
         'kausa_id', 'user_id', 'pesanan_pembayaran', 'nama_donatur', 'anonim', 'doa_dukungan',
         'email_donatur', 'telepon_donatur', 'nominal', 'metode_pembayaran',
-        'status', 'dibayar_pada',
+        'status', 'path_bukti_manual', 'catatan_verifikasi_manual', 'dibayar_pada',
     ];
 
     protected function casts(): array
@@ -62,7 +66,7 @@ class Donasi extends Model
 
     public function scopeSuccess($query)
     {
-        return $query->where('status', self::STATUS_SUCCESS);
+        return $query->whereIn('status', [self::STATUS_SUCCESS, 'berhasil']);
     }
 
     public function scopePending($query)

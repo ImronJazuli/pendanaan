@@ -7,6 +7,8 @@ use App\Http\Controllers\Dashboard\InstansiLaporanDanaController;
 use App\Http\Controllers\DonasiController;
 use App\Http\Controllers\KausaController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MidtransWebhookController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransparansiController;
@@ -29,8 +31,10 @@ Route::middleware(['auth', 'peran:institution_user'])->group(function () {
 });
 
 // Alur Donasi Publik & Simulasi Pembayaran
+Route::post('/webhook/midtrans', [MidtransWebhookController::class, 'handle'])->name('webhook.midtrans');
 Route::post('/kausa/{slug}/donasi', [DonasiController::class, 'store'])->name('donasi.store');
 Route::get('/donasi/{kode}/bayar', [DonasiController::class, 'payment'])->name('donasi.bayar');
+Route::post('/donasi/{kode}/upload-bukti', [DonasiController::class, 'uploadBukti'])->name('donasi.uploadBukti');
 Route::post('/donasi/{kode}/simulasi', [DonasiController::class, 'simulate'])->name('donasi.simulate');
 Route::get('/donasi/{kode}/sukses', [DonasiController::class, 'success'])->name('donasi.sukses');
 Route::get('/donasi/{kode}/kuitansi', [DonasiController::class, 'kuitansi'])->name('donasi.kuitansi');
@@ -66,6 +70,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Notifikasi In-App Pengguna
+    Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+    Route::post('/notifikasi/{notifikasi}/read', [NotifikasiController::class, 'markRead'])->name('notifikasi.read');
+    Route::post('/notifikasi/read-all', [NotifikasiController::class, 'markAllRead'])->name('notifikasi.readAll');
 
     // Route untuk Instansi (support middleware baru dan lama)
     Route::middleware('peran:institution_user')->group(function () {
@@ -103,6 +112,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/admin/kausa-aktif', [AdminDashboardController::class, 'kausaAktif'])->name('admin.kausa.aktif');
         Route::post('/dashboard/admin/kausa/{kausa}/selesai', [AdminDashboardController::class, 'selesaikanKausa'])->name('admin.kausa.selesai');
         Route::get('/dashboard/admin/donasi', [AdminDashboardController::class, 'donasi'])->name('admin.donasi');
+        Route::post('/dashboard/admin/donasi/{donasi}/approve-manual', [AdminDashboardController::class, 'approveManual'])->name('admin.donasi.approveManual');
+        Route::post('/dashboard/admin/donasi/{donasi}/reject-manual', [AdminDashboardController::class, 'rejectManual'])->name('admin.donasi.rejectManual');
         Route::get('/dashboard/admin/laporan', [AdminDashboardController::class, 'laporan'])->name('admin.laporan');
         Route::post('/dashboard/admin/laporan/{laporan}/verify', [AdminDashboardController::class, 'verifyLaporan'])->name('admin.laporan.verify');
         Route::post('/dashboard/admin/laporan/{laporan}/revise', [AdminDashboardController::class, 'reviseLaporan'])->name('admin.laporan.revise');

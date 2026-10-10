@@ -17,14 +17,34 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        body { background-color: #F6F8F7; color: #17211E; font-family: 'Inter', sans-serif; }
-        h1, h2, h3, h4, .font-heading, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { 
+            background-color: #F6F8F7; 
+            color: #17211E; 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, .font-heading, .font-display { 
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; 
+            letter-spacing: -0.02em;
+        }
+        ::selection {
+            background-color: #E6F4EF;
+            color: #066A4C;
+        }
+        :focus-visible {
+            outline: 2px solid #087F5B;
+            outline-offset: 2px;
+        }
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 
     @stack('styles')
 </head>
 <body
-    class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen selection:bg-emerald-100 selection:text-emerald-900"
+    class="bg-[#F6F8F7] text-[#17211E] antialiased min-h-screen"
     x-data="{ sidebarOpen: false }"
 >
 
@@ -201,15 +221,16 @@
                 </div>
                 <div class="flex items-center gap-2 sm:gap-3 shrink-0">
                     {{-- Notification Bell --}}
+                    @php
+                        $instansiUnreadNotif = auth()->check() ? \App\Models\Notifikasi::where('user_id', auth()->id())->whereNull('dibaca_pada')->count() : 0;
+                    @endphp
                     <div class="relative">
-                        <button type="button" class="relative p-2 rounded-lg border border-[#D9E2DE] bg-white text-[#52615C] hover:bg-[#EEF3F1] transition-colors active:scale-95" aria-label="Pemberitahuan">
+                        <a href="{{ route('notifikasi.index') }}" class="relative p-2 rounded-lg border border-[#D9E2DE] bg-white text-[#52615C] hover:bg-[#EEF3F1] transition-colors active:scale-95 inline-flex items-center justify-center" aria-label="Pemberitahuan">
                             <i data-lucide="bell" class="w-4 h-4"></i>
-                            @isset($unreadNotificationsCount)
-                                @if($unreadNotificationsCount > 0)
-                                    <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-500 ring-2 ring-white"></span>
-                                @endif
-                            @endisset
-                        </button>
+                            @if($instansiUnreadNotif > 0)
+                                <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-orange-500 ring-2 ring-white"></span>
+                            @endif
+                        </a>
                     </div>
                     @yield('topbar-actions')
                     {{-- CTA Button --}}

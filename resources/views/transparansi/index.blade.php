@@ -18,14 +18,11 @@
             <div class="absolute right-0 top-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="relative z-10 space-y-3 max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-semibold">
-                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Keterbukaan Informasi Publik (UU No. 14 Tahun 2008)
-                </div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-white tracking-tight leading-tight">
                     Pusat Transparansi &amp; Akuntabilitas Penyaluran Dana
                 </h1>
-                <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
-                    Setiap rupiah donasi masyarakat diaudit secara terbuka. Dokumen kuitansi toko, foto penyerahan fisik barang, dan Berita Acara Serah Terima (BAST) dipublikasikan untuk pengawasan bersama.
+                <p class="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+                    Sesuai prinsip Keterbukaan Informasi Publik (UU No. 14 Tahun 2008), setiap rupiah donasi masyarakat diaudit secara terbuka. Dokumen kuitansi toko, foto penyerahan fisik barang, dan Berita Acara Serah Terima (BAST) dipublikasikan untuk pengawasan publik.
                 </p>
             </div>
         </div>
@@ -34,22 +31,22 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Laporan Dipublikasi</span>
+                    <span class="text-xs font-semibold text-[#52615C] uppercase tracking-wider">Laporan Dipublikasikan</span>
                     <i data-lucide="file-check-2" class="w-5 h-5 text-emerald-600"></i>
                 </div>
-                <p class="text-2xl sm:text-3xl font-extrabold text-[#17211E] font-heading">{{ $totalLaporanCount ?? $laporan->total() }} Laporan</p>
-                <span class="text-[11px] text-emerald-700 font-semibold mt-1 block">&check; 100% Diaudit Verifikator Pemkab</span>
+                <p class="text-2xl sm:text-3xl font-extrabold text-[#17211E] font-heading tabular-nums">{{ $totalLaporanCount ?? $laporan->total() }} Laporan</p>
+                <span class="text-xs text-emerald-700 font-medium mt-1 inline-flex items-center gap-1">&check; 100% Diaudit Verifikator Pemkab</span>
             </div>
 
             <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Dana Tervalidasi</span>
+                    <span class="text-xs font-semibold text-[#52615C] uppercase tracking-wider">Total Dana Tervalidasi</span>
                     <i data-lucide="wallet" class="w-5 h-5 text-[#087F5B]"></i>
                 </div>
-                <p class="text-xl sm:text-2xl font-bold text-[#123B32] font-heading">
+                <p class="text-xl sm:text-2xl font-extrabold text-[#123B32] font-heading tabular-nums">
                     Rp {{ number_format($totalDanaDisalurkan ?? 0, 0, ',', '.') }}
                 </p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Tersalurkan Tepat Sasaran</span>
+                <span class="text-xs text-[#52615C] mt-1 block">Tersalurkan Tepat Sasaran</span>
             </div>
 
             <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">

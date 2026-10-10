@@ -20,6 +20,10 @@ class EnsureAdmin
             return $next($request);
         }
 
+        if (Auth::check()) {
+            abort(403, 'Akses khusus Admin Pemkab Tulungagung.');
+        }
+
         return redirect()->route('login', ['tab' => 'admin']);
     }
 }

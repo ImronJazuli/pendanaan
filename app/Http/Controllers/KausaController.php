@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SimpanKausaRequest;
+use App\Models\Donasi;
 use App\Models\KategoriKausa;
 use App\Models\Kausa;
 use Illuminate\Http\RedirectResponse;
@@ -49,11 +50,18 @@ class KausaController extends Controller
     {
         $kausa = Kausa::where('slug', $slug)
             ->where('status', 'disetujui')
-            ->with(['kategori', 'instansi', 'donasi', 'dokumen', 'riwayatStatus'])
+            ->with([
+                'kategori',
+                'instansi',
+                'donasi' => fn ($q) => $q->whereIn('status', [Donasi::STATUS_SUCCESS, 'berhasil'])->latest(),
+                'dokumen',
+                'riwayatStatus',
+                'logTransparansi' => fn ($q) => $q->where('dipublikasikan', true)->latest(),
+            ])
             ->firstOrFail();
 
         $totalDonasi = $kausa->total_terkumpul;
-        $jumlahDonatur = $kausa->jumlah_donatur;
+        $jumlahDonatur = $kausa->donasi->count();
 
         return view('kausa.show', [
             'kausa' => $kausa,
@@ -81,11 +89,22 @@ class KausaController extends Controller
 
         $kausa = Kausa::create($data);
 
-        foreach ($request->file('dokumen', []) as $file) {
+        foreach ($request->file('foto_kausa', []) as $foto) {
             $kausa->dokumen()->create([
-                'jenis_dokumen' => 'dokumen_pendukung',
+                'jenis_dokumen' => 'foto_galeri',
+                'nama_file' => $foto->getClientOriginalName(),
+                'path_file' => $foto->store('dokumen/kausa/galeri', 'public'),
+                'mime_type' => $foto->getMimeType(),
+                'ukuran_file' => $foto->getSize(),
+            ]);
+        }
+
+        foreach ($request->file('dokumen', []) as $file) {
+            $isImage = str_starts_with($file->getMimeType(), 'image/');
+            $kausa->dokumen()->create([
+                'jenis_dokumen' => $isImage ? 'foto_galeri' : 'dokumen_pendukung',
                 'nama_file' => $file->getClientOriginalName(),
-                'path_file' => $file->store('dokumen/kausa'),
+                'path_file' => $file->store('dokumen/kausa', 'public'),
                 'mime_type' => $file->getMimeType(),
                 'ukuran_file' => $file->getSize(),
             ]);
