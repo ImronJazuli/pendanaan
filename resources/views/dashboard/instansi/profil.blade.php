@@ -135,28 +135,28 @@
         <div class="bg-white rounded-2xl border border-[#D9E2DE] p-5 shadow-xs">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Alur &amp; Tahapan Legalitas Lembaga</h4>
             <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
-                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $instansi->nama && $instansi->alamat ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-600' }}">
+                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $instansi->nama && $instansi->alamat ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-700' }}">
                     <span class="w-6 h-6 rounded-full {{ $instansi->nama && $instansi->alamat ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[11px] font-bold shrink-0">1</span>
                     <span class="truncate">Identitas Lembaga</span>
                     @if($instansi->nama && $instansi->alamat)
                         <i data-lucide="check" class="w-4 h-4 text-emerald-600 ml-auto hidden sm:inline shrink-0"></i>
                     @endif
                 </div>
-                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $instansi->dokumen->count() > 0 ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-600' }}">
+                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $instansi->dokumen->count() > 0 ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-700' }}">
                     <span class="w-6 h-6 rounded-full {{ $instansi->dokumen->count() > 0 ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[11px] font-bold shrink-0">2</span>
                     <span class="truncate">Berkas Legalitas</span>
                     @if($instansi->dokumen->count() > 0)
                         <i data-lucide="check" class="w-4 h-4 text-emerald-600 ml-auto hidden sm:inline shrink-0"></i>
                     @endif
                 </div>
-                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $status === 'menunggu_verifikasi' ? 'bg-amber-100 text-amber-950 font-bold ring-1 ring-amber-300' : ($status === 'terverifikasi' ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-600') }}">
+                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $status === 'menunggu_verifikasi' ? 'bg-amber-100 text-amber-950 font-bold ring-1 ring-amber-300' : ($status === 'terverifikasi' ? 'bg-emerald-50 text-emerald-900 font-semibold' : 'bg-slate-50 text-slate-700') }}">
                     <span class="w-6 h-6 rounded-full {{ $status === 'menunggu_verifikasi' ? 'bg-amber-500 text-white' : ($status === 'terverifikasi' ? 'bg-emerald-600 text-white' : 'bg-slate-300 text-slate-700') }} flex items-center justify-center text-[11px] font-bold shrink-0">3</span>
                     <span class="truncate">Kurasi Dinsos &amp; PPID</span>
                     @if($status === 'terverifikasi')
                         <i data-lucide="check" class="w-4 h-4 text-emerald-600 ml-auto hidden sm:inline shrink-0"></i>
                     @endif
                 </div>
-                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $status === 'terverifikasi' ? 'bg-emerald-100 text-emerald-950 font-bold ring-1 ring-emerald-400' : 'bg-slate-50 text-slate-500' }}">
+                <div class="flex items-center gap-2.5 p-2 rounded-xl {{ $status === 'terverifikasi' ? 'bg-emerald-100 text-emerald-950 font-bold ring-1 ring-emerald-400' : 'bg-slate-50 text-slate-700' }}">
                     <span class="w-6 h-6 rounded-full {{ $status === 'terverifikasi' ? 'bg-[#087F5B] text-white' : 'bg-slate-300 text-slate-700' }} flex items-center justify-center text-[11px] font-bold shrink-0">4</span>
                     <span class="truncate">Akses Kausa Aktif</span>
                     @if($status === 'terverifikasi')

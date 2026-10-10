@@ -258,8 +258,8 @@
                         Unggah Dokumen Tambahan / Dokumen Hasil Revisi
                     </label>
                     <input type="file" id="dokumen" name="dokumen[]" multiple accept=".pdf,.jpg,.jpeg,.png"
-                           class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-[#087F5B] hover:file:bg-emerald-100 cursor-pointer border border-slate-300 rounded-xl p-1 bg-white">
-                    <p class="text-[11px] text-slate-500 mt-1">Mendukung file PDF, JPG, PNG hingga 5MB per dokumen. Anda dapat memilih beberapa file sekaligus.</p>
+                           class="w-full text-xs text-slate-700 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-700 file:text-white hover:file:bg-emerald-800 cursor-pointer border border-slate-300 rounded-xl p-1 bg-white">
+                    <p class="text-[11px] text-slate-600 mt-1">Mendukung file PDF, JPG, PNG hingga 5MB per dokumen. Anda dapat memilih beberapa file sekaligus.</p>
                     @error('dokumen.*') <p class="text-xs text-rose-600 mt-1">{{ $message }}</p> @enderror
                 </div>
             </div>
