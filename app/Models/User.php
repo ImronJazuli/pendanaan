@@ -68,7 +68,29 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'admin' || $this->peran === 'admin';
+    }
+
+    /**
+     * Periksa apakah user memiliki peran/role tertentu.
+     */
+    public function hasRole(string $role): bool
+    {
+        $currentRole = $this->role ?? $this->peran ?? '';
+
+        if ($currentRole === $role) {
+            return true;
+        }
+
+        if ($role === 'instansi' && $currentRole === 'institution_user') {
+            return true;
+        }
+
+        if ($role === 'institution_user' && $currentRole === 'instansi') {
+            return true;
+        }
+
+        return false;
     }
 
     /**

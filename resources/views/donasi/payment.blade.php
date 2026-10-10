@@ -105,7 +105,7 @@
                     </p>
                     @if($donasi->path_bukti_manual)
                         <div class="pt-1">
-                            <a href="{{ \Illuminate\Support\Facades\Storage::url($donasi->path_bukti_manual) }}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#087F5B] hover:underline">
+                            <a href="{{ route('donasi.bukti', $donasi->pesanan_pembayaran) }}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#087F5B] hover:underline">
                                 <i data-lucide="file-check" class="w-4 h-4"></i> Lihat File Bukti Yang Diunggah
                             </a>
                         </div>

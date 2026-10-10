@@ -216,4 +216,21 @@ class WebhookMidtransTest extends TestCase
         $donasi->refresh();
         $this->assertEquals(Donasi::STATUS_EXPIRED, $donasi->status);
     }
+
+    public function test_webhook_returns_500_when_server_key_is_missing(): void
+    {
+        Config::set('services.midtrans.server_key', '');
+
+        $payload = [
+            'order_id' => 'INV-202610-WH005',
+            'status_code' => '200',
+            'gross_amount' => '100000.00',
+            'signature_key' => 'any-signature',
+            'transaction_status' => 'settlement',
+        ];
+
+        $response = $this->postJson(route('webhook.midtrans'), $payload);
+        $response->assertStatus(500);
+        $response->assertJson(['message' => 'Midtrans server key is not configured.']);
+    }
 }

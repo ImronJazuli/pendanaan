@@ -226,4 +226,29 @@ class NotifikasiTest extends TestCase
         $response = $this->actingAs($this->instansiUser)->post(route('notifikasi.read', $notifOther));
         $response->assertStatus(403);
     }
+
+    public function test_mark_read_does_not_redirect_to_external_url(): void
+    {
+        $notif = Notifikasi::create([
+            'user_id' => $this->instansiUser->id,
+            'jenis' => 'kausa_disetujui',
+            'judul' => 'Kausa Disetujui',
+            'isi' => 'Kausa aktif',
+            'dibaca_pada' => null,
+        ]);
+
+        // Attempt open redirect with external URL
+        $response = $this->actingAs($this->instansiUser)->post(route('notifikasi.read', $notif), [
+            'redirect_to' => 'https://evil.com/attack',
+        ]);
+
+        $this->assertFalse(str_contains($response->headers->get('Location') ?? '', 'evil.com'));
+
+        // Attempt open redirect with protocol relative URL
+        $response2 = $this->actingAs($this->instansiUser)->post(route('notifikasi.read', $notif), [
+            'redirect_to' => '//evil.com/attack',
+        ]);
+
+        $this->assertFalse(str_contains($response2->headers->get('Location') ?? '', 'evil.com'));
+    }
 }

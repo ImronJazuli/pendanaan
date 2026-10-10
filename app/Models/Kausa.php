@@ -69,12 +69,12 @@ class Kausa extends Model
 
     /**
      * Satu-satunya method resmi untuk menambah dana terkumpul saat donasi sukses.
-     * Dipanggil di dalam DB::transaction dengan lockForUpdate.
+     * Menggunakan operasi increment tingkat database secara atomik.
      */
     public function tambahDanaTerkumpul(float $nominal): void
     {
-        $this->dana_terkumpul = (float) $this->dana_terkumpul + $nominal;
-        $this->save();
+        $this->increment('dana_terkumpul', $nominal);
+        $this->refresh();
     }
 
     /**

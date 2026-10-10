@@ -41,11 +41,28 @@ class NotifikasiController extends Controller
         }
 
         if ($request->filled('redirect_to')) {
-            return redirect($request->input('redirect_to'));
+            $redirectTo = (string) $request->input('redirect_to');
+            // Validasi open redirect: hanya izinkan URI lokal internal
+            if (str_starts_with($redirectTo, '/') && ! str_starts_with($redirectTo, '//')) {
+                return redirect($redirectTo);
+            }
+
+            $parsed = parse_url($redirectTo);
+            if (isset($parsed['host']) && $parsed['host'] === $request->getHost()) {
+                return redirect($redirectTo);
+            }
         }
 
         if ($notifikasi->tautan) {
-            return redirect($notifikasi->tautan);
+            $tautan = (string) $notifikasi->tautan;
+            if (str_starts_with($tautan, '/') && ! str_starts_with($tautan, '//')) {
+                return redirect($tautan);
+            }
+
+            $parsed = parse_url($tautan);
+            if (isset($parsed['host']) && $parsed['host'] === $request->getHost()) {
+                return redirect($tautan);
+            }
         }
 
         return back()->with('status', 'Notifikasi berhasil ditandai sebagai dibaca.');

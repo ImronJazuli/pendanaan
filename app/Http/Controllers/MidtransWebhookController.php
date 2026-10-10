@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donasi;
+use App\Models\Kausa;
 use App\Models\TransaksiPembayaran;
 use App\Services\NotifikasiService;
 use Illuminate\Http\JsonResponse;
@@ -24,10 +25,16 @@ class MidtransWebhookController extends Controller
         $fraudStatus = (string) $request->input('fraud_status');
 
         $serverKey = (string) config('services.midtrans.server_key');
+        if (empty($serverKey)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Midtrans server key is not configured.',
+            ], 500);
+        }
 
-        // 1. Verifikasi SHA512 Signature
+        // 1. Verifikasi SHA512 Signature dengan hash_equals (constant-time)
         $expectedSignature = hash('sha512', $orderId.$statusCode.$grossAmount.$serverKey);
-        if ($signatureKey !== $expectedSignature) {
+        if (! hash_equals($expectedSignature, $signatureKey)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Invalid signature key.',
@@ -65,13 +72,15 @@ class MidtransWebhookController extends Controller
                     return;
                 }
 
+                $kausaLocked = Kausa::where('id', $donasiLocked->kausa_id)->lockForUpdate()->first();
+
                 $donasiLocked->update([
                     'status' => Donasi::STATUS_SUCCESS,
                     'dibayar_pada' => now(),
                 ]);
 
                 // Akumulasi dana terkumpul kausa secara atomik
-                $donasiLocked->kausa->tambahDanaTerkumpul((float) $donasiLocked->nominal);
+                $kausaLocked->tambahDanaTerkumpul((float) $donasiLocked->nominal);
 
                 // Update / create TransaksiPembayaran
                 $donasiLocked->transaksiPembayaran()->updateOrCreate(

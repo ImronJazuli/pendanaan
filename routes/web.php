@@ -38,6 +38,7 @@ Route::post('/donasi/{kode}/upload-bukti', [DonasiController::class, 'uploadBukt
 Route::post('/donasi/{kode}/simulasi', [DonasiController::class, 'simulate'])->name('donasi.simulate');
 Route::get('/donasi/{kode}/sukses', [DonasiController::class, 'success'])->name('donasi.sukses');
 Route::get('/donasi/{kode}/kuitansi', [DonasiController::class, 'kuitansi'])->name('donasi.kuitansi');
+Route::get('/donasi/{kode}/bukti', [DonasiController::class, 'lihatBukti'])->name('donasi.bukti');
 
 // Route aliases untuk kompatibilitas
 Route::post('/kausa/{slug}/donasi/submit', [DonasiController::class, 'store'])->name('kausa.donasi.store');
@@ -112,6 +113,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/admin/kausa-aktif', [AdminDashboardController::class, 'kausaAktif'])->name('admin.kausa.aktif');
         Route::post('/dashboard/admin/kausa/{kausa}/selesai', [AdminDashboardController::class, 'selesaikanKausa'])->name('admin.kausa.selesai');
         Route::get('/dashboard/admin/donasi', [AdminDashboardController::class, 'donasi'])->name('admin.donasi');
+        Route::get('/dashboard/admin/donasi/{donasi}/bukti', [AdminDashboardController::class, 'lihatBuktiManual'])->name('admin.donasi.bukti');
         Route::post('/dashboard/admin/donasi/{donasi}/approve-manual', [AdminDashboardController::class, 'approveManual'])->name('admin.donasi.approveManual');
         Route::post('/dashboard/admin/donasi/{donasi}/reject-manual', [AdminDashboardController::class, 'rejectManual'])->name('admin.donasi.rejectManual');
         Route::get('/dashboard/admin/laporan', [AdminDashboardController::class, 'laporan'])->name('admin.laporan');

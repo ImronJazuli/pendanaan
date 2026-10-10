@@ -10,6 +10,7 @@ use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -76,6 +77,8 @@ class DonasiController extends Controller
             return $donasi;
         });
 
+        session()->put('donasi_token_'.$donasi->pesanan_pembayaran, true);
+
         return redirect()->route('donasi.bayar', $donasi->pesanan_pembayaran);
     }
 
@@ -112,13 +115,15 @@ class DonasiController extends Controller
                 return;
             }
 
+            $kausaLocked = Kausa::where('id', $donasiLocked->kausa_id)->lockForUpdate()->first();
+
             $donasiLocked->update([
                 'status' => Donasi::STATUS_SUCCESS,
                 'dibayar_pada' => now(),
             ]);
 
             // Update dana terkumpul kausa secara resmi via atomic increment
-            $donasiLocked->kausa->tambahDanaTerkumpul((float) $donasiLocked->nominal);
+            $kausaLocked->tambahDanaTerkumpul((float) $donasiLocked->nominal);
 
             // Update TransaksiPembayaran
             if ($donasiLocked->transaksiPembayaran) {
@@ -192,6 +197,15 @@ class DonasiController extends Controller
     {
         $donasi = Donasi::where('pesanan_pembayaran', $kode)->firstOrFail();
 
+        // 1. Validasi transisi status: donasi yang sudah berhasil/final tidak boleh upload ulang
+        if ($donasi->status === Donasi::STATUS_SUCCESS || $donasi->status === 'berhasil') {
+            abort(422, 'Donasi sudah berstatus berhasil dan tidak dapat mengunggah bukti pembayaran lagi.');
+        }
+
+        if (in_array($donasi->status, [Donasi::STATUS_EXPIRED, 'kadaluarsa', 'dibatalkan'])) {
+            abort(422, 'Donasi sudah tidak aktif.');
+        }
+
         $request->validate([
             'bukti_transfer' => ['required', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
         ], [
@@ -200,14 +214,43 @@ class DonasiController extends Controller
             'bukti_transfer.max' => 'Ukuran file bukti maksimal 2MB.',
         ]);
 
-        $path = $request->file('bukti_transfer')->store('bukti-manual', 'public');
+        $path = $request->file('bukti_transfer')->store('bukti-manual', 'local');
 
         $donasi->update([
             'path_bukti_manual' => $path,
             'status' => Donasi::STATUS_MENUNGGU_VERIFIKASI_MANUAL,
         ]);
 
+        session()->put('donasi_token_'.$kode, true);
+
         return redirect()->route('donasi.bayar', $kode)->with('status', 'Bukti transfer berhasil diunggah. Menunggu verifikasi manual dari Admin Pemkab Tulungagung.');
+    }
+
+    /**
+     * Tampilkan/stream berkas bukti transfer manual untuk donatur pemilik donasi.
+     */
+    public function lihatBukti(Request $request, string $kode)
+    {
+        $donasi = Donasi::where('pesanan_pembayaran', $kode)->firstOrFail();
+        abort_unless($donasi->path_bukti_manual, 404, 'Bukti transfer tidak ditemukan.');
+
+        $user = $request->user();
+        $isAuthorized = false;
+
+        if ($user && $user->hasRole('admin')) {
+            $isAuthorized = true;
+        } elseif ($donasi->user_id && $user && $user->id === $donasi->user_id) {
+            $isAuthorized = true;
+        } elseif (! $donasi->user_id && session('donasi_token_'.$kode)) {
+            $isAuthorized = true;
+        }
+
+        abort_unless($isAuthorized, 403, 'Anda tidak memiliki hak akses untuk melihat bukti transfer ini.');
+
+        $disk = Storage::disk('local')->exists($donasi->path_bukti_manual) ? 'local' : 'public';
+        abort_unless(Storage::disk($disk)->exists($donasi->path_bukti_manual), 404, 'File bukti transfer tidak ditemukan di penyimpanan.');
+
+        return Storage::disk($disk)->response($donasi->path_bukti_manual);
     }
 
     public function receipt(string $kode): View

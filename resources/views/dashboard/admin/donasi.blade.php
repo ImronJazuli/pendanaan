@@ -118,7 +118,7 @@
                                 </td>
                                 <td class="py-3.5 px-4">
                                     @if($item->path_bukti_manual)
-                                        <a href="{{ \Illuminate\Support\Facades\Storage::url($item->path_bukti_manual) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-[#087F5B] border border-emerald-300 font-bold text-[11px] hover:bg-emerald-100">
+                                        <a href="{{ route('admin.donasi.bukti', $item) }}" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-[#087F5B] border border-emerald-300 font-bold text-[11px] hover:bg-emerald-100">
                                             <i data-lucide="eye" class="w-3.5 h-3.5"></i> Lihat Bukti
                                         </a>
                                     @else

@@ -14,6 +14,7 @@ use App\Services\NotifikasiService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class AdminDashboardController extends Controller
@@ -524,6 +525,8 @@ class AdminDashboardController extends Controller
                 return;
             }
 
+            $kausaLocked = Kausa::where('id', $donasiLocked->kausa_id)->lockForUpdate()->first();
+
             $catatan = $request->input('catatan_verifikasi_manual', 'Pembayaran transfer manual diverifikasi dan disetujui oleh Admin Pemkab.');
 
             $donasiLocked->update([
@@ -532,8 +535,8 @@ class AdminDashboardController extends Controller
                 'catatan_verifikasi_manual' => $catatan,
             ]);
 
-            // Tambah dana terkumpul kausa
-            $donasiLocked->kausa->tambahDanaTerkumpul((float) $donasiLocked->nominal);
+            // Tambah dana terkumpul kausa secara atomik
+            $kausaLocked->tambahDanaTerkumpul((float) $donasiLocked->nominal);
 
             // Notifikasi ke donatur jika ada
             if ($donasiLocked->user_id) {
@@ -571,6 +574,10 @@ class AdminDashboardController extends Controller
             $donasi = Donasi::findOrFail($request->route('donasi'));
         }
 
+        if ($donasi->status === Donasi::STATUS_SUCCESS || $donasi->status === 'berhasil') {
+            abort(422, 'Donasi yang sudah berstatus berhasil tidak dapat ditolak.');
+        }
+
         $request->validate([
             'catatan_verifikasi_manual' => ['required', 'string', 'min:5'],
         ], [
@@ -596,6 +603,19 @@ class AdminDashboardController extends Controller
         }
 
         return redirect()->route('admin.donasi')->with('status', "Bukti transfer donasi '{$donasi->pesanan_pembayaran}' telah ditolak.");
+    }
+
+    /**
+     * Tampilkan/stream berkas bukti transfer manual untuk Admin.
+     */
+    public function lihatBuktiManual(Donasi $donasi)
+    {
+        abort_unless($donasi->path_bukti_manual, 404, 'Bukti transfer tidak ditemukan.');
+
+        $disk = Storage::disk('local')->exists($donasi->path_bukti_manual) ? 'local' : 'public';
+        abort_unless(Storage::disk($disk)->exists($donasi->path_bukti_manual), 404, 'File bukti transfer tidak ditemukan di penyimpanan.');
+
+        return Storage::disk($disk)->response($donasi->path_bukti_manual);
     }
 
     protected function createNotifikasi(Kausa $kausa, string $jenis, string $judul, string $isi): void

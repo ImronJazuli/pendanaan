@@ -125,10 +125,22 @@ class ProjectPortalPendanaanTest extends TestCase
     {
         $kausa = Kausa::where('status', 'draf')->first();
 
-        if ($kausa) {
-            $response = $this->get("/kausa/{$kausa->slug}");
-            $response->assertStatus(404);
+        if (! $kausa) {
+            $instansi = Instansi::first();
+            $kategori = KategoriKausa::first();
+            $kausa = Kausa::create([
+                'instansi_id' => $instansi?->id ?? 1,
+                'kategori_kausa_id' => $kategori?->id ?? 1,
+                'judul' => 'Draf Kausa Test',
+                'slug' => 'draf-kausa-test',
+                'deskripsi' => 'Deskripsi draf',
+                'target_dana' => 10000000,
+                'status' => 'draf',
+            ]);
         }
+
+        $response = $this->get("/kausa/{$kausa->slug}");
+        $response->assertStatus(404);
     }
 
     // ===== TESTING DASHBOARD INSTANSI =====
