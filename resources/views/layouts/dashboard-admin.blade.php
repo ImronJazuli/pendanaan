@@ -68,9 +68,24 @@
                 @include('layouts.partials.admin-sidebar-menu')
             </nav>
         </div>
-        <div class="pt-4 border-t border-[#D9E2DE] text-xs text-[#52615C]">
-            <p class="font-semibold text-[#17211E]">{{ $adminUser?->name ?? 'Admin Pemkab' }}</p>
-            <p class="text-[11px] text-[#73817C]">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
+        <div class="pt-4 border-t border-[#D9E2DE]">
+            <div class="bg-[#123B32] text-white rounded-xl p-3 border border-[#1A5144] shadow-xs flex items-center justify-between gap-2.5">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-9 h-9 rounded-full bg-emerald-800 flex items-center justify-center text-xs font-bold text-white ring-2 ring-emerald-400/40 shrink-0">
+                        {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 2)) }}
+                    </div>
+                    <div class="min-w-0 text-left">
+                        <p class="text-sm font-semibold text-white leading-tight truncate">{{ $adminUser?->name ?? 'Admin Pemkab Tulungagung' }}</p>
+                        <p class="text-[11px] text-emerald-200/90 leading-tight truncate">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
+                    </div>
+                </div>
+                <form method="POST" action="{{ route('admin.logout') }}" class="shrink-0">
+                    @csrf
+                    <button type="submit" class="p-2 rounded-lg text-emerald-200 hover:text-red-300 hover:bg-[#1A5144] transition-colors" title="Keluar">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </aside>
 
@@ -121,26 +136,6 @@
                         @endisset
                     </button>
                 </div>
-
-                <div class="h-6 w-px bg-white/20 hidden sm:block"></div>
-
-                {{-- Admin Profile --}}
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-emerald-800 flex items-center justify-center text-xs font-bold text-white ring-2 ring-emerald-400/40">
-                        {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 2)) }}
-                    </div>
-                    <div class="hidden sm:block text-left">
-                        <p class="text-sm font-semibold text-white leading-tight">{{ $adminUser?->name ?? 'Admin Verifikator' }}</p>
-                        <p class="text-[11px] text-emerald-200/90 leading-tight">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
-                    </div>
-                    {{-- Logout --}}
-                    <form method="POST" action="{{ route('admin.logout') }}" class="ml-1">
-                        @csrf
-                        <button type="submit" class="p-2 rounded-lg text-emerald-200 hover:text-red-300 hover:bg-[#1A5144] transition-colors" title="Keluar">
-                            <i data-lucide="log-out" class="w-4 h-4"></i>
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
     </header>
@@ -149,47 +144,71 @@
     <div class="w-full px-4 sm:px-6 lg:px-8 py-6 flex gap-6 min-h-[calc(100vh-4rem)]">
 
         {{-- Desktop White Sidebar (canvas 008, fixed 288px / lg:w-72, sticky) --}}
-        <aside class="w-64 lg:w-72 shrink-0 hidden lg:flex flex-col gap-5 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
+        <aside class="w-64 lg:w-72 shrink-0 hidden lg:flex flex-col justify-between sticky top-20 h-[calc(100vh-6rem)]">
 
-            {{-- Role Verification Pill Card --}}
-            <div class="bg-white rounded-xl p-4 border border-[#D9E2DE] shadow-xs">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-[#E6F4EF] flex items-center justify-center text-[#087F5B]">
-                        <i data-lucide="award" class="w-5 h-5"></i>
+            {{-- Scrollable Sidebar Content --}}
+            <div class="flex flex-col gap-5 overflow-y-auto pr-1 flex-1">
+                {{-- Role Verification Pill Card --}}
+                <div class="bg-white rounded-xl p-4 border border-[#D9E2DE] shadow-xs">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#E6F4EF] flex items-center justify-center text-[#087F5B]">
+                            <i data-lucide="award" class="w-5 h-5"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-[#123B32]">
+                                {{ $adminUser?->instansi->nama ?? 'Biro Kesejahteraan Rakyat' }}
+                            </h4>
+                            <p class="text-[11px] text-[#52615C] truncate">Setda Kab. Tulungagung</p>
+                        </div>
                     </div>
-                    <div class="min-w-0">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-[#123B32]">
-                            {{ $adminUser?->instansi->nama ?? 'Biro Kesejahteraan Rakyat' }}
-                        </h4>
-                        <p class="text-[11px] text-[#52615C] truncate">Setda Kab. Tulungagung</p>
+                    <div class="mt-3 pt-3 border-t border-[#D9E2DE]/70 flex items-center justify-between text-[11px] text-[#52615C]">
+                        <span>Role Hak Akses</span>
+                        <span class="font-semibold text-[#087F5B] bg-[#E6F4EF] px-2 py-0.5 rounded-full">Admin Kurator</span>
                     </div>
                 </div>
-                <div class="mt-3 pt-3 border-t border-[#D9E2DE]/70 flex items-center justify-between text-[11px] text-[#52615C]">
-                    <span>Role Hak Akses</span>
-                    <span class="font-semibold text-[#087F5B] bg-[#E6F4EF] px-2 py-0.5 rounded-full">Admin Kurator</span>
+
+                {{-- Nav Menu --}}
+                <nav class="bg-white rounded-xl p-3 border border-[#D9E2DE] shadow-xs space-y-1">
+                    <p class="px-3 pt-2 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-[#73817C]">Menu Kurasi &amp; Kontrol</p>
+                    @include('layouts.partials.admin-sidebar-menu')
+                </nav>
+
+                {{-- Integrity Box (Mockup 008) --}}
+                <div class="bg-[#123B32] text-white rounded-xl p-4 border border-[#1A5144] shadow-xs relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 text-emerald-300 text-xs font-bold uppercase mb-1">
+                            <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
+                            <span>Pakta Integritas Admin</span>
+                        </div>
+                        <p class="text-[11px] text-emerald-100/80 leading-relaxed mb-3">
+                            Sesuai Perbup Tulungagung, setiap penolakan kausa sosial wajib melampirkan alasan objektif dan dasar hukum verifikasi.
+                        </p>
+                        <div class="text-[10px] font-semibold text-emerald-300 flex items-center gap-1">
+                            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                            <span>Terikat Audit Inspektorat</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {{-- Nav Menu --}}
-            <nav class="bg-white rounded-xl p-3 border border-[#D9E2DE] shadow-xs space-y-1">
-                <p class="px-3 pt-2 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-[#73817C]">Menu Kurasi &amp; Kontrol</p>
-                @include('layouts.partials.admin-sidebar-menu')
-            </nav>
-
-            {{-- Integrity Box (Mockup 008) --}}
-            <div class="bg-[#123B32] text-white rounded-xl p-4 border border-[#1A5144] shadow-xs relative overflow-hidden">
-                <div class="relative z-10">
-                    <div class="flex items-center gap-2 text-emerald-300 text-xs font-bold uppercase mb-1">
-                        <i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i>
-                        <span>Pakta Integritas Admin</span>
+            {{-- Fixed Bottom Admin Profile & Logout (Pojok Kiri Bawah Sidebar) --}}
+            <div class="pt-3 border-t border-[#D9E2DE] shrink-0 mt-3">
+                <div class="bg-[#123B32] text-white rounded-xl p-3 border border-[#1A5144] shadow-xs flex items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-9 h-9 rounded-full bg-emerald-800 flex items-center justify-center text-xs font-bold text-white ring-2 ring-emerald-400/40 shrink-0">
+                            {{ strtoupper(substr($adminUser?->name ?? 'A', 0, 2)) }}
+                        </div>
+                        <div class="min-w-0 text-left">
+                            <p class="text-sm font-semibold text-white leading-tight truncate">{{ $adminUser?->name ?? 'Admin Pemkab Tulungagung' }}</p>
+                            <p class="text-[11px] text-emerald-200/90 leading-tight truncate">Admin Verifikator Pemkab {{ $adminUser?->nip ? '(NIP. '.$adminUser->nip.')' : 'Tulungagung' }}</p>
+                        </div>
                     </div>
-                    <p class="text-[11px] text-emerald-100/80 leading-relaxed mb-3">
-                        Sesuai Perbup Tulungagung, setiap penolakan kausa sosial wajib melampirkan alasan objektif dan dasar hukum verifikasi.
-                    </p>
-                    <div class="text-[10px] font-semibold text-emerald-300 flex items-center gap-1">
-                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
-                        <span>Terikat Audit Inspektorat</span>
-                    </div>
+                    <form method="POST" action="{{ route('admin.logout') }}" class="shrink-0">
+                        @csrf
+                        <button type="submit" class="p-2 rounded-lg text-emerald-200 hover:text-red-300 hover:bg-[#1A5144] transition-colors" title="Keluar">
+                            <i data-lucide="log-out" class="w-4 h-4"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </aside>
